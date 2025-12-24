@@ -2,7 +2,6 @@ import { Plane, Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
-import logo from 'figma:asset/7bc0411f51dbb1b1ada948fae1e4872a66d5e18f.png';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -119,7 +118,7 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center gap-2">
-              <img src={logo} alt="GNC Travel Agency" className="h-20" />
+              <img src="/logognctravel.png" alt="GNC Travel Agency" className="h-20" />
             </Link>
 
             {/* Desktop Navigation */}
