@@ -4,57 +4,23 @@ export function EuropeCulture() {
   const packages = [
     {
       id: 1,
-      title: 'Paris & Londra Klasik',
-      duration: '8 Gün / 7 Gece',
-      price: '€780',
-      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800',
+      title: 'Almanya Berlin',
+      duration: '4 Gün / 3 Gece',
+      price: '€599',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Eyfel Kulesi', 'Big Ben', 'Müze Gezileri']
+      features: ['Brandenburg Kapısı', 'Berlin Duvarı', 'Müze Adası', 'Türkçe Rehber']
     },
     {
       id: 2,
-      title: 'Orta Avrupa Başkentleri',
-      duration: '10 Gün / 9 Gece',
-      price: '€700',
-      image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800',
-      rating: 5,
-      features: ['Viyana', 'Prag', 'Budapeşte']
-    },
-    {
-      id: 3,
-      title: 'İspanya Kültür Turu',
-      duration: '9 Gün / 8 Gece',
-      price: '€650',
-      image: 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800',
-      rating: 5,
-      features: ['Barcelona', 'Madrid', 'Sevilla', 'Granada']
-    },
-    {
-      id: 4,
-      title: 'Almanya & Avusturya',
+      title: 'Güney Almanya Turu - Schwäbisch Kültür Turu',
       duration: '7 Gün / 6 Gece',
-      price: '€590',
-      image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800',
+      price: '€899',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1595928069811-8e1c7f1ee1c3?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Münih', 'Salzburg', 'Alpler']
-    },
-    {
-      id: 5,
-      title: 'Benelüks Ülkeleri',
-      duration: '6 Gün / 5 Gece',
-      price: '€520',
-      image: 'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800',
-      rating: 5,
-      features: ['Amsterdam', 'Brüksel', 'Lüksemburg']
-    },
-    {
-      id: 6,
-      title: 'Avrupa Ekspres',
-      duration: '14 Gün / 13 Gece',
-      price: '€1.040',
-      image: 'https://images.unsplash.com/photo-1493707553966-283afb8c7aac?w=800',
-      rating: 5,
-      features: ['9 Ülke', '15 Şehir', 'Komple Avrupa']
+      features: ['Stuttgart', 'Schwäbisch Alb', 'Rothenburg', 'Neuschwanstein Şatosu', 'Türkçe Rehber']
     }
   ];
 

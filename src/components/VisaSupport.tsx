@@ -89,7 +89,29 @@ export function VisaSupport() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Teşekkürler! Vize destek ekibimiz 24 saat içinde sizinle iletişime geçecektir.');
+    
+    // E-posta gövdesini oluştur
+    const emailBody = `
+Vize Destek Formu - Yeni Başvuru
+
+Ad Soyad: ${name}
+E-posta: ${email}
+Telefon: ${phone}
+Ülke: ${selectedCountry}
+Vize Tipi: ${visaType}
+    `.trim();
+
+    // Mailto linki oluştur
+    const mailtoLink = `mailto:gonca@gnctravel.com?subject=Vize Destek Talebi - ${selectedCountry}&body=${encodeURIComponent(emailBody)}`;
+    
+    // E-posta istemcisini aç
+    window.location.href = mailtoLink;
+    
+    // Kullanıcıya bilgi ver
+    setTimeout(() => {
+      alert('Teşekkürler! Vize destek ekibimiz 24 saat içinde sizinle iletişime geçecektir.');
+    }, 500);
+    
     setName('');
     setEmail('');
     setPhone('');

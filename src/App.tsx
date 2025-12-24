@@ -41,6 +41,10 @@ import { BaliParadise } from './pages/tour-details/BaliParadise';
 import { DubaiAjet } from './pages/tour-details/DubaiAjet';
 import { DubaiMasali } from './pages/tour-details/DubaiMasali';
 import { DubaiEmirates } from './pages/tour-details/DubaiEmirates';
+import { BangkokPattaya } from './pages/tour-details/BangkokPattaya';
+import { KesfetTayland } from './pages/tour-details/KesfetTayland';
+import { BangkokPattayaExtended } from './pages/tour-details/BangkokPattayaExtended';
+import { BaliUbudWonderland } from './pages/tour-details/BaliUbudWonderland';
 
 export default function App() {
   return (
@@ -89,6 +93,10 @@ export default function App() {
             <Route path="/tour-details/dubai-ajet" element={<DubaiAjet />} />
             <Route path="/tour-details/dubai-masali" element={<DubaiMasali />} />
             <Route path="/tour-details/dubai-emirates" element={<DubaiEmirates />} />
+            <Route path="/tour-details/bangkok-pattaya" element={<BangkokPattaya />} />
+            <Route path="/tour-details/kesfet-tayland" element={<KesfetTayland />} />
+            <Route path="/tour-details/bangkok-pattaya-extended" element={<BangkokPattayaExtended />} />
+            <Route path="/tour-details/bali-ubud-wonderland" element={<BaliUbudWonderland />} />
           </Routes>
           <Footer />
         </div>

@@ -4,57 +4,47 @@ export function AsiaCulture() {
   const packages = [
     {
       id: 1,
-      title: 'Çin Kültür Turu',
-      duration: '10 Gün / 9 Gece',
-      price: '₺42.999',
-      image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800',
+      title: 'Harikalar Diyarı Bali - Ubud Turu Rotası',
+      duration: '8 Gün / 6 Gece',
+      price: '€1499',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Çin Seddi', 'Terracotta', 'Pekin']
+      features: ['Türk Havayolları', 'Ubud + Bali', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bali-ubud-wonderland'
     },
     {
       id: 2,
-      title: 'Hindistan Klasik',
-      duration: '9 Gün / 8 Gece',
-      price: '₺36.500',
-      image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800',
+      title: 'Bangkok - Pattaya Turu',
+      duration: '9 Gün / 7 Gece',
+      price: '€999',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Tac Mahal', 'Delhi', 'Jaipur', 'Agra']
+      features: ['Türk Havayolları', 'Tapınak Turları', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bangkok-pattaya'
     },
     {
       id: 3,
-      title: 'Vietnam & Kamboçya',
-      duration: '11 Gün / 10 Gece',
-      price: '₺38.000',
-      image: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800',
+      title: 'Keşfet Tayland Bangkok Pattaya Phuket Turu',
+      duration: '11 Gün / 9 Gece',
+      price: '€1499',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Angkor Wat', 'Halong Körfezi', 'Ho Chi Minh']
+      features: ['Türk Havayolları', '3 Şehir Turu', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/kesfet-tayland'
     },
     {
       id: 4,
-      title: 'Güney Kore Keşfi',
-      duration: '8 Gün / 7 Gece',
-      price: '₺44.000',
-      image: 'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=800',
+      title: 'Bangkok - Pattaya Turu 7 Gece Süper Promosyon',
+      duration: '9 Gün / 7 Gece',
+      price: '€1149',
+      priceNote: 'başlayan fiyatlarla',
+      image: 'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=800&q=80',
       rating: 5,
-      features: ['Seul', 'Geleneksel Köyler', 'K-pop Kültürü']
-    },
-    {
-      id: 5,
-      title: 'Sri Lanka Turu',
-      duration: '7 Gün / 6 Gece',
-      price: '₺32.500',
-      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800',
-      rating: 5,
-      features: ['Çay Bahçeleri', 'Budist Tapınakları', 'Safari']
-    },
-    {
-      id: 6,
-      title: 'İpek Yolu Rotası',
-      duration: '14 Gün / 13 Gece',
-      price: '₺55.000',
-      image: 'https://images.unsplash.com/photo-1570211776045-af3a51026f4a?w=800',
-      rating: 5,
-      features: ['Özbekistan', 'Kırgızistan', 'Tarihi Yol']
+      features: ['Türk Havayolları', 'Extended Stay', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bangkok-pattaya-extended'
     }
   ];
 

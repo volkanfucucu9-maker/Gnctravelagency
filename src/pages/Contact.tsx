@@ -1,7 +1,9 @@
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,7 +14,31 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Teşekkürler! Mesajınız alındı. En kısa sürede size dönüş yapacağız.');
+    
+    // E-posta gövdesini oluştur
+    const emailBody = `
+İletişim Formu - Yeni Mesaj
+
+Ad Soyad: ${formData.name}
+E-posta: ${formData.email}
+Telefon: ${formData.phone}
+Konu: ${formData.subject}
+
+Mesaj:
+${formData.message}
+    `.trim();
+
+    // Mailto linki oluştur
+    const mailtoLink = `mailto:gonca@gnctravel.com?subject=İletişim Formu - ${formData.subject}&body=${encodeURIComponent(emailBody)}`;
+    
+    // E-posta istemcisini aç
+    window.location.href = mailtoLink;
+    
+    // Kullanıcıya bilgi ver
+    setTimeout(() => {
+      alert(t('contact.successMessage'));
+    }, 500);
+    
     setFormData({
       name: '',
       email: '',
@@ -35,9 +61,9 @@ export function Contact() {
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-white mb-4">Bizimle İletişime Geçin</h1>
+            <h1 className="text-white mb-4">{t('contact.getInTouch')}</h1>
             <p className="text-white/90 max-w-2xl mx-auto">
-              Sorularınız, önerileriniz veya destek talepleriniz için bize ulaşın. Ekibimiz size yardımcı olmak için burada.
+              {t('contact.getInTouchDesc')}
             </p>
           </div>
         </div>
@@ -51,9 +77,9 @@ export function Contact() {
             <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4">
               <MapPin className="w-6 h-6 text-blue-600" />
             </div>
-            <h3 className="text-gray-900 mb-2">Adresimiz</h3>
+            <h3 className="text-gray-900 mb-2">{t('contact.address')}</h3>
             <p className="text-gray-600">
-              Side Mah. Yavuz Sultan Selim Blv. No:6 A-Z01 MANAVGAT / ANTALYA
+              {t('contact.addressText')}
             </p>
           </div>
 
@@ -61,7 +87,7 @@ export function Contact() {
             <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
               <Phone className="w-6 h-6 text-green-600" />
             </div>
-            <h3 className="text-gray-900 mb-2">Telefon</h3>
+            <h3 className="text-gray-900 mb-2">{t('contact.phone')}</h3>
             <div className="text-gray-600 space-y-1">
               <p>+90 543 220 0543</p>
               <p>+90 242 753 2827</p>
@@ -72,7 +98,7 @@ export function Contact() {
             <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
               <Mail className="w-6 h-6 text-purple-600" />
             </div>
-            <h3 className="text-gray-900 mb-2">E-posta</h3>
+            <h3 className="text-gray-900 mb-2">{t('contact.email')}</h3>
             <p className="text-gray-600">info@gnctravel.com</p>
           </div>
         </div>
@@ -84,9 +110,9 @@ export function Contact() {
               <Clock className="w-6 h-6 text-amber-600" />
             </div>
             <div>
-              <h3 className="text-gray-900 mb-1">Çalışma Saatlerimiz</h3>
-              <p className="text-gray-600">Pazartesi – Cumartesi : 09:00 – 19:00</p>
-              <p className="text-gray-500">Pazar günleri kapalıyız</p>
+              <h3 className="text-gray-900 mb-1">{t('contact.workingHours')}</h3>
+              <p className="text-gray-600">{t('contact.workingHoursText')}</p>
+              <p className="text-gray-500">{t('contact.sundayClosed')}</p>
             </div>
           </div>
         </div>
@@ -95,48 +121,48 @@ export function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
           <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-gray-900 mb-6">Mesaj Gönderin</h2>
+            <h2 className="text-gray-900 mb-6">{t('contact.sendMessage')}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-700 mb-2">Ad Soyad *</label>
+                <label className="block text-gray-700 mb-2">{t('contact.name')} *</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Adınızı ve soyadınızı girin"
+                  placeholder={t('contact.namePlaceholder')}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">E-posta Adresi *</label>
+                <label className="block text-gray-700 mb-2">{t('contact.email')} *</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="ornek@email.com"
+                  placeholder={t('contact.emailPlaceholder')}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">Telefon Numarası</label>
+                <label className="block text-gray-700 mb-2">{t('contact.phone')}</label>
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+90 (555) 123-4567"
+                  placeholder={t('contact.phonePlaceholder')}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">Konu *</label>
+                <label className="block text-gray-700 mb-2">{t('contact.subject')} *</label>
                 <select
                   name="subject"
                   value={formData.subject}
@@ -144,25 +170,23 @@ export function Contact() {
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none"
                 >
-                  <option value="">Konu seçin</option>
-                  <option value="general">Genel Bilgi</option>
-                  <option value="tour">Tur Paketleri</option>
-                  <option value="visa">Vize Desteği</option>
-                  <option value="booking">Rezervasyon</option>
-                  <option value="complaint">Şikayet</option>
-                  <option value="other">Diğer</option>
+                  <option value="">{t('contact.subjectPlaceholder')}</option>
+                  <option value="general">{t('contact.general')}</option>
+                  <option value="tour">{t('contact.tourInquiry')}</option>
+                  <option value="visa">{t('contact.visaSupport')}</option>
+                  <option value="complaint">{t('contact.complaint')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">Mesajınız *</label>
+                <label className="block text-gray-700 mb-2">{t('contact.message')} *</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows={5}
-                  placeholder="Mesajınızı buraya yazın..."
+                  placeholder={t('contact.messagePlaceholder')}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
                 />
               </div>
@@ -172,7 +196,7 @@ export function Contact() {
                 className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
               >
                 <Send className="w-5 h-5" />
-                Mesajı Gönder
+                {t('contact.send')}
               </button>
             </form>
           </div>
@@ -196,22 +220,22 @@ export function Contact() {
 
         {/* Additional Info */}
         <div className="mt-16 bg-blue-50 border border-blue-200 rounded-xl p-8">
-          <h3 className="text-gray-900 mb-4 text-center">Neden Bize Ulaşmalısınız?</h3>
+          <h3 className="text-gray-900 mb-4 text-center">{t('contact.whyContact')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-blue-600 mb-2">✓</div>
-              <h4 className="text-gray-900 mb-2">Hızlı Yanıt</h4>
-              <p className="text-gray-600">Tüm sorularınıza 24 saat içinde yanıt veriyoruz</p>
+              <h4 className="text-gray-900 mb-2">{t('contact.fastResponse')}</h4>
+              <p className="text-gray-600">{t('contact.fastResponseDesc')}</p>
             </div>
             <div className="text-center">
               <div className="text-blue-600 mb-2">✓</div>
-              <h4 className="text-gray-900 mb-2">Uzman Ekip</h4>
-              <p className="text-gray-600">Deneyimli seyahat danışmanlarımız size yardımcı olur</p>
+              <h4 className="text-gray-900 mb-2">{t('contact.expertTeam')}</h4>
+              <p className="text-gray-600">{t('contact.expertTeamDesc')}</p>
             </div>
             <div className="text-center">
               <div className="text-blue-600 mb-2">✓</div>
-              <h4 className="text-gray-900 mb-2">Güvenilir Hizmet</h4>
-              <p className="text-gray-600">Profesyonel ve güvenilir destek garantisi</p>
+              <h4 className="text-gray-900 mb-2">{t('contact.reliableService')}</h4>
+              <p className="text-gray-600">{t('contact.reliableServiceDesc')}</p>
             </div>
           </div>
         </div>

@@ -121,52 +121,6 @@ const blogPosts = [
     `,
   },
   {
-    id: 'turist-vizesi',
-    title: 'Turist Vizesi Nasıl Alınır? Gerekli Belgeler ve Süreç',
-    category: 'Turist Vizesi',
-    date: '5 Aralık 2024',
-    author: 'GNC Travel',
-    image: 'https://images.unsplash.com/photo-1646870116973-a8aebc4d0dd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b3VyaXN0JTIwdmFjYXRpb24lMjBiZWFjaHxlbnwxfHx8fDE3NjUxOTg0ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    excerpt: 'Yurtdışına turistik amaçlı seyahat etmek isteyenler için turist vizesi başvuru süreci, gerekli belgeler ve dikkat edilmesi gereken noktalar.',
-    content: `
-      <h2>Turist Vizesi Nedir?</h2>
-      <p>Turist vizesi, yurtdışına tatil veya turistik amaçlı seyahat etmek isteyen kişilere verilen geçici vize türüdür. Bu vize ile belirli bir süre için ülkede turistik faaliyetlerde bulunabilirsiniz.</p>
-      
-      <h2>Gerekli Belgeler</h2>
-      <ul>
-        <li>Geçerli pasaport (en az 6 ay geçerliliği olan)</li>
-        <li>Vize başvuru formu (eksiksiz doldurulmuş ve imzalanmış)</li>
-        <li>Biyometrik fotoğraflar (2 adet, beyaz fon)</li>
-        <li>Seyahat sigortası (minimum 30.000 Euro teminat)</li>
-        <li>Otel rezervasyonu veya konaklamanızı gösterir belgeler</li>
-        <li>Gidiş-dönüş uçak bileti rezervasyonu</li>
-        <li>Banka hesap özeti (son 3-6 ay)</li>
-        <li>İş yerinden izin belgesi ve maaş bordrosu</li>
-        <li>Vize ücreti dekont veya makbuzu</li>
-      </ul>
-
-      <h2>Başvuru Süreci</h2>
-      <p><strong>1. Randevu Alın:</strong> Vize başvurusu yapmak istediğiniz ülkenin konsolosluğu veya vize başvuru merkezinden randevu alın.</p>
-      <p><strong>2. Belgeleri Hazırlayın:</strong> Tüm gerekli belgeleri eksiksiz ve doğru bir şekilde hazırlayın. Belgelerin çevirilerinin noter onaylı olması gerekebilir.</p>
-      <p><strong>3. Başvuruyu Yapın:</strong> Randevu gününüzde tüm belgelerinizle birlikte başvuru merkezine gidin. Parmak izi ve fotoğraf alınacaktır.</p>
-      <p><strong>4. Vize Ücretini Ödeyin:</strong> Vize başvuru ücretini ödeyin (ülkeye göre değişiklik gösterir).</p>
-      <p><strong>5. Sonucu Bekleyin:</strong> Başvuru süreci genellikle 15-30 gün arasında sonuçlanır.</p>
-
-      <h2>Önemli Noktalar</h2>
-      <ul>
-        <li>Başvuru yapmadan önce mutlaka ilgili ülkenin vize şartlarını kontrol edin</li>
-        <li>Belgelerin güncel ve doğru olduğundan emin olun</li>
-        <li>Yeterli finansal kaynağa sahip olduğunuzu kanıtlayın</li>
-        <li>Seyahat amacınızı net bir şekilde belirtin</li>
-        <li>Konsolosluk görüşmesine hazırlıklı gidin</li>
-        <li>Vize başvurusu yapılan ülkenin dilinde hazırlanmış belgeler tercih edilir</li>
-      </ul>
-
-      <h2>Red Durumunda Ne Yapmalı?</h2>
-      <p>Vize başvurunuz reddedilirse, ret gerekçesini öğrenin ve eksiklikleri tamamlayarak tekrar başvuru yapabilirsiniz. GNC Travel olarak vize red durumlarında danışmanlık hizmeti sunuyoruz.</p>
-    `,
-  },
-  {
     id: 'egitim-vizesi',
     title: 'Eğitim Vizesi Başvurusu: Öğrenci Vizesi İçin Rehber',
     category: 'Eğitim Vizesi',

@@ -148,9 +148,12 @@ export function TourTemplate({
             Uzman ekibimiz size en uygun tur paketini bulmak için hazır. Hemen iletişime geçin!
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors">
+            <Link 
+              to="/contact"
+              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-block"
+            >
               Hemen İletişime Geç
-            </button>
+            </Link>
             <Link 
               to="/tours/all"
               className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full hover:bg-blue-50 transition-colors inline-block text-center"

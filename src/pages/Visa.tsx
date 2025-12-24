@@ -1,9 +1,11 @@
 import { FileText, Clock, CheckCircle2, Globe, Shield, Users, ArrowRight, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 import exampleImage from 'figma:asset/3c41d0a7b0e544fca7dcadf3133a19df82439f0e.png';
 
 export function Visa() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,7 +17,31 @@ export function Visa() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Başvurunuz alındı! En kısa sürede size dönüş yapacağız.');
+    
+    // E-posta gövdesini oluştur
+    const emailBody = `
+Vize Başvuru Formu - Yeni Başvuru
+
+Ad Soyad: ${formData.name}
+E-posta: ${formData.email}
+Telefon: ${formData.phone}
+Gitmek İstediği Ülke: ${formData.country}
+Pasaport Durumu: ${formData.passportStatus}
+
+Mesaj:
+${formData.message}
+    `.trim();
+
+    // Mailto linki oluştur
+    const mailtoLink = `mailto:gonca@gnctravel.com?subject=Vize Başvurusu - ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+    
+    // E-posta istemcisini aç
+    window.location.href = mailtoLink;
+    
+    // Kullanıcıya bilgi ver
+    setTimeout(() => {
+      alert(t('visa.submitSuccess') || 'Başvurunuz alındı! En kısa sürede size dönüş yapacağız.');
+    }, 500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -28,42 +54,42 @@ export function Visa() {
   const visaServices = [
     {
       icon: FileText,
-      title: 'Belge Hazırlama',
-      description: 'Tüm vize başvuru belgelerinizi sizin için hazırlıyoruz. Eksik evrak konusunda destek sağlıyoruz.',
+      title: t('visa.documentPreparation'),
+      description: t('visa.documentPreparationDesc'),
     },
     {
       icon: Clock,
-      title: 'Hızlı İşlem',
-      description: 'Vize başvurularınızı en hızlı şekilde tamamlıyor ve takip ediyoruz.',
+      title: t('visa.fastProcess'),
+      description: t('visa.fastProcessDesc'),
     },
     {
       icon: CheckCircle2,
-      title: 'Onay Garantisi',
-      description: 'Yüksek onay oranı ile profesyonel vize danışmanlığı hizmeti sunuyoruz.',
+      title: t('visa.approvalGuarantee'),
+      description: t('visa.approvalGuaranteeDesc'),
     },
     {
       icon: Globe,
-      title: 'Tüm Ülkeler',
-      description: 'Dünyanın her ülkesi için vize başvuru desteği sağlıyoruz.',
+      title: t('visa.allCountries'),
+      description: t('visa.allCountriesDesc'),
     },
     {
       icon: Shield,
-      title: 'Güvenli Süreç',
-      description: 'Belgeleriniz güvenli bir şekilde işlenir ve gizliliğiniz korunur.',
+      title: t('visa.secureProcess'),
+      description: t('visa.secureProcessDesc'),
     },
     {
       icon: Users,
-      title: 'Uzman Ekip',
-      description: 'Deneyimli vize danışmanlarımız her adımda yanınızda.',
+      title: t('visa.expertTeam'),
+      description: t('visa.expertTeamDesc'),
     },
   ];
 
   const passportRequirements = [
-    'Biyometrik 2 adet fotoğrafınız',
-    'TC Kimlik Kartı veya nüfus cüzdanınız',
-    'Varsa eski pasaportunuz',
-    'Öğrenci belgesi (Harçsız pasaport talep edenler için)',
-    'Ergin olmayanlar veya kısıtlılar için muvafakat belgesi',
+    t('visa.requirement1'),
+    t('visa.requirement2'),
+    t('visa.requirement3'),
+    t('visa.requirement4'),
+    t('visa.requirement5'),
   ];
 
   return (
@@ -76,28 +102,22 @@ export function Visa() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-1 bg-green-400"></div>
-                <span className="tracking-wider">VİZE DANIŞMANLIĞI</span>
+                <span className="tracking-wider">{t('visa.visaConsultancy').toUpperCase()}</span>
               </div>
               <h1 className="mb-6">
-                Yurtdışı Vize Danışmanlığı
+                {t('visa.visaConsultancy')}
               </h1>
               <p className="text-xl mb-8 text-blue-100">
-                Yurtdışı vize başvurularınız hakkında bilgiler. Vize işlemlerinizi profesyonel ekibimizle kolaylaştırın.
+                {t('visa.subtitle2')}
               </p>
               <div className="flex flex-wrap gap-4">
-                <a
-                  href="#form"
+                <Link
+                  to="/contact"
                   className="bg-green-500 text-white px-8 py-4 rounded-full hover:bg-green-600 transition-colors inline-flex items-center gap-2"
                 >
-                  Hemen Başvur
+                  {t('visa.applyNow')}
                   <ArrowRight className="w-5 h-5" />
-                </a>
-                <a
-                  href="#services"
-                  className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full hover:bg-white/20 transition-colors border border-white/30"
-                >
-                  Hizmetlerimiz
-                </a>
+                </Link>
               </div>
             </div>
             <div className="hidden md:block">
@@ -115,10 +135,9 @@ export function Visa() {
       <section id="services" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="mb-4">Neden Bizi Tercih Etmelisiniz?</h2>
+            <h2 className="mb-4">{t('visa.whyChooseUs')}</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Yurtdışı vize başvuru işlemlerinizi başvurudan ülkeye göre birçok farklılık göstermektedir. 
-              Profesyonel ekibimizle size en uygun çözümü sunuyoruz.
+              {t('visa.processInfo')}
             </p>
           </div>
 
@@ -191,13 +210,13 @@ export function Visa() {
             <strong className="text-white"> +90 543 220 05 43</strong> numarasını arayın ya da 
             <strong className="text-white"> info@gnctravel.com</strong> adresine e-posta gönderin.
           </p>
-          <a
-            href="#form"
+          <Link
+            to="/contact"
             className="bg-white text-blue-600 px-10 py-4 rounded-full hover:bg-blue-50 transition-colors inline-flex items-center gap-3 text-lg"
           >
             Ücretsiz Danışmanlık Alın
             <ArrowRight className="w-6 h-6" />
-          </a>
+          </Link>
         </div>
       </section>
 

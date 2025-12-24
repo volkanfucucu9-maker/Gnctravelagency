@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TourPackage } from '../components/TourPackage';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Packages() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü');
@@ -8,155 +9,167 @@ export function Packages() {
   const [priceRange, setPriceRange] = useState('Tümü');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = ['Tümü', 'Plaj & Deniz', 'Macera', 'Kültür & Tarih', 'Lüks', 'Şehir Turları', 'Doğa'];
-  const durations = ['Tümü', '1-3 Gün', '4-7 Gün', '8-14 Gün', '15+ Gün'];
-  const priceRanges = ['Tümü', '€550 - €1.100', '€1.100 - €1.650', '€1.650+'];
+  const categories = ['Tümü', 'Vizesiz Turlar', 'Dubai Turları', 'Mısır Turları', 'Tayland Turları', 'Bali Turları'];
+  const durations = ['Tümü', '1-3 Gün', '4-7 Gün', '8-14 Gün'];
+  const priceRanges = ['Tümü', '€270 - €600', '€600 - €1000', '€1000 - €1500', '€1500+'];
 
   const allPackages = [
+    // Vizesiz Turlar (4 tur)
     {
-      image: 'https://images.unsplash.com/photo-1558117338-aa433feb1c62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cm9waWNhbCUyMGJlYWNoJTIwcmVzb3J0fGVufDF8fHx8MTc2NTExOTY1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Tropikal Cennet Kaçışı',
-      description: 'El değmemiş kumsallarda rahatlayın ve bu unutulmaz tatilde lüks tesis olanaklarının keyfini çıkarın.',
-      duration: '7 Gün',
-      groupSize: '8-12 kişi',
-      rating: 4.9,
-      reviews: 234,
-      price: '€1.535',
-      departure: 'Her gün',
-      category: 'Plaj & Deniz',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1682308999971-208126ba75ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWxkaXZlcyUyMHJlc29ydHxlbnwxfHx8fDE3NjUxNjUxNzh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Maldivler Lüks Tatil',
-      description: 'Su üstü bungalovlar ve berrak sularla nihai lüks destinasyonda deneyim yaşayın.',
-      duration: '5 Gün',
-      groupSize: '2-6 kişi',
+      image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80',
+      title: 'Harikalar Diyarı Bali - Ubud Turu',
+      description: 'Mistik tapınaklar, pirinç terasları ve tropik cennet Bali\'de unutulmaz bir tatil deneyimi.',
+      duration: '8 Gün',
+      groupSize: '10-25 kişi',
       rating: 5.0,
-      reviews: 189,
-      price: '€2.020',
-      departure: 'Pzt, Per',
-      category: 'Lüks',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1603741614953-4187ed84cc50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMGhpa2luZyUyMGFkdmVudHVyZXxlbnwxfHx8fDE3NjUxNzE4MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Dağ Macerası Trekking',
-      description: 'Nefes kesici dağ yolları ve muhteşem panoramik manzaralarla kendinize meydan okuyun.',
-      duration: '10 Gün',
-      groupSize: '6-15 kişi',
-      rating: 4.8,
       reviews: 156,
-      price: '€1.295',
-      departure: 'Cumartesi',
-      category: 'Macera',
+      price: '€1.499',
+      departure: 'Belirli Tarihler',
+      category: 'Bali Turları',
+      link: '/tour-details/bali-ubud-wonderland'
     },
     {
-      image: 'https://images.unsplash.com/photo-1431274172761-fca41d930114?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXJpcyUyMGVpZmZlbCUyMHRvd2VyfGVufDF8fHx8MTc2NTA5NDU0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Paris Romantik Kaçamak',
-      description: 'Aşk şehrinde romantik bir hafta sonu geçirin. Eyfel Kulesi, Louvre ve daha fazlası.',
-      duration: '4 Gün',
-      groupSize: '2-4 kişi',
-      rating: 4.9,
-      reviews: 312,
-      price: '€970',
-      departure: 'Cum, Pzt',
-      category: 'Şehir Turları',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1760199078626-d295728e9b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZnJpY2FuJTIwc2FmYXJpJTIwYWR2ZW50dXJlfGVufDF8fHx8MTc2NTE4Nzg4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Afrika Safari Macerası',
-      description: 'Vahşi yaşamı keşfedin ve Afrika\'nın büyüleyici doğasında unutulmaz anlar yaşayın.',
-      duration: '12 Gün',
-      groupSize: '8-16 kişi',
-      rating: 4.7,
-      reviews: 178,
-      price: '€2.425',
-      departure: 'Cumartesi',
-      category: 'Macera',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmV8ZW58MXx8fHwxNzY1MTg3ODg2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'New York Şehir Turu',
-      description: 'Uyumayan şehirde ikonik yerler, müzeler ve Broadway gösterileri deneyimi.',
-      duration: '6 Gün',
-      groupSize: '4-10 kişi',
-      rating: 4.8,
-      reviews: 267,
-      price: '€1.430',
-      departure: 'Her gün',
-      category: 'Şehir Turları',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1488415032361-b7e238421f1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpY2VsYW5kJTIwbm9ydGhlcm4lMjBsaWdodHN8ZW58MXx8fHwxNzY1MTUyMzE1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'İzlanda Kuzey Işıkları',
-      description: 'Kuzey ışıklarını izleyin, sıcak su kaynaklarında yüzün ve buzulları keşfedin.',
-      duration: '8 Gün',
-      groupSize: '6-12 kişi',
-      rating: 5.0,
-      reviews: 203,
-      price: '€1.835',
-      departure: 'Salı, Cuma',
-      category: 'Doğa',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1745311069169-28192965b671?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYWxpJTIwdGVtcGxlJTIwY3VsdHVyZXxlbnwxfHx8fDE3NjUxMDQwNTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Bali Kültür & Yoga Retreat',
-      description: 'Bali\'nin manevi atmosferinde yoga, meditasyon ve kültürel keşif.',
+      image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80',
+      title: 'Bangkok - Pattaya Turu',
+      description: 'Tayland\'ın egzotik güzelliği, tapınaklar, plajlar ve eğlence ile dolu muhteşem bir kaçış.',
       duration: '9 Gün',
-      groupSize: '4-8 kişi',
-      rating: 4.9,
-      reviews: 145,
-      price: '€1.160',
-      departure: 'Pazar',
-      category: 'Kültür & Tarih',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 234,
+      price: '€999',
+      departure: 'Belirli Tarihler',
+      category: 'Tayland Turları',
+      link: '/tour-details/bangkok-pattaya'
     },
     {
-      image: 'https://images.unsplash.com/photo-1546180132-8267c4c5bdd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzd2lzcyUyMGFscHMlMjBza2lpbmd8ZW58MXx8fHwxNzY1MTg3ODg4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'İsviçre Alpleri Kayak Turu',
-      description: 'Dünya standartlarında pist ve muhteşem dağ manzaralarıyla unutulmaz bir kayak tatili.',
-      duration: '7 Gün',
-      groupSize: '6-14 kişi',
-      rating: 4.8,
-      reviews: 198,
-      price: '€1.890',
-      departure: 'Cumartesi',
-      category: 'Macera',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1645731285912-b64e36194ce5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcnVpc2UlMjBzaGlwJTIwdmFjYXRpb258ZW58MXx8fHwxNzY1MTg3ODg4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Akdeniz Cruise Turu',
-      description: '7 gün boyunca Akdeniz\'in en güzel limanlarını keşfedin. Her şey dahil lüks deneyim.',
-      duration: '7 Gün',
-      groupSize: '100+',
-      rating: 4.6,
-      reviews: 421,
-      price: '€1.620',
-      departure: 'Pazar',
-      category: 'Lüks',
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1640871426525-a19540c45a39?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b2t5byUyMGphcGFuJTIwY2l0eXxlbnwxfHx8fDE3NjUxNjUxNzd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Tokyo & Kyoto Kültür Turu',
-      description: 'Japonya\'nın modern ve geleneksel yüzünü keşfedin. Tapınaklar, bahçeler ve teknoloji.',
+      image: 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80',
+      title: 'Keşfet Tayland Bangkok Pattaya Phuket',
+      description: '3 şehirde Tayland\'ın en güzel yerlerini keşfedin. Tapınaklar, plajlar ve kültür.',
       duration: '11 Gün',
-      groupSize: '8-15 kişi',
-      rating: 4.9,
-      reviews: 289,
-      price: '€2.130',
-      departure: 'Pazartesi',
-      category: 'Kültür & Tarih',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 198,
+      price: '€1.499',
+      departure: 'Belirli Tarihler',
+      category: 'Tayland Turları',
+      link: '/tour-details/kesfet-tayland'
     },
     {
-      image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYW50b3JpbmklMjBncmVlY2V8ZW58MXx8fHwxNzY1MTAwODQzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Yunan Adaları Turu',
-      description: 'Santorini, Mykonos ve Atina\'yı kapsayan muhteşem Yunan adaları turu.',
-      duration: '8 Gün',
-      groupSize: '10-20 kişi',
-      rating: 4.8,
-      reviews: 276,
-      price: '€1.485',
-      departure: 'Perşembe',
-      category: 'Plaj & Deniz',
+      image: 'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=800&q=80',
+      title: 'Bangkok - Pattaya 7 Gece Süper Promosyon',
+      description: 'Uzatılmış konaklama ile daha fazla keşif ve dinlenme fırsatı.',
+      duration: '9 Gün',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 187,
+      price: '€1.149',
+      departure: 'Belirli Tarihler',
+      category: 'Tayland Turları',
+      link: '/tour-details/bangkok-pattaya-extended'
     },
+
+    // Dubai Turları (3 tur)
+    {
+      image: 'https://images.unsplash.com/photo-1651284819032-42a925c1b114?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+      title: 'Dubai Turu 3 Gece AJet Havayolları',
+      description: 'Burj Khalifa, Dubai Mall ve şehir turu ile kısa ama yoğun Dubai deneyimi.',
+      duration: '4 Gün',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 143,
+      price: '€550',
+      departure: 'Her gün',
+      category: 'Dubai Turları',
+      link: '/tour-details/dubai-ajet'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1761341063556-80cb742411b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
+      title: 'Bir Dubai Masalı - Dubai Şehir Turu Dahil',
+      description: 'Dubai\'nin büyüleyici atmosferi, Abra tekne gezisi ve geleneksel çarşılar.',
+      duration: '6 Gün',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 176,
+      price: '€499',
+      departure: 'Her gün',
+      category: 'Dubai Turları',
+      link: '/tour-details/dubai-masali'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800',
+      title: 'Muhteşem Dubai - Emirates Havayolları',
+      description: 'Emirates konforu ile Dubai\'nin görkemli yapıları ve lüks alışveriş deneyimi.',
+      duration: '5 Gün',
+      groupSize: '10-25 kişi',
+      rating: 5.0,
+      reviews: 167,
+      price: '€899',
+      departure: 'Her gün',
+      category: 'Dubai Turları',
+      link: '/tour-details/dubai-emirates'
+    },
+
+    // Mısır Turları (5 tur - Hurghada kaldırıldı)
+    {
+      image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800',
+      title: 'Kahire & Nil Turu',
+      description: 'Piramitler, Sfenks ve Nil üzerinde cruise ile Mısır\'ın kalbini keşfedin.',
+      duration: '7 Gün',
+      groupSize: '15-30 kişi',
+      rating: 5.0,
+      reviews: 289,
+      price: '€500',
+      departure: 'Her gün',
+      category: 'Mısır Turları'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800',
+      title: 'Mısır Klasik Tur',
+      description: 'Kahire, Piramitler ve Mısır Müzesi ile tarih dolu bir keşif.',
+      duration: '5 Gün',
+      groupSize: '15-30 kişi',
+      rating: 5.0,
+      reviews: 245,
+      price: '€370',
+      departure: 'Her gün',
+      category: 'Mısır Turları'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800',
+      title: 'Mısır & Ürdün Kombine Tur',
+      description: '2 ülke, Petra antik kenti, Ölü Deniz ve Piramitler ile eşsiz bir deneyim.',
+      duration: '9 Gün',
+      groupSize: '15-30 kişi',
+      rating: 5.0,
+      reviews: 198,
+      price: '€640',
+      departure: 'Pazartesi, Perşembe',
+      category: 'Mısır Turları'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800',
+      title: 'Mısır Kültür Turu',
+      description: 'Tüm tapınaklar, Abu Simbel ve Nil kenarında tarihi bir yolculuk.',
+      duration: '8 Gün',
+      groupSize: '15-30 kişi',
+      rating: 5.0,
+      reviews: 267,
+      price: '€570',
+      departure: 'Salı, Cuma',
+      category: 'Mısır Turları'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800',
+      title: 'Mısır Ekonomik Paket',
+      description: 'Bütçe dostu fiyatlarla Piramitler ve Kahire gezisi.',
+      duration: '4 Gün',
+      groupSize: '15-30 kişi',
+      rating: 4.0,
+      reviews: 176,
+      price: '€270',
+      departure: 'Her gün',
+      category: 'Mısır Turları'
+    }
   ];
 
   const filteredPackages = allPackages.filter(pkg => {
@@ -170,15 +183,15 @@ export function Packages() {
       if (selectedDuration === '1-3 Gün') matchesDuration = days >= 1 && days <= 3;
       else if (selectedDuration === '4-7 Gün') matchesDuration = days >= 4 && days <= 7;
       else if (selectedDuration === '8-14 Gün') matchesDuration = days >= 8 && days <= 14;
-      else if (selectedDuration === '15+ Gün') matchesDuration = days >= 15;
     }
 
     let matchesPrice = true;
     if (priceRange !== 'Tümü') {
       const price = parseInt(pkg.price.replace(/[^\d]/g, ''));
-      if (priceRange === '€550 - €1.100') matchesPrice = price >= 550 && price <= 1100;
-      else if (priceRange === '€1.100 - €1.650') matchesPrice = price >= 1100 && price <= 1650;
-      else if (priceRange === '€1.650+') matchesPrice = price >= 1650;
+      if (priceRange === '€270 - €600') matchesPrice = price >= 270 && price <= 600;
+      else if (priceRange === '€600 - €1000') matchesPrice = price >= 600 && price <= 1000;
+      else if (priceRange === '€1000 - €1500') matchesPrice = price >= 1000 && price <= 1500;
+      else if (priceRange === '€1500+') matchesPrice = price >= 1500;
     }
 
     return matchesCategory && matchesSearch && matchesDuration && matchesPrice;
@@ -212,7 +225,7 @@ export function Packages() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Paket ara... (örn: Paris, safari, cruise)"
+                  placeholder="Paket ara... (örn: Dubai, Mısır, Bangkok)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -328,9 +341,12 @@ export function Packages() {
           <p className="text-gray-600 mb-8">
             Uzman ekibimiz size özel bir tur paketi hazırlayabilir. Bizimle iletişime geçin!
           </p>
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-colors">
+          <Link 
+            to="/contact"
+            className="bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-colors inline-block"
+          >
             Özel Paket Talebi
-          </button>
+          </Link>
         </div>
       </section>
     </div>

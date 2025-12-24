@@ -2,6 +2,7 @@ import { Plane, Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
+import logo from 'figma:asset/7bc0411f51dbb1b1ada948fae1e4872a66d5e18f.png';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,9 +13,9 @@ export function Header() {
   
   // Countdown timer state
   const [timeLeft, setTimeLeft] = useState({
-    hours: 0,
-    minutes: 11,
-    seconds: 49
+    hours: 21,
+    minutes: 0,
+    seconds: 0
   });
 
   useEffect(() => {
@@ -34,39 +35,23 @@ export function Header() {
     return () => clearInterval(timer);
   }, []);
 
-  const tourCategories = [
+  const navItems = [
     {
-      title: t('tours.international'),
+      title: t('tours.abroad'),
       items: [
-        { name: t('tours.visaFree'), count: 6, path: '/tours/visa-free' },
+        { name: t('tours.visaFree'), count: 4, path: '/tours/visa-free' },
         { name: t('tours.dubai'), count: 3, path: '/tours/dubai' },
-        { name: t('tours.egypt'), count: 18, path: '/tours/egypt' },
-        { name: t('tours.thailand'), count: 12, path: '/tours/thailand' },
-        { name: t('tours.bali'), count: 10, path: '/tours/bali' },
-        { name: t('tours.montenegro'), count: 4, path: '/tours/montenegro' },
-        { name: t('tours.balkans'), count: 6, path: '/tours/balkans' },
-        { name: t('tours.italy'), count: 6, path: '/tours/italy' },
-        { name: t('tours.japan'), count: 10, path: '/tours/japan' },
-        { name: t('tours.greece'), count: 22, path: '/tours/greece' }
+        { name: t('tours.egypt'), count: 6, path: '/tours/egypt' },
+        { name: t('tours.thailand'), count: 3, path: '/tours/thailand' },
+        { name: t('tours.bali'), count: 1, path: '/tours/bali' }
       ]
     },
     {
       title: t('tours.culture'),
       items: [
-        { name: t('tours.europeCulture'), count: 35, path: '/tours/europe-culture' },
-        { name: t('tours.asiaCulture'), count: 28, path: '/tours/asia-culture' },
-        { name: t('tours.middleEast'), count: 20, path: '/tours/middle-east' },
-        { name: t('tours.holyLands'), count: 15, path: '/tours/holy-lands' },
-        { name: t('tours.farEast'), count: 12, path: '/tours/far-east' }
-      ]
-    },
-    {
-      title: t('tours.turkey'),
-      items: [
-        { name: t('tours.antalya'), count: 28, path: '/tours/antalya' },
-        { name: t('tours.cappadocia'), count: 22, path: '/tours/cappadocia' },
-        { name: t('tours.aegean'), count: 24, path: '/tours/aegean-turkey' },
-        { name: t('tours.mediterranean'), count: 26, path: '/tours/mediterranean-turkey' }
+        { name: t('tours.europeCulture'), count: 2, path: '/tours/europe-culture' },
+        { name: t('tours.asiaCulture'), count: 4, path: '/tours/asia-culture' },
+        { name: t('tours.middleEast'), count: 3, path: '/tours/middle-east' }
       ]
     }
   ];
@@ -78,6 +63,26 @@ export function Header() {
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);
+
+  // Logo SVG
+  const logoSVG = (
+    <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="80" fill="white"/>
+      <text x="20" y="35" fontFamily="Gotham, Arial, sans-serif" fontSize="28" fontWeight="bold" fill="#1E40AF">
+        GNC
+      </text>
+      <text x="20" y="55" fontFamily="Gotham, Arial, sans-serif" fontSize="12" fill="#64748B">
+        TRAVEL AGENCY
+      </text>
+      <circle cx="170" cy="30" r="25" fill="#1E40AF" opacity="0.1"/>
+      <text x="153" y="38" fontFamily="Gotham, Arial, sans-serif" fontSize="20" fontWeight="bold" fill="#1E40AF">
+        10
+      </text>
+      <text x="148" y="50" fontFamily="Gotham, Arial, sans-serif" fontSize="8" fill="#1E40AF">
+        YIL
+      </text>
+    </svg>
+  );
 
   return (
     <>
@@ -118,7 +123,7 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/logognctravel.png" alt="GNC Travel Agency" className="h-20" />
+              <img src={logo} alt="GNC Travel Agency" className="h-10" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -140,8 +145,8 @@ export function Header() {
                 
                 {toursDropdownOpen && (
                   <div className="absolute top-full left-0 pt-2 z-50">
-                    <div className="bg-white shadow-lg rounded-lg py-4 px-6 min-w-[700px] grid grid-cols-3 gap-8">
-                      {tourCategories.map((category, idx) => (
+                    <div className="bg-white shadow-lg rounded-lg py-4 px-6 min-w-[500px] grid grid-cols-2 gap-8">
+                      {navItems.map((category, idx) => (
                         <div key={idx}>
                           <div className="text-blue-600 mb-3">{category.title}</div>
                           <ul className="space-y-2">
@@ -238,7 +243,7 @@ export function Header() {
                   </button>
                   {toursDropdownOpen && (
                     <div className="mt-2 ml-4 space-y-3">
-                      {tourCategories.map((category, idx) => (
+                      {navItems.map((category, idx) => (
                         <div key={idx}>
                           <div className="text-blue-600 mb-2 text-sm">{category.title}</div>
                           <ul className="space-y-1 ml-2">

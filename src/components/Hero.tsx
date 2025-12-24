@@ -1,8 +1,10 @@
 import { Search, MapPin, Calendar, Users } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Hero() {
+  const { t } = useLanguage();
   const [destination, setDestination] = useState('');
   const [date, setDate] = useState('');
   const [guests, setGuests] = useState('2');
@@ -10,35 +12,20 @@ export function Hero() {
   const navigate = useNavigate();
 
   // Tüm turlar için arama verisi
-  const allTours = [
-    // Yurt Dışı Turları
-    { name: 'Vizesiz Yurt Dışı', path: '/tours/visa-free', keywords: ['vizesiz', 'vize', 'pasaport', 'bali', 'tayland', 'maldivler', 'gürcistan', 'kıbrıs'] },
-    { name: 'Karadağ', path: '/tours/montenegro', keywords: ['karadağ', 'montenegro', 'kotor', 'budva', 'adriyatik'] },
-    { name: 'Balkan Turları', path: '/tours/balkans', keywords: ['balkan', 'balkanlar', 'bosna', 'sırbistan', 'hırvatistan', 'makedonya', 'arnavutluk', 'romanya'] },
-    { name: 'İtalya', path: '/tours/italy', keywords: ['italya', 'roma', 'floransa', 'venedik', 'milano', 'toskana', 'napoli', 'amalfi'] },
-    { name: 'Dubai', path: '/tours/dubai', keywords: ['dubai', 'bae', 'birleşik arap emirlikleri', 'burj khalifa', 'abu dhabi'] },
-    { name: 'Japonya', path: '/tours/japan', keywords: ['japonya', 'tokyo', 'kyoto', 'osaka', 'hiroshima', 'fuji'] },
-    { name: 'Mısır', path: '/tours/egypt', keywords: ['mısır', 'kahire', 'piramit', 'nil', 'luxor', 'aswan'] },
-    { name: 'Sharm El Sheikh', path: '/tours/sharm-el-sheikh', keywords: ['sharm', 'şarm', 'kırmızı deniz', 'dalış', 'mısır'] },
-    { name: 'Yunanistan', path: '/tours/greece', keywords: ['yunanistan', 'santorini', 'mykonos', 'atina', 'girit', 'rodos'] },
-    
-    // Kültür Turları
-    { name: 'Avrupa Kültür Turları', path: '/tours/europe-culture', keywords: ['avrupa', 'kültür', 'paris', 'londra', 'viyana', 'prag', 'budapeşte', 'ispanya'] },
-    { name: 'Asya Kültür Turları', path: '/tours/asia-culture', keywords: ['asya', 'kültür', 'çin', 'hindistan', 'vietnam', 'kamboçya', 'güney kore', 'sri lanka'] },
-    { name: 'Orta Doğu Turları', path: '/tours/middle-east', keywords: ['orta doğu', 'ürdün', 'petra', 'iran', 'umman', 'katar', 'lübnan'] },
-    { name: 'Kutsal Topraklar', path: '/tours/holy-lands', keywords: ['kutsal', 'kudüs', 'israil', 'filistin', 'betlehem', 'nasıra'] },
-    { name: 'Uzak Doğu', path: '/tours/far-east', keywords: ['uzak doğu', 'singapur', 'malezya', 'tayvan', 'filipinler', 'hong kong'] },
-    
-    // Türkiye Turları
-    { name: 'Antalya Turları', path: '/tours/antalya', keywords: ['antalya', 'türkiye', 'lara', 'kaleiçi', 'düden', 'konyaaltı', 'akdeniz'] },
-    { name: 'Kapadokya Turları', path: '/tours/cappadocia', keywords: ['kapadokya', 'türkiye', 'balon', 'peri bacası', 'göreme', 'nevşehir'] },
-    { name: 'Ege Turları', path: '/tours/aegean-turkey', keywords: ['ege', 'türkiye', 'efes', 'kuşadası', 'çeşme', 'bodrum', 'pamukkale'] },
-    { name: 'Akdeniz Turları', path: '/tours/mediterranean-turkey', keywords: ['akdeniz', 'türkiye', 'antalya', 'kaş', 'fethiye', 'kemer', 'alanya'] }
+  const tourDestinations = [
+    { name: 'Dubai Turları', path: '/tours/dubai', keywords: ['dubai', 'burj khalifa', 'çöl safarisi', 'alışveriş', 'lüks'] },
+    { name: 'Mısır Turları', path: '/tours/egypt', keywords: ['mısır', 'piramit', 'kahire', 'nil', 'hurgada', 'sharm el sheikh'] },
+    { name: 'Tayland Turları', path: '/tours/thailand', keywords: ['tayland', 'bangkok', 'phuket', 'pattaya', 'tapınak'] },
+    { name: 'Bali Turları', path: '/tours/bali', keywords: ['bali', 'endonezya', 'ubud', 'adalar', 'tapınak'] },
+    { name: 'Vizesiz Turlar', path: '/tours/visa-free', keywords: ['vizesiz', 'pasaport', 'kolay', 'sırbistan', 'gürcistan', 'kıbrıs'] },
+    { name: 'Avrupa Kültür Turları', path: '/tours/europe-culture', keywords: ['avrupa', 'kültür', 'almanya', 'berlin', 'schwäbisch'] },
+    { name: 'Asya Kültür Turları', path: '/tours/asia-culture', keywords: ['asya', 'kültür', 'bali', 'tayland', 'bangkok'] },
+    { name: 'Orta Doğu Turları', path: '/tours/middle-east', keywords: ['orta doğu', 'dubai', 'burj khalifa'] }
   ];
 
   // Arama filtresi
   const filteredTours = destination.trim() 
-    ? allTours.filter(tour => {
+    ? tourDestinations.filter(tour => {
         const searchTerm = destination.toLowerCase();
         return tour.name.toLowerCase().includes(searchTerm) ||
                tour.keywords.some(keyword => keyword.includes(searchTerm));
@@ -76,22 +63,22 @@ export function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-white mb-6 font-bold">
-          Bir Sonraki Maceranızı Keşfedin
+          {t('hero.title')}
         </h1>
         <p className="text-white/90 mb-12 max-w-2xl mx-auto">
-          Özenle seçilmiş tur paketlerimiz ve uzman rehberlerimizle dünyanın muhteşem destinasyonlarını keşfedin
+          {t('hero.subtitle')}
         </p>
 
         {/* Search Card */}
         <form onSubmit={handleSearch} className="bg-white rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="relative">
-              <label className="block text-gray-700 mb-2 text-left">Destinasyon</label>
+              <label className="block text-gray-700 mb-2 text-left">{t('hero.destination')}</label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Nereye?"
+                  placeholder={t('hero.destinationPlaceholder')}
                   value={destination}
                   onChange={(e) => {
                     setDestination(e.target.value);
@@ -124,7 +111,7 @@ export function Hero() {
             </div>
 
             <div className="relative">
-              <label className="block text-gray-700 mb-2 text-left">Tarih</label>
+              <label className="block text-gray-700 mb-2 text-left">{t('hero.date')}</label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
@@ -137,7 +124,7 @@ export function Hero() {
             </div>
 
             <div className="relative">
-              <label className="block text-gray-700 mb-2 text-left">Misafir Sayısı</label>
+              <label className="block text-gray-700 mb-2 text-left">{t('hero.guests')}</label>
               <div className="relative">
                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <select
@@ -145,11 +132,11 @@ export function Hero() {
                   onChange={(e) => setGuests(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none"
                 >
-                  <option value="1">1 Misafir</option>
-                  <option value="2">2 Misafir</option>
-                  <option value="3">3 Misafir</option>
-                  <option value="4">4 Misafir</option>
-                  <option value="5+">5+ Misafir</option>
+                  <option value="1">1 {t('hero.guest')}</option>
+                  <option value="2">2 {t('hero.guest')}</option>
+                  <option value="3">3 {t('hero.guest')}</option>
+                  <option value="4">4 {t('hero.guest')}</option>
+                  <option value="5+">5+ {t('hero.guest')}</option>
                 </select>
               </div>
             </div>
@@ -160,7 +147,7 @@ export function Hero() {
                 className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
               >
                 <Search className="w-5 h-5" />
-                Ara
+                {t('hero.search')}
               </button>
             </div>
           </div>

@@ -1,101 +1,170 @@
 import { useState } from 'react';
 import { CheckCircle, Star, Calendar, Filter, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function AllTours() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPrice, setSelectedPrice] = useState<string>('all');
   const [selectedDuration, setSelectedDuration] = useState<string>('all');
-  const [selectedRating, setSelectedRating] = useState<number>(0);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // Tüm turlar - Her kategoriden
+  // Tüm turlar - Websitedeki güncel turlar
   const allTours = [
-    // İtalya Turları
-    { id: 'italy-1', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'Roma & Floransa Klasikleri', duration: '7 Gün / 6 Gece', price: 34999, priceText: '₺34.999', image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800', rating: 5, features: ['Vatikan', 'Colosseum', 'Uffizi Galerisi'] },
-    { id: 'italy-2', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'Venedik & Milano Turu', duration: '6 Gün / 5 Gece', price: 32500, priceText: '₺32.500', image: 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800', rating: 5, features: ['Gondol Turu', 'Duomo', 'Moda Başkenti'] },
-    { id: 'italy-3', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'Güney İtalya & Amalfi', duration: '8 Gün / 7 Gece', price: 38000, priceText: '₺38.000', image: 'https://images.unsplash.com/photo-1534445538923-75f38c93c81f?w=800', rating: 5, features: ['Napoli', 'Amalfi Kıyıları', 'Capri Adası'] },
-    { id: 'italy-4', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'Toskana Bağ Rotası', duration: '5 Gün / 4 Gece', price: 29500, priceText: '₺29.500', image: 'https://images.unsplash.com/photo-1523906630133-f6934a1ab2b9?w=800', rating: 5, features: ['Şarap Turları', 'Chianti', 'Şirin Kasabalar'] },
-    { id: 'italy-5', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'İtalya Panorama', duration: '10 Gün / 9 Gece', price: 45000, priceText: '₺45.000', image: 'https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800', rating: 5, features: ['12 Şehir', 'Komple İtalya', 'Kültür & Sanat'] },
-    { id: 'italy-6', category: 'Yurt Dışı Turları', subCategory: 'İtalya', title: 'İtalya Balayı Özel', duration: '7 Gün / 6 Gece', price: 42000, priceText: '₺42.000', image: 'https://images.unsplash.com/photo-1498307833015-e7b400441eb8?w=800', rating: 5, features: ['Romantik Oteller', 'Özel Turlar', 'Lüks Deneyim'] },
+    // Bali Turları (1 tur)
+    { 
+      id: 'bali-1', 
+      category: 'Bali Turları', 
+      title: 'Harikalar Diyarı Bali - Ubud Turu', 
+      duration: '8 Gün / 6 Gece', 
+      price: 1499, 
+      priceText: '€1.499', 
+      image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=800&q=80', 
+      rating: 5, 
+      features: ['Türk Havayolları', 'Ubud + Bali', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bali-ubud-wonderland'
+    },
 
-    // Japonya Turları
-    { id: 'japan-1', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Tokyo & Kyoto Klasik', duration: '8 Gün / 7 Gece', price: 42000, priceText: '₺42.000', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800', rating: 5, features: ['Modern Tokyo', 'Tarihi Kyoto', 'Geleneksel Deneyim'] },
-    { id: 'japan-2', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Japonya Panorama', duration: '12 Gün / 11 Gece', price: 58000, priceText: '₺58.000', image: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800', rating: 5, features: ['5 Şehir', 'Fuji Dağı', 'Kültür Turu'] },
-    { id: 'japan-3', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Kiraz Çiçeği Festivali', duration: '10 Gün / 9 Gece', price: 52000, priceText: '₺52.000', image: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=800', rating: 5, features: ['Sakura Mevsimi', 'Bahçe Turları', 'Fotoğraf Turu'] },
-    { id: 'japan-4', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Osaka Gastronomi Turu', duration: '6 Gün / 5 Gece', price: 38500, priceText: '₺38.500', image: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800', rating: 5, features: ['Yemek Turları', 'Market Gezileri', 'Michelin Restoranlar'] },
-    { id: 'japan-5', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Kış Japonya & Kayak', duration: '9 Gün / 8 Gece', price: 48000, priceText: '₺48.000', image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800', rating: 5, features: ['Hokkaido Kayak', 'Kaplıcalar', 'Kar Festivali'] },
-    { id: 'japan-6', category: 'Yurt Dışı Turları', subCategory: 'Japonya', title: 'Japonya Express', duration: '5 Gün / 4 Gece', price: 32000, priceText: '₺32.000', image: 'https://images.unsplash.com/photo-1554797589-7241bb691973?w=800', rating: 4, features: ['Tokyo Highlights', 'Hızlı Tur', 'Ekonomik'] },
+    // Tayland Turları (3 tur)
+    { 
+      id: 'thailand-1', 
+      category: 'Tayland Turları', 
+      title: 'Bangkok - Pattaya Turu', 
+      duration: '9 Gün / 7 Gece', 
+      price: 999, 
+      priceText: '€999', 
+      image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80', 
+      rating: 5, 
+      features: ['Türk Havayolları', 'Tapınak Turları', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bangkok-pattaya'
+    },
+    { 
+      id: 'thailand-2', 
+      category: 'Tayland Turları', 
+      title: 'Keşfet Tayland Bangkok Pattaya Phuket', 
+      duration: '11 Gün / 9 Gece', 
+      price: 1499, 
+      priceText: '€1.499', 
+      image: 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=80', 
+      rating: 5, 
+      features: ['Türk Havayolları', '3 Şehir Turu', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/kesfet-tayland'
+    },
+    { 
+      id: 'thailand-3', 
+      category: 'Tayland Turları', 
+      title: 'Bangkok - Pattaya 7 Gece Süper Promosyon', 
+      duration: '9 Gün / 7 Gece', 
+      price: 1149, 
+      priceText: '€1.149', 
+      image: 'https://images.unsplash.com/photo-1562602833-0f4ab2fc46e3?auto=format&fit=crop&w=800&q=80', 
+      rating: 5, 
+      features: ['Türk Havayolları', 'Extended Stay', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/bangkok-pattaya-extended'
+    },
 
-    // Yunanistan Turları
-    { id: 'greece-1', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Santorini Romantik Kaçış', duration: '5 Gün / 4 Gece', price: 28000, priceText: '₺28.000', image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800', rating: 5, features: ['Caldera Manzarası', 'Gün Batımı', 'Beyaz Evler'] },
-    { id: 'greece-2', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Mykonos & Santorini Kombo', duration: '7 Gün / 6 Gece', price: 35000, priceText: '₺35.000', image: 'https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800', rating: 5, features: ['2 Ada', 'Gece Hayatı', 'Plaj Kulüpleri'] },
-    { id: 'greece-3', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Atina Klasik', duration: '4 Gün / 3 Gece', price: 18500, priceText: '₺18.500', image: 'https://images.unsplash.com/photo-1555993539-1732b0258235?w=800', rating: 5, features: ['Akropolis', 'Antik Tarih', 'Şehir Turu'] },
-    { id: 'greece-4', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Girit Adası Turu', duration: '6 Gün / 5 Gece', price: 24000, priceText: '₺24.000', image: 'https://images.unsplash.com/photo-1601581987809-a874a81309c9?w=800', rating: 5, features: ['Knossos Sarayı', 'Plajlar', 'Zeytinyağı Tadımı'] },
-    { id: 'greece-5', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Rodos Şövalye Adası', duration: '5 Gün / 4 Gece', price: 22000, priceText: '₺22.000', image: 'https://images.unsplash.com/photo-1601581348382-232295465bdc?w=800', rating: 5, features: ['Ortaçağ Şehri', 'Antik Lindos', 'Termal Kaynaklar'] },
-    { id: 'greece-6', category: 'Yurt Dışı Turları', subCategory: 'Yunanistan', title: 'Yunan Adaları Cruise', duration: '8 Gün / 7 Gece', price: 42000, priceText: '₺42.000', image: 'https://images.unsplash.com/photo-1580837119756-563d608dd119?w=800', rating: 5, features: ['5 Ada', 'Gemi Turu', 'Her Şey Dahil'] },
+    // Dubai Turları (3 tur)
+    { 
+      id: 'dubai-1', 
+      category: 'Dubai Turları', 
+      title: 'Dubai Turu 3 Gece AJet Havayolları', 
+      duration: '4 Gün / 3 Gece', 
+      price: 550, 
+      priceText: '€550', 
+      image: 'https://images.unsplash.com/photo-1651284819032-42a925c1b114?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 
+      rating: 5, 
+      features: ['AJet Havayolları', 'Dubai İkonları Şehir Turu', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/dubai-ajet'
+    },
+    { 
+      id: 'dubai-2', 
+      category: 'Dubai Turları', 
+      title: 'Bir Dubai Masalı - Dubai Şehir Turu Dahil', 
+      duration: '6 Gün / 5 Gece', 
+      price: 499, 
+      priceText: '€499', 
+      image: 'https://images.unsplash.com/photo-1761341063556-80cb742411b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80', 
+      rating: 5, 
+      features: ['AJet Havayolları', 'Dubai Şehir Turu ve Abra', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/dubai-masali'
+    },
+    { 
+      id: 'dubai-3', 
+      category: 'Dubai Turları', 
+      title: 'Muhteşem Dubai - Emirates Havayolları', 
+      duration: '5 Gün / 4 Gece', 
+      price: 899, 
+      priceText: '€899', 
+      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', 
+      rating: 5, 
+      features: ['Emirates Havayolları', 'Dubai Şehir Turu ve Abra', 'Türkçe Rehber'],
+      detailUrl: '/tour-details/dubai-emirates'
+    },
 
-    // Mısır Turları
-    { id: 'egypt-1', category: 'Yurt Dışı Turları', subCategory: 'Mısır', title: 'Kahire & Piramitler', duration: '5 Gün / 4 Gece', price: 18000, priceText: '₺18.000', image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800', rating: 5, features: ['Giza Piramitleri', 'Sfenks', 'Mısır Müzesi'] },
-    { id: 'egypt-2', category: 'Yurt Dışı Turları', subCategory: 'Mısır', title: 'Nil Nehri Cruise', duration: '7 Gün / 6 Gece', price: 32000, priceText: '₺32.000', image: 'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=800', rating: 5, features: ['Lüks Gemi', 'Luxor & Aswan', 'Tapınaklar'] },
-    { id: 'egypt-3', category: 'Yurt Dışı Turları', subCategory: 'Mısır', title: 'Mısır Ekspres', duration: '4 Gün / 3 Gece', price: 15000, priceText: '₺15.000', image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800', rating: 4, features: ['Hızlı Tur', 'Önemli Noktalar', 'Ekonomik'] },
-
-    // Balkan Turları
-    { id: 'balkans-1', category: 'Yurt Dışı Turları', subCategory: 'Balkan Turları', title: 'Balkan Üçgeni', duration: '8 Gün / 7 Gece', price: 24500, priceText: '₺24.500', image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800', rating: 5, features: ['Bosna', 'Sırbistan', 'Hırvatistan'] },
-    { id: 'balkans-2', category: 'Yurt Dışı Turları', subCategory: 'Balkan Turları', title: 'Balkan Turu Komple', duration: '12 Gün / 11 Gece', price: 38000, priceText: '₺38.000', image: 'https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?w=800', rating: 5, features: ['7 Ülke', 'Kültür Rotası', 'Tarihi Şehirler'] },
-
-    // Karadağ Turları
-    { id: 'montenegro-1', category: 'Yurt Dışı Turları', subCategory: 'Karadağ', title: 'Karadağ Kıyıları', duration: '6 Gün / 5 Gece', price: 22000, priceText: '₺22.000', image: 'https://images.unsplash.com/photo-1565530916503-c15dff5e8d27?w=800', rating: 5, features: ['Kotor Körfezi', 'Budva', 'Adriyatik'] },
-
-    // Vizesiz Turlar
-    { id: 'visa-free-1', category: 'Yurt Dışı Turları', subCategory: 'Vizesiz Yurt Dışı', title: 'Bali Cennet Adası', duration: '8 Gün / 7 Gece', price: 28000, priceText: '₺28.000', image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800', rating: 5, features: ['Tapınaklar', 'Pirinç Tarlaları', 'Plajlar'] },
-    { id: 'visa-free-2', category: 'Yurt Dışı Turları', subCategory: 'Vizesiz Yurt Dışı', title: 'Maldivler Lüks', duration: '6 Gün / 5 Gece', price: 52000, priceText: '₺52.000', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800', rating: 5, features: ['Su Üstü Villa', 'Her Şey Dahil', 'Dalış'] },
-    { id: 'visa-free-3', category: 'Yurt Dışı Turları', subCategory: 'Vizesiz Yurt Dışı', title: 'Gürcistan Kültür Turu', duration: '7 Gün / 6 Gece', price: 18500, priceText: '₺18.500', image: 'https://images.unsplash.com/photo-1585856262626-317c89469e5e?w=800', rating: 5, features: ['Tiflis', 'Şarap Yolu', 'Kafkas Dağları'] },
-
-    // Dubai Turları
-    { id: 'dubai-1', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai Klasik Tur', duration: '5 Gün / 4 Gece', price: 22999, priceText: '₺22.999', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', rating: 5, features: ['Burj Khalifa', 'Dubai Mall', 'Çöl Safari'] },
-    { id: 'dubai-2', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai Lüks Paket', duration: '7 Gün / 6 Gece', price: 38000, priceText: '₺38.000', image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800', rating: 5, features: ['5 Yıldız Otel', 'VIP Turlar', 'Özel Transfer'] },
-    { id: 'dubai-3', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai & Abu Dhabi', duration: '6 Gün / 5 Gece', price: 27500, priceText: '₺27.500', image: 'https://images.unsplash.com/photo-1546412414-e1885259563a?w=800', rating: 5, features: ['2 Şehir', 'Şeyh Zayed Camii', 'Ferrari World'] },
-    { id: 'dubai-4', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai Alışveriş Festivali', duration: '4 Gün / 3 Gece', price: 19999, priceText: '₺19.999', image: 'https://images.unsplash.com/photo-1582672060674-bc2bd808a8b5?w=800', rating: 5, features: ['Alışveriş Turu', 'İndirimler', 'Mall Gezisi'] },
-    { id: 'dubai-5', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai Balayı', duration: '6 Gün / 5 Gece', price: 35000, priceText: '₺35.000', image: 'https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=800', rating: 5, features: ['Romantik Akşam Yemekleri', 'Yat Turu', 'Spa'] },
-    { id: 'dubai-6', category: 'Yurt Dışı Turları', subCategory: 'Dubai', title: 'Dubai Ekspres', duration: '3 Gün / 2 Gece', price: 15500, priceText: '₺15.500', image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800', rating: 4, features: ['Hızlı Tur', 'Önemli Noktalar', 'Ekonomik'] },
-
-    // Avrupa Kültür Turları
-    { id: 'europe-culture-1', category: 'Kültür Turları', subCategory: 'Avrupa Kültür', title: 'Paris Sanat Turu', duration: '5 Gün / 4 Gece', price: 32000, priceText: '₺32.000', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800', rating: 5, features: ['Louvre', 'Eiffel', 'Seine Cruise'] },
-    { id: 'europe-culture-2', category: 'Kültür Turları', subCategory: 'Avrupa Kültür', title: 'Orta Avrupa Rotası', duration: '10 Gün / 9 Gece', price: 42000, priceText: '₺42.000', image: 'https://images.unsplash.com/photo-1541849546-216549ae216d?w=800', rating: 5, features: ['Prag', 'Viyana', 'Budapeşte'] },
-
-    // Asya Kültür Turları
-    { id: 'asia-culture-1', category: 'Kültür Turları', subCategory: 'Asya Kültür', title: 'Çin Büyük Duvar', duration: '9 Gün / 8 Gece', price: 38000, priceText: '₺38.000', image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800', rating: 5, features: ['Pekin', 'Şangay', 'Terrakota Ordusu'] },
-    { id: 'asia-culture-2', category: 'Kültür Turları', subCategory: 'Asya Kültür', title: 'Hindistan Altın Üçgen', duration: '8 Gün / 7 Gece', price: 28000, priceText: '₺28.000', image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800', rating: 5, features: ['Delhi', 'Agra', 'Jaipur'] },
-
-    // Orta Doğu Turları
-    { id: 'middle-east-1', category: 'Kültür Turları', subCategory: 'Orta Doğu', title: 'Ürdün Petra Hazinesi', duration: '6 Gün / 5 Gece', price: 26000, priceText: '₺26.000', image: 'https://images.unsplash.com/photo-1585155967216-77c612902c98?w=800', rating: 5, features: ['Petra', 'Wadi Rum', 'Ölü Deniz'] },
-
-    // Kutsal Topraklar
-    { id: 'holy-lands-1', category: 'Kültür Turları', subCategory: 'Kutsal Topraklar', title: 'Kudüs & Kutsal Yerler', duration: '7 Gün / 6 Gece', price: 32000, priceText: '₺32.000', image: 'https://images.unsplash.com/photo-1605971868720-63e6a63d1eb4?w=800', rating: 5, features: ['Kudüs', 'Betlehem', 'Nasıra'] },
-
-    // Uzak Doğu
-    { id: 'far-east-1', category: 'Kültür Turları', subCategory: 'Uzak Doğu', title: 'Singapur & Malezya', duration: '7 Gün / 6 Gece', price: 32000, priceText: '€2.650', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800', rating: 5, features: ['Modern Şehirler', '2 Ülke', 'Alışveriş'] },
-
-    // Türkiye Turları
-    { id: 'antalya-1', category: 'Türkiye Turları', subCategory: 'Antalya', title: 'Antalya Klasik Tur', duration: '4 Gün / 3 Gece', price: 220, priceText: '€220', image: 'https://images.unsplash.com/photo-1648644769787-6e4f77f26703?w=800', rating: 5, features: ['Kaleiçi', 'Düden Şelalesi', 'Plaj Keyfi'] },
-    { id: 'antalya-2', category: 'Türkiye Turları', subCategory: 'Antalya', title: 'Antalya Her Şey Dahil', duration: '7 Gün / 6 Gece', price: 450, priceText: '€450', image: 'https://images.unsplash.com/photo-1669046632648-609242cd51e8?w=800', rating: 5, features: ['5 Yıldız Otel', 'Her Şey Dahil', 'Aqua Park'] },
-    
-    { id: 'cappadocia-1', category: 'Türkiye Turları', subCategory: 'Kapadokya', title: 'Kapadokya Balon Turu', duration: '3 Gün / 2 Gece', price: 225, priceText: '€225', image: 'https://images.unsplash.com/photo-1641958308842-8bfb108a0b57?w=800', rating: 5, features: ['Sıcak Hava Balonu', 'Peri Bacaları', 'Mağara Otel'] },
-    { id: 'cappadocia-2', category: 'Türkiye Turları', subCategory: 'Kapadokya', title: 'Kapadokya Özel Tur', duration: '4 Gün / 3 Gece', price: 340, priceText: '€340', image: 'https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800', rating: 5, features: ['VIP Balon Turu', 'Yeraltı Şehri', 'ATV Safari'] },
-    
-    { id: 'aegean-1', category: 'Türkiye Turları', subCategory: 'Ege', title: 'Ege Kıyıları Turu', duration: '5 Gün / 4 Gece', price: 295, priceText: '€295', image: 'https://images.unsplash.com/photo-1656506598002-9a5138c3a461?w=800', rating: 5, features: ['Efes Antik Kenti', 'Pamukkale', 'Kuşadası'] },
-    { id: 'aegean-2', category: 'Türkiye Turları', subCategory: 'Ege', title: 'Bodrum & Datça', duration: '6 Gün / 5 Gece', price: 380, priceText: '€380', image: 'https://images.unsplash.com/photo-1527838832700-5059252407fa?w=800', rating: 5, features: ['Bodrum Kalesi', 'Datça Yarımadası', 'Plaj Keyfi'] },
-    
-    { id: 'mediterranean-1', category: 'Türkiye Turları', subCategory: 'Akdeniz', title: 'Kaş & Kekova', duration: '4 Gün / 3 Gece', price: 320, priceText: '€320', image: 'https://images.unsplash.com/photo-1551524164-687a55dd1126?w=800', rating: 5, features: ['Batık Şehir', 'Tekne Turu', 'Dalış'] },
-    { id: 'mediterranean-2', category: 'Türkiye Turları', subCategory: 'Akdeniz', title: 'Fethiye & Ölüdeniz', duration: '6 Gün / 5 Gece', price: 395, priceText: '€395', image: 'https://images.unsplash.com/photo-1599577180661-f1e7c77bbc0a?w=800', rating: 5, features: ['Yamaç Paraşütü', 'Mavi Lagün', 'Saklıkent'] },
+    // Mısır Turları (6 tur)
+    { 
+      id: 'egypt-1', 
+      category: 'Mısır Turları', 
+      title: 'Kahire & Nil Turu', 
+      duration: '7 Gün / 6 Gece', 
+      price: 500, 
+      priceText: '€500', 
+      image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800', 
+      rating: 5, 
+      features: ['Piramitler', 'Nil Cruise', 'Luxor & Aswan']
+    },
+    { 
+      id: 'egypt-2', 
+      category: 'Mısır Turları', 
+      title: 'Mısır Klasik Tur', 
+      duration: '5 Gün / 4 Gece', 
+      price: 370, 
+      priceText: '€370', 
+      image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800', 
+      rating: 5, 
+      features: ['Kahire', 'Piramitler', 'Müze Gezisi']
+    },
+    { 
+      id: 'egypt-3', 
+      category: 'Mısır Turları', 
+      title: 'Mısır & Ürdün Kombine', 
+      duration: '9 Gün / 8 Gece', 
+      price: 640, 
+      priceText: '€640', 
+      image: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800', 
+      rating: 5, 
+      features: ['2 Ülke', 'Petra', 'Ölü Deniz']
+    },
+    { 
+      id: 'egypt-5', 
+      category: 'Mısır Turları', 
+      title: 'Mısır Kültür Turu', 
+      duration: '8 Gün / 7 Gece', 
+      price: 570, 
+      priceText: '€570', 
+      image: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800', 
+      rating: 5, 
+      features: ['Tüm Tapınaklar', 'Nil Kenarı', 'Abu Simbel']
+    },
+    { 
+      id: 'egypt-6', 
+      category: 'Mısır Turları', 
+      title: 'Mısır Ekonomik Paket', 
+      duration: '4 Gün / 3 Gece', 
+      price: 270, 
+      priceText: '€270', 
+      image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800', 
+      rating: 4, 
+      features: ['Bütçe Dostu', 'Piramitler', 'Kahire Gezisi']
+    }
   ];
 
   // Kategoriler
   const categories = [
     { value: 'all', label: 'Tüm Turlar', count: allTours.length },
-    { value: 'Yurt Dışı Turları', label: 'Yurt Dışı Turları', count: allTours.filter(t => t.category === 'Yurt Dışı Turları').length },
-    { value: 'Kültür Turları', label: 'Kültür Turları', count: allTours.filter(t => t.category === 'Kültür Turları').length },
-    { value: 'Türkiye Turları', label: 'Türkiye Turları', count: allTours.filter(t => t.category === 'Türkiye Turları').length },
+    { value: 'Dubai Turları', label: 'Dubai Turları', count: allTours.filter(t => t.category === 'Dubai Turları').length },
+    { value: 'Mısır Turları', label: 'Mısır Turları', count: allTours.filter(t => t.category === 'Mısır Turları').length },
+    { value: 'Tayland Turları', label: 'Tayland Turları', count: allTours.filter(t => t.category === 'Tayland Turları').length },
+    { value: 'Bali Turları', label: 'Bali Turları', count: allTours.filter(t => t.category === 'Bali Turları').length },
   ];
 
   // Filtreleme fonksiyonu
@@ -105,9 +174,9 @@ export function AllTours() {
     
     // Fiyat filtresi
     if (selectedPrice !== 'all') {
-      if (selectedPrice === 'low' && tour.price > 25000) return false;
-      if (selectedPrice === 'medium' && (tour.price < 25000 || tour.price > 40000)) return false;
-      if (selectedPrice === 'high' && tour.price < 40000) return false;
+      if (selectedPrice === 'low' && tour.price > 500) return false;
+      if (selectedPrice === 'medium' && (tour.price < 500 || tour.price > 1000)) return false;
+      if (selectedPrice === 'high' && tour.price < 1000) return false;
     }
     
     // Süre filtresi
@@ -118,9 +187,6 @@ export function AllTours() {
       if (selectedDuration === 'long' && days < 9) return false;
     }
     
-    // Rating filtresi
-    if (selectedRating > 0 && tour.rating < selectedRating) return false;
-    
     return true;
   });
 
@@ -128,7 +194,6 @@ export function AllTours() {
     setSelectedCategory('all');
     setSelectedPrice('all');
     setSelectedDuration('all');
-    setSelectedRating(0);
   };
 
   const FilterPanel = () => (
@@ -191,7 +256,7 @@ export function AllTours() {
               onChange={(e) => setSelectedPrice(e.target.value)}
               className="w-4 h-4 text-blue-600"
             />
-            <span>₺25.000'e kadar</span>
+            <span>€500'e kadar</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
             <input
@@ -202,7 +267,7 @@ export function AllTours() {
               onChange={(e) => setSelectedPrice(e.target.value)}
               className="w-4 h-4 text-blue-600"
             />
-            <span>₺25.000 - ₺40.000</span>
+            <span>€500 - €1.000</span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
             <input
@@ -213,7 +278,7 @@ export function AllTours() {
               onChange={(e) => setSelectedPrice(e.target.value)}
               className="w-4 h-4 text-blue-600"
             />
-            <span>₺40.000+</span>
+            <span>€1.000+</span>
           </label>
         </div>
       </div>
@@ -266,37 +331,6 @@ export function AllTours() {
             />
             <span>9+ Gün</span>
           </label>
-        </div>
-      </div>
-
-      {/* Rating Filtresi */}
-      <div className="mb-6">
-        <h4 className="text-gray-700 mb-3">Minimum Puan</h4>
-        <div className="space-y-2">
-          {[0, 4, 5].map(rating => (
-            <label key={rating} className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-2 rounded">
-              <input
-                type="radio"
-                name="rating"
-                value={rating}
-                checked={selectedRating === rating}
-                onChange={(e) => setSelectedRating(Number(e.target.value))}
-                className="w-4 h-4 text-blue-600"
-              />
-              <div className="flex items-center gap-1">
-                {rating === 0 ? (
-                  <span>Tümü</span>
-                ) : (
-                  <>
-                    {[...Array(rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                    <span className="ml-1">ve üzeri</span>
-                  </>
-                )}
-              </div>
-            </label>
-          ))}
         </div>
       </div>
     </div>
@@ -371,7 +405,7 @@ export function AllTours() {
                     <div className="p-5">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                          {tour.subCategory}
+                          {tour.category}
                         </span>
                         <div className="flex items-center gap-1">
                           {[...Array(5)].map((_, i) => (
@@ -400,9 +434,18 @@ export function AllTours() {
                         </div>
                         <div className="text-xl text-blue-600">{tour.priceText}</div>
                       </div>
-                      <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                        Detayları Gör
-                      </button>
+                      {tour.detailUrl ? (
+                        <Link 
+                          to={tour.detailUrl}
+                          className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors block text-center"
+                        >
+                          Detayları Gör
+                        </Link>
+                      ) : (
+                        <button className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                          Detayları Gör
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}

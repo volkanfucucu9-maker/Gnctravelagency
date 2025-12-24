@@ -1,37 +1,40 @@
 import { Plane, MapPin, Users, Clock, Award, Shield, Heart, Globe2, Ship, Briefcase, MapPinned, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function About() {
+  const { t } = useLanguage();
+
   const features = [
     {
       icon: MapPin,
       title: 'Yerel Rehberler',
-      description: 'Her destinasyonda yerel uzman rehberlerle gezinin',
+      description: 'Yerel uzmanlarla seyahat edin',
     },
     {
       icon: Users,
       title: 'Grup Turları',
-      description: 'Benzer düşünen gezginlerle unutulmaz anılar yaratın',
+      description: 'Benzer düşünen gezginlerle unutulmaz anlar yaratın',
     },
     {
       icon: Clock,
       title: '7/24 Destek',
-      description: 'Her zaman yanınızdayız, nerede olursanız olun',
+      description: 'Nerede olursanız olun her zaman yanınızdayız',
     },
     {
       icon: Award,
       title: 'Ödüllü Hizmet',
-      description: 'Mükemmellik için sürekli tanınan hizmet kalitemiz',
+      description: 'Hizmet kalitemiz sürekli olarak mükemmellik için takdir edilmektedir',
     },
     {
       icon: Shield,
       title: 'Güvenli Seyahat',
-      description: 'Güvenliğiniz her zaman önceliğimizdir',
+      description: 'Güvenliğiniz bizim en önemli önceliğimizdir',
     },
     {
       icon: Heart,
       title: 'Tutkuyla Hizmet',
-      description: 'Seyahati seven bir ekip tarafından oluşturuldu',
+      description: 'Seyahat etmeyi seven bir ekip tarafından oluşturuldu',
     },
   ];
 
@@ -39,37 +42,37 @@ export function About() {
     {
       icon: Plane,
       title: 'Uçak Biletleri',
-      description: 'Seyahat acentemiz müşterilerimize en iyi uçak bileti fırsatlarını sunma konusunda uzmanlaşmıştır.',
+      description: 'Seyahat acentemiz müşterilerimize en iyi uçak bileti fırsatlarını sunma konusunda uzmanlaşmıştır',
       image: 'https://images.unsplash.com/photo-1639034741369-1e0c771adaeb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaXJsaW5lJTIwdGlja2V0cyUyMGJvb2tpbmd8ZW58MXx8fHwxNzY1MTkwOTUwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
     {
       icon: FileText,
-      title: 'Vize İşlemleri',
-      description: 'Vize başvuru süreçlerinizde size yardımcı oluyoruz. Tüm evrak işlemlerinizi kolaylaştırıyoruz.',
+      title: 'Vize Hizmetleri',
+      description: 'Vize başvuru sürecinizde size yardımcı oluyor, tüm belge işlemlerini kolaylaştırıyoruz',
       image: 'https://images.unsplash.com/photo-1758928807847-ed94f9ed3cad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aXNhJTIwcGFzc3BvcnQlMjBkb2N1bWVudHN8ZW58MXx8fHwxNzY1MTkyNjg0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
     {
       icon: Globe2,
       title: 'Ulaşım Araçları',
-      description: 'Seyahat acentemiz destinasyonunuza güvenli bir şekilde ulaşmanız için çeşitli ulaşım seçenekleri sunar.',
+      description: 'Seyahat acentemiz hedefinize güvenli bir şekilde varmanızı sağlamak için çeşitli ulaşım seçenekleri sunar',
       image: 'https://images.unsplash.com/photo-1503220954697-e02095e8e0d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMHRyYXZlbCUyMGFkdmVudHVyZXxlbnwxfHx8fDE3NjUxMTcxODZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
     {
       icon: Briefcase,
       title: 'Seyahat Programları',
-      description: 'Uzman ekibimiz tüm planlamalar ve lojistik konularında size detaylı bir program sunacaktır.',
+      description: 'Uzman ekibimiz tüm planlama ve lojistik konularında size detaylı bir program sunacaktır',
       image: 'https://images.unsplash.com/photo-1522199710521-72d69614c702?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2YWNhdGlvbiUyMHBsYW5uaW5nfGVufDF8fHx8MTc2NTE5MDU1M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
     {
       icon: Shield,
       title: 'Seyahat Sigortası',
-      description: 'Seyahat sigortası her seyahatin önemli bir parçasıdır, gönül rahatlığı ve koruma sağlar.',
+      description: 'Seyahat sigortası her gezinin önemli bir parçasıdır, huzur ve koruma sağlar',
       image: 'https://images.unsplash.com/photo-1650821414031-cf7291ce938c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBpbnN1cmFuY2UlMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc2NTE5MDk1MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
     {
       icon: MapPinned,
       title: 'Yerel Rehber',
-      description: 'Sizi en iyi yola götürecek ve size şehirlerini gösterecek rehberlerle bağlantı kurabiliriz.',
+      description: 'Sizi şehirlerini gezdirip en iyi yolu gösterecek rehberlerle sizi buluşturabiliriz',
       image: 'https://images.unsplash.com/photo-1759252973843-957dc1b5e0e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2NhbCUyMHRvdXIlMjBndWlkZXxlbnwxfHx8fDE3NjUxNzk0MTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     },
   ];
@@ -96,7 +99,7 @@ export function About() {
   ];
 
   const stats = [
-    { number: '10+', label: 'Yıllık Tecrübe' },
+    { number: '10+', label: 'Yıllık Deneyim' },
     { number: '50K+', label: 'Mutlu Müşteri' },
     { number: '500+', label: 'Destinasyon' },
     { number: '98%', label: 'Memnuniyet Oranı' },
