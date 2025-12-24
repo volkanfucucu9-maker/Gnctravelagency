@@ -80,7 +80,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'disk',
+      outDir: 'build',
     },
     server: {
       port: 3000,
