@@ -2,7 +2,7 @@ import { Plane, Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
-import logo from 'figma:asset/7bc0411f51dbb1b1ada948fae1e4872a66d5e18f.png';
+<img src="/logognctravel.png" alt="GNC Travel Agency" className="h-20" />
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
