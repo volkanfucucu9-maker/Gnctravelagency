@@ -110,7 +110,8 @@ export function AllTours() {
       priceText: '€500', 
       image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800', 
       rating: 5, 
-      features: ['Piramitler', 'Nil Cruise', 'Luxor & Aswan']
+      features: ['Piramitler', 'Nil Cruise', 'Luxor & Aswan'],
+      detailUrl: '/tour-details/egypt-cairo-nile'
     },
     { 
       id: 'egypt-2', 
@@ -121,7 +122,8 @@ export function AllTours() {
       priceText: '€370', 
       image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800', 
       rating: 5, 
-      features: ['Kahire', 'Piramitler', 'Müze Gezisi']
+      features: ['Kahire', 'Piramitler', 'Müze Gezisi'],
+      detailUrl: '/tour-details/egypt-classic'
     },
     { 
       id: 'egypt-3', 
@@ -132,7 +134,8 @@ export function AllTours() {
       priceText: '€640', 
       image: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800', 
       rating: 5, 
-      features: ['2 Ülke', 'Petra', 'Ölü Deniz']
+      features: ['2 Ülke', 'Petra', 'Ölü Deniz'],
+      detailUrl: '/tour-details/egypt-jordan-combo'
     },
     { 
       id: 'egypt-5', 
@@ -143,7 +146,8 @@ export function AllTours() {
       priceText: '€570', 
       image: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800', 
       rating: 5, 
-      features: ['Tüm Tapınaklar', 'Nil Kenarı', 'Abu Simbel']
+      features: ['Tüm Tapınaklar', 'Nil Kenarı', 'Abu Simbel'],
+      detailUrl: '/tour-details/egypt-culture'
     },
     { 
       id: 'egypt-6', 
@@ -154,7 +158,8 @@ export function AllTours() {
       priceText: '€270', 
       image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800', 
       rating: 4, 
-      features: ['Bütçe Dostu', 'Piramitler', 'Kahire Gezisi']
+      features: ['Bütçe Dostu', 'Piramitler', 'Kahire Gezisi'],
+      detailUrl: '/tour-details/egypt-budget'
     }
   ];
 
@@ -197,7 +202,7 @@ export function AllTours() {
   };
 
   const FilterPanel = () => (
-    <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+    <div className="bg-white rounded-xl shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl flex items-center gap-2">
           <Filter className="w-5 h-5" />
@@ -378,7 +383,7 @@ export function AllTours() {
           )}
 
           {/* Desktop Filter Sidebar */}
-          <aside className="hidden lg:block w-80 flex-shrink-0">
+          <aside className="hidden lg:block w-80 flex-shrink-0 sticky top-24 self-start">
             <FilterPanel />
           </aside>
 

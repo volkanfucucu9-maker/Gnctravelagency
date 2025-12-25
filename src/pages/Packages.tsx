@@ -120,7 +120,8 @@ export function Packages() {
       reviews: 289,
       price: '€500',
       departure: 'Her gün',
-      category: 'Mısır Turları'
+      category: 'Mısır Turları',
+      link: '/tour-details/egypt-cairo-nile'
     },
     {
       image: 'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=800',
@@ -132,7 +133,8 @@ export function Packages() {
       reviews: 245,
       price: '€370',
       departure: 'Her gün',
-      category: 'Mısır Turları'
+      category: 'Mısır Turları',
+      link: '/tour-details/egypt-classic'
     },
     {
       image: 'https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=800',
@@ -144,7 +146,8 @@ export function Packages() {
       reviews: 198,
       price: '€640',
       departure: 'Pazartesi, Perşembe',
-      category: 'Mısır Turları'
+      category: 'Mısır Turları',
+      link: '/tour-details/egypt-jordan-combo'
     },
     {
       image: 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800',
@@ -156,7 +159,8 @@ export function Packages() {
       reviews: 267,
       price: '€570',
       departure: 'Salı, Cuma',
-      category: 'Mısır Turları'
+      category: 'Mısır Turları',
+      link: '/tour-details/egypt-culture'
     },
     {
       image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800',
@@ -168,7 +172,8 @@ export function Packages() {
       reviews: 176,
       price: '€270',
       departure: 'Her gün',
-      category: 'Mısır Turları'
+      category: 'Mısır Turları',
+      link: '/tour-details/egypt-budget'
     }
   ];
 

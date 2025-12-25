@@ -102,12 +102,6 @@ export function Home() {
       rating: 4.9,
     },
     {
-      image: 'https://images.unsplash.com/photo-1605971868720-63e6a63d1eb4?w=800',
-      name: 'Kudüs',
-      country: 'İsrail',
-      rating: 4.7,
-    },
-    {
       image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800',
       name: 'Singapur',
       country: 'Singapur',

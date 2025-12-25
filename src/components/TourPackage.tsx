@@ -1,4 +1,5 @@
 import { Clock, Users, Star, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface TourPackageProps {
   image: string;
@@ -10,6 +11,7 @@ interface TourPackageProps {
   reviews: number;
   price: string;
   departure: string;
+  link?: string;
 }
 
 export function TourPackage({
@@ -22,6 +24,7 @@ export function TourPackage({
   reviews,
   price,
   departure,
+  link,
 }: TourPackageProps) {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -57,9 +60,17 @@ export function TourPackage({
             <span>{departure}</span>
           </div>
         </div>
-        <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
-          Detayları Gör
-        </button>
+        {link ? (
+          <Link to={link}>
+            <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              Detayları Gör
+            </button>
+          </Link>
+        ) : (
+          <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            Detayları Gör
+          </button>
+        )}
       </div>
     </div>
   );

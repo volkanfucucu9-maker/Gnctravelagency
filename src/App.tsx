@@ -2,6 +2,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Home } from './pages/Home';
 import { Packages } from './pages/Packages';
 import { About } from './pages/About';
@@ -45,11 +46,17 @@ import { BangkokPattaya } from './pages/tour-details/BangkokPattaya';
 import { KesfetTayland } from './pages/tour-details/KesfetTayland';
 import { BangkokPattayaExtended } from './pages/tour-details/BangkokPattayaExtended';
 import { BaliUbudWonderland } from './pages/tour-details/BaliUbudWonderland';
+import { EgyptCairoNile } from './pages/tour-details/EgyptCairoNile';
+import { EgyptClassic } from './pages/tour-details/EgyptClassic';
+import { EgyptJordanCombo } from './pages/tour-details/EgyptJordanCombo';
+import { EgyptCulture } from './pages/tour-details/EgyptCulture';
+import { EgyptBudget } from './pages/tour-details/EgyptBudget';
 
 export default function App() {
   return (
     <Router>
       <LanguageProvider>
+        <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
           <Header />
           <Routes>
@@ -97,6 +104,11 @@ export default function App() {
             <Route path="/tour-details/kesfet-tayland" element={<KesfetTayland />} />
             <Route path="/tour-details/bangkok-pattaya-extended" element={<BangkokPattayaExtended />} />
             <Route path="/tour-details/bali-ubud-wonderland" element={<BaliUbudWonderland />} />
+            <Route path="/tour-details/egypt-cairo-nile" element={<EgyptCairoNile />} />
+            <Route path="/tour-details/egypt-classic" element={<EgyptClassic />} />
+            <Route path="/tour-details/egypt-jordan-combo" element={<EgyptJordanCombo />} />
+            <Route path="/tour-details/egypt-culture" element={<EgyptCulture />} />
+            <Route path="/tour-details/egypt-budget" element={<EgyptBudget />} />
           </Routes>
           <Footer />
         </div>
