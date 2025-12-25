@@ -202,7 +202,7 @@ export function AllTours() {
   };
 
   const FilterPanel = () => (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-white rounded-xl shadow-lg p-6 max-h-[calc(100vh-7rem)] overflow-y-auto">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl flex items-center gap-2">
           <Filter className="w-5 h-5" />
@@ -355,7 +355,7 @@ export function AllTours() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex gap-8">
+        <div className="flex gap-8 items-start">
           {/* Mobile Filter Button */}
           <button
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
