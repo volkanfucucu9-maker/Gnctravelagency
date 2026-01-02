@@ -141,7 +141,45 @@ ${formData.message}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Dubai Vize Özel Kartı */}
+          <div className="mb-16">
+            <Link 
+              to="/dubai-visa"
+              className="block bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 md:p-12 border-2 border-blue-200 hover:border-blue-300 hover:shadow-2xl transition-all duration-300 group"
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">Özel Hizmet</span>
+                  </div>
+                  <h3 className="text-3xl md:text-4xl mb-4 text-blue-900">
+                    🇦🇪 Dubai Vize Hizmetleri
+                  </h3>
+                  <p className="text-lg text-gray-700 mb-6">
+                    Birleşik Arap Emirlikleri'ne seyahatiniz için profesyonel vize danışmanlığı. 
+                    Hızlı işlem, yüksek onay oranı ve özel Dubai turlarımızla sizlere hizmet veriyoruz.
+                  </p>
+                  <div className="flex items-center gap-3 text-blue-700 group-hover:gap-5 transition-all">
+                    <span className="text-lg">Detaylı Bilgi Al</span>
+                    <ArrowRight className="w-6 h-6" />
+                  </div>
+                </div>
+                <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
+                  <img 
+                    src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80"
+                    alt="Dubai"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <p className="text-sm opacity-90">Turist Vizesi • Transit Vize • Çok Girişli Vize</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
             {visaServices.map((service, index) => (
               <div
                 key={index}

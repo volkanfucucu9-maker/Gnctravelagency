@@ -167,29 +167,29 @@ export function About() {
                   <img 
                     src="https://images.unsplash.com/photo-1558117338-aa433feb1c62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cm9waWNhbCUyMGJlYWNoJTIwcmVzb3J0fGVufDF8fHx8MTc2NTExOTY1N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
                     alt="Travel" 
-                    className="rounded-2xl w-full h-32 object-cover"
+                    className="rounded-2xl w-full h-24 sm:h-32 object-cover"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1682308999971-208126ba75ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWxkaXZlcyUyMHJlc29ydHxlbnwxfHx8fDE3NjUxNjUxNzh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
                     alt="Travel" 
-                    className="rounded-2xl w-full h-64 object-cover"
+                    className="rounded-2xl w-full h-48 sm:h-64 object-cover"
                   />
                 </div>
-                <div className="space-y-4 pt-8">
+                <div className="space-y-4 pt-4 sm:pt-8">
                   <img 
                     src="https://images.unsplash.com/photo-1603741614953-4187ed84cc50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMGhpa2luZyUyMGFkdmVudHVyZXxlbnwxfHx8fDE3NjUxNzE4MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
                     alt="Travel" 
-                    className="rounded-2xl w-full h-40 object-cover"
+                    className="rounded-2xl w-full h-32 sm:h-40 object-cover"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzYW50b3JpbmklMjBncmVlY2V8ZW58MXx8fHwxNzY1MTAwODQzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
                     alt="Travel" 
-                    className="rounded-2xl w-full h-24 object-cover"
+                    className="rounded-2xl w-full h-20 sm:h-24 object-cover"
                   />
                   <img 
                     src="https://images.unsplash.com/photo-1488415032361-b7e238421f1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpY2VsYW5kJTIwbm9ydGhlcm4lMjBsaWdodHN8ZW58MXx8fHwxNzY1MTUyMzE1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" 
                     alt="Travel" 
-                    className="rounded-2xl w-full h-20 object-cover"
+                    className="rounded-2xl w-full h-16 sm:h-20 object-cover"
                   />
                 </div>
               </div>

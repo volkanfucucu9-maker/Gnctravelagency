@@ -51,7 +51,7 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative h-[600px] flex items-center justify-center">
+    <section id="home" className="relative h-[500px] md:h-[600px] flex items-center justify-center">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -62,15 +62,15 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-white mb-6 font-bold">
+        <h1 className="text-white mb-4 md:mb-6 font-bold">
           {t('hero.title')}
         </h1>
-        <p className="text-white/90 mb-12 max-w-2xl mx-auto">
+        <p className="text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
           {t('hero.subtitle')}
         </p>
 
         {/* Search Card */}
-        <form onSubmit={handleSearch} className="bg-white rounded-2xl shadow-2xl p-6 max-w-4xl mx-auto">
+        <form onSubmit={handleSearch} className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="relative">
               <label className="block text-gray-700 mb-2 text-left">{t('hero.destination')}</label>

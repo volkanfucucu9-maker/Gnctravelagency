@@ -280,7 +280,7 @@ export function DubaiEmirates() {
 
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="text-sm text-gray-600 space-y-2">
-                  <p>📞 Telefon: +90 212 123 45 67</p>
+                  <p>📞 Telefon: +90 543 220 05 43</p>
                   <p>📧 Email: info@gnctravel.com</p>
                   <p>⏰ 7/24 Müşteri Desteği</p>
                 </div>

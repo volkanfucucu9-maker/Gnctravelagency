@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { Packages } from './pages/Packages';
 import { About } from './pages/About';
 import { Visa } from './pages/Visa';
+import { DubaiVisa } from './pages/DubaiVisa';
 import { Blog } from './pages/Blog';
 import { Contact } from './pages/Contact';
 import { AllTours } from './pages/AllTours';
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="/packages" element={<Packages />} />
             <Route path="/about" element={<About />} />
             <Route path="/visa" element={<Visa />} />
+            <Route path="/dubai-visa" element={<DubaiVisa />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />

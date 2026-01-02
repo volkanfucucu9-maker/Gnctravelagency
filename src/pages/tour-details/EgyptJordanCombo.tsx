@@ -194,7 +194,7 @@ export function EgyptJordanCombo() {
 
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <div className="text-sm text-gray-600 space-y-2">
-                  <p>📞 Telefon: +90 543 220 0543</p>
+                  <p>📞 Telefon: +90 543 220 05 43</p>
                   <p>📧 Email: gonca@gnctravel.com</p>
                   <p>⏰ Pzt-Cmt: 09:00 – 19:00</p>
                 </div>

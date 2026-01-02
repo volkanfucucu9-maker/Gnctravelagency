@@ -6,6 +6,7 @@ import { useLanguage, Language } from '../contexts/LanguageContext';
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toursDropdownOpen, setToursDropdownOpen] = useState(false);
+  const [visaDropdownOpen, setVisaDropdownOpen] = useState(false);
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
   const location = useLocation();
   const { language, setLanguage, t } = useLanguage();
@@ -33,6 +34,13 @@ export function Header() {
 
     return () => clearInterval(timer);
   }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setToursDropdownOpen(false);
+    setVisaDropdownOpen(false);
+  }, [location]);
 
   const navItems = [
     {
@@ -168,9 +176,37 @@ export function Header() {
                 )}
               </div>
 
-              <Link to="/visa" className="text-gray-700 hover:text-blue-600 transition-colors">
-                {t('header.visa')}
-              </Link>
+              {/* Vize Desteği Dropdown */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setVisaDropdownOpen(true)}
+                onMouseLeave={() => setVisaDropdownOpen(false)}
+              >
+                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2">
+                  {t('header.visa')}
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+                
+                {visaDropdownOpen && (
+                  <div className="absolute top-full left-0 pt-2 z-50">
+                    <div className="bg-white shadow-lg rounded-lg py-2 min-w-[200px]">
+                      <Link 
+                        to="/visa"
+                        className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-sm"
+                      >
+                        Vize Desteği
+                      </Link>
+                      <Link 
+                        to="/dubai-visa"
+                        className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-sm"
+                      >
+                        Dubai Vize
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">
                 {t('header.blog')}
               </Link>
@@ -264,9 +300,33 @@ export function Header() {
                   )}
                 </div>
 
-                <Link to="/visa" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  {t('header.visa')}
-                </Link>
+                {/* Mobile Vize Desteği */}
+                <div>
+                  <button 
+                    onClick={() => setVisaDropdownOpen(!visaDropdownOpen)}
+                    className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors w-full"
+                  >
+                    {t('header.visa')}
+                    <ChevronDown className={`w-4 h-4 transition-transform ${visaDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {visaDropdownOpen && (
+                    <div className="mt-2 ml-4 space-y-1">
+                      <Link 
+                        to="/visa" 
+                        className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                      >
+                        Vize Desteği
+                      </Link>
+                      <Link 
+                        to="/dubai-visa" 
+                        className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                      >
+                        Dubai Vize
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
                 <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">
                   {t('header.blog')}
                 </Link>
