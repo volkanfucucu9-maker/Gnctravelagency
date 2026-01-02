@@ -1,8 +1,9 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { MessageCircle } from 'lucide-react';
 import { Home } from './pages/Home';
 import { Packages } from './pages/Packages';
 import { About } from './pages/About';
@@ -52,6 +53,30 @@ import { EgyptClassic } from './pages/tour-details/EgyptClassic';
 import { EgyptJordanCombo } from './pages/tour-details/EgyptJordanCombo';
 import { EgyptCulture } from './pages/tour-details/EgyptCulture';
 import { EgyptBudget } from './pages/tour-details/EgyptBudget';
+
+function WhatsAppButton() {
+  const location = useLocation();
+  
+  // Dubai Vize sayfasında WhatsApp butonunu gösterme
+  if (location.pathname === '/dubai-visa') {
+    return null;
+  }
+  
+  return (
+    <a
+      href="https://wa.me/905432200543"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all hover:scale-110 group"
+      aria-label="WhatsApp"
+    >
+      <MessageCircle className="w-7 h-7" />
+      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        WhatsApp ile iletişime geç
+      </span>
+    </a>
+  );
+}
 
 export default function App() {
   return (
@@ -113,6 +138,7 @@ export default function App() {
             <Route path="/tour-details/egypt-budget" element={<EgyptBudget />} />
           </Routes>
           <Footer />
+          <WhatsAppButton />
         </div>
       </LanguageProvider>
     </Router>

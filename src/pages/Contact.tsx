@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Mail, Clock, Send, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -84,21 +84,26 @@ ${formData.message}
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
-              <Phone className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="text-gray-900 mb-2">{t('contact.phone')}</h3>
-            <div className="text-gray-600 space-y-1">
-              <p>+90 543 220 05 43</p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
               <Mail className="w-6 h-6 text-purple-600" />
             </div>
             <h3 className="text-gray-900 mb-2">{t('contact.email')}</h3>
             <p className="text-gray-600">info@gnctravel.com</p>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-500 rounded-full mb-4">
+              <MessageCircle className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-gray-900 mb-2">WhatsApp</h3>
+            <a 
+              href="https://wa.me/905432200543" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-600 hover:text-green-700 transition-colors"
+            >
+              +90 543 220 05 43
+            </a>
           </div>
         </div>
 

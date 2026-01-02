@@ -3,6 +3,80 @@ import { Link, useParams } from 'react-router-dom';
 
 const blogPosts = [
   {
+    id: 'dubai-abartmadan-kesfet',
+    title: 'Dubai\'yi Abartmadan Keşfetmek',
+    category: 'Dubai Rehberi',
+    date: '2 Ocak 2025',
+    author: 'GNC Travel',
+    image: 'https://images.unsplash.com/photo-1718789967298-09132d1404bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxEdWJhaSUyMGNpdHklMjBza3lsaW5lfGVufDF8fHx8MTc2NzM1MDAwOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    excerpt: 'GNC Travel Agency\'den: Gerçek hayata yakın Dubai önerileri. Kartpostal durakları değil, Dubai\'nin günlük yaşamını keşfedin.',
+    content: `
+      <h2>GNC Travel Agency'den: Gerçek Hayata Yakın Dubai Önerileri</h2>
+      <p>Dubai çoğu zaman tek bir çerçevede anlatılıyor: ya aşırı lüks ya da turistik kalabalıklar. Oysa bu şehir, kısa süreli ziyaretlerde bile daha sade, daha gündelik ve tekrar edilebilir deneyimler sunuyor.</p>
+      <p><strong>GNC Travel Agency</strong> olarak bu yazıda; kartpostal durakları değil, Dubai'ye ilk kez gelenlerin ya da ikinci kez gidenlerin gerçekten vakit geçirmekten keyif aldığı bölgeleri paylaşıyoruz.</p>
+      <p>Amacımız iddia etmek değil; yön göstermek.</p>
+
+      <h2>Sabah: Günlük Hayat Nerede Başlıyor?</h2>
+      <p>Dubai'de sabahları şehir yavaş başlar. Bu ritmi görmek için Downtown ya da Marina'ya gitmek gerekmez. <strong>Satwa</strong>, sabah saatlerinde Dubai'nin en doğal hâllerinden birini sunar.</p>
+      <ul>
+        <li>Küçük mahalle lokantaları</li>
+        <li>Hızlı servis edilen kahvaltılar</li>
+        <li>Günlük hayatına giden insanlar</li>
+      </ul>
+      <p>Burada geçirilen kısa bir zaman, Dubai'nin "yaşayan şehir" tarafını görmenizi sağlar. Tur programlarında genelde yer almaz; ama iyi bir başlangıçtır.</p>
+
+      <h2>Öğle: Yerel Yemek, Gösterişsiz Mekânlar</h2>
+      <p>Öğle saatleri için <strong>Karama</strong> pratik ve nettir. Burası Dubai'de yaşayanların yemek için tercih ettiği bölgelerden biridir.</p>
+      <ul>
+        <li>Uygun fiyatlı Güney Asya mutfağı</li>
+        <li>Menüden çok tezgâha bakarak seçim</li>
+        <li>Uzun oturmaya değil, işlevselliğe odaklı mekânlar</li>
+      </ul>
+      <p>Karama, "özel hissettirme" iddiası olmayan ama tekrar gidilen bir bölgedir.</p>
+
+      <h2>Öğleden Sonra: Alışveriş Merkezi Dışında Bir Alternatif</h2>
+      <p>Dubai'de her serbest zaman alışveriş merkezinde geçmek zorunda değil. <strong>Al Quoz</strong>, bu açıdan farklı bir duraktır.</p>
+      <ul>
+        <li>Sanayi bölgesi görünümünün içinde galeriler</li>
+        <li>Küçük kahve kavurucuları</li>
+        <li>Sessiz, sakin alanlar</li>
+      </ul>
+      <p>Turlarımıza katılan misafirlerin özellikle "farklı" bulduğu bölgelerden biridir.</p>
+
+      <h2>Deniz Görmek İsteyenler İçin Daha Sakin Bir Seçenek</h2>
+      <p>Dubai'de deniz keyfi her zaman kalabalık plajlar anlamına gelmez. <strong>Al Mamzar Beach Park</strong>, daha yerel ve sakin bir alternatiftir.</p>
+      <ul>
+        <li>Ailelerin tercih ettiği alanlar</li>
+        <li>Daha az kalabalık</li>
+        <li>Kısa süreli dinlenme için ideal</li>
+      </ul>
+      <p>Programı yoğun olmayan Dubai turlarında rahatlıkla değerlendirilebilir.</p>
+
+      <h2>Akşam: Ulaşımın Kendisi Deneyim Olduğunda</h2>
+      <p>Akşam saatlerinde <strong>Dubai Creek</strong> çevresi hâlâ işlevseldir. Abra ile karşıya geçmek turistik bir şovdan çok, günlük hayatın parçasıdır.</p>
+      <ul>
+        <li>Kısa</li>
+        <li>Ucuz</li>
+        <li>Pratik</li>
+      </ul>
+      <p>Dubai'de hâlâ değişmeden kalan nadir alışkanlıklardan biridir.</p>
+
+      <h2>GNC Travel Agency ile Dubai Deneyimi</h2>
+      <p><strong>GNC Travel Agency</strong> olarak Dubai'yi tek bir anlatıya sıkıştırmadan, farklı beklentilere göre planlıyoruz.</p>
+      <ul>
+        <li>Kültür + şehir + serbest zaman dengesi</li>
+        <li>Rehberli Dubai turları</li>
+        <li>Türkiye çıkışlı, planlı programlar</li>
+        <li>Dubai vizesi danışmanlığı ve başvuru takibi</li>
+      </ul>
+      <p>Dubai'ye ilk kez gidiyor olun ya da tekrar ziyaret ediyor olun; önemli olan şehrin size uygun hâlini görmek.</p>
+
+      <h2>Son Not</h2>
+      <p>Dubai her zaman "etkileyici" olmak zorunda değil. Doğru planlandığında rahat, düzenli ve yorucu olmayan bir seyahat sunar.</p>
+      <p>Dubai turları, vize danışmanlığı ve güncel programlarımız hakkında bilgi almak için <strong>GNC Travel Agency</strong> ile iletişime geçebilirsiniz.</p>
+    `,
+  },
+  {
     id: 'almanya-d-tipi-vize',
     title: 'Almanya Ulusal Vizesi (D Tipi) Nasıl Alınır? – 2025 Güncel Rehber',
     category: 'Ulusal Vize',
