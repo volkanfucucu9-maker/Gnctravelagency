@@ -2,6 +2,7 @@ import { Plane, Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
+import logo from '../assets/logognctravel.png';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,6 +64,11 @@ export function Header() {
     }
   ];
 
+  const visaItems = [
+    { name: t('visa.all'), path: '/visa' },
+    { name: t('visa.dubai'), path: '/dubai-visa' }
+  ];
+
   const languages = [
     { code: 'tr' as Language, name: 'Türkçe', flag: '🇹🇷' },
     { code: 'en' as Language, name: 'English', flag: '🇬🇧' },
@@ -70,26 +76,6 @@ export function Header() {
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);
-
-  // Logo SVG
-  const logoSVG = (
-    <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="200" height="80" fill="white"/>
-      <text x="20" y="35" fontFamily="Gotham, Arial, sans-serif" fontSize="28" fontWeight="bold" fill="#1E40AF">
-        GNC
-      </text>
-      <text x="20" y="55" fontFamily="Gotham, Arial, sans-serif" fontSize="12" fill="#64748B">
-        TRAVEL AGENCY
-      </text>
-      <circle cx="170" cy="30" r="25" fill="#1E40AF" opacity="0.1"/>
-      <text x="153" y="38" fontFamily="Gotham, Arial, sans-serif" fontSize="20" fontWeight="bold" fill="#1E40AF">
-        10
-      </text>
-      <text x="148" y="50" fontFamily="Gotham, Arial, sans-serif" fontSize="8" fill="#1E40AF">
-        YIL
-      </text>
-    </svg>
-  );
 
   return (
     <>
@@ -130,115 +116,125 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/assets/logognctravel.png" alt="GNC Travel Agency" className="h-16 md:h-20" />
+              <img src={logo} alt="GNC Travel Agency" className="h-16 md:h-20" />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-8">
               <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
                 {t('header.home')}
               </Link>
               
-              {/* Turlar Dropdown */}
+              {/* Tours Dropdown */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => setToursDropdownOpen(true)}
                 onMouseLeave={() => setToursDropdownOpen(false)}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2">
+                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors">
                   {t('header.tours')}
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 {toursDropdownOpen && (
                   <div className="absolute top-full left-0 pt-2 z-50">
-                    <div className="bg-white shadow-lg rounded-lg py-4 px-6 min-w-[500px] grid grid-cols-2 gap-8">
-                      {navItems.map((category, idx) => (
-                        <div key={idx}>
-                          <div className="text-blue-600 mb-3">{category.title}</div>
-                          <ul className="space-y-2">
-                            {category.items.map((item, itemIdx) => (
-                              <li key={itemIdx}>
-                                <Link 
-                                  to={item.path}
-                                  className="text-gray-600 hover:text-blue-600 transition-colors text-sm flex justify-between items-center"
-                                >
-                                  <span>{item.name}</span>
-                                  <span className="text-gray-400 text-xs">({item.count})</span>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                    <div className="w-96 bg-white rounded-lg shadow-xl border border-gray-100 py-4">
+                      <div className="grid grid-cols-2 gap-4 px-4">
+                        {navItems.map((category, idx) => (
+                          <div key={idx}>
+                            <h3 className="font-semibold text-gray-900 mb-2">{category.title}</h3>
+                            <ul className="space-y-2">
+                              {category.items.map((item, itemIdx) => (
+                                <li key={itemIdx}>
+                                  <Link
+                                    to={item.path}
+                                    className="text-gray-600 hover:text-blue-600 transition-colors flex items-center justify-between group"
+                                  >
+                                    <span>{item.name}</span>
+                                    <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                      {item.count}
+                                    </span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-4 pt-4 border-t border-gray-100 px-4">
+                        <Link
+                          to="/tours/all"
+                          className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2"
+                        >
+                          {t('home.viewAllTours')}
+                          <span className="text-lg">→</span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Vize Desteği Dropdown */}
+              {/* Visa Dropdown */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => setVisaDropdownOpen(true)}
                 onMouseLeave={() => setVisaDropdownOpen(false)}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2">
+                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors">
                   {t('header.visa')}
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 {visaDropdownOpen && (
                   <div className="absolute top-full left-0 pt-2 z-50">
-                    <div className="bg-white shadow-lg rounded-lg py-2 min-w-[200px]">
-                      <Link 
-                        to="/visa"
-                        className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-sm"
-                      >
-                        Vize Desteği
-                      </Link>
-                      <Link 
-                        to="/dubai-visa"
-                        className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors text-sm"
-                      >
-                        Dubai Vize
-                      </Link>
+                    <div className="w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2">
+                      {visaItems.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          to={item.path}
+                          className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 )}
               </div>
 
-              <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">
-                {t('header.blog')}
-              </Link>
               <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
                 {t('header.about')}
+              </Link>
+              <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">
+                {t('header.blog')}
               </Link>
               <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">
                 {t('header.contact')}
               </Link>
-              <Link to="/contact" className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors">
-                {t('header.bookNow')}
-              </Link>
 
-              {/* Language Dropdown */}
+              {/* Language Selector */}
               <div 
-                className="relative"
+                className="relative group"
                 onMouseEnter={() => setLanguageDropdownOpen(true)}
                 onMouseLeave={() => setLanguageDropdownOpen(false)}
               >
-                <button className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors py-2">
+                <button className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors">
                   <Globe className="w-4 h-4" />
-                  {currentLanguage ? currentLanguage.flag : '🇹🇷'}
+                  <span>{currentLanguage?.flag}</span>
+                  <ChevronDown className="w-4 h-4" />
                 </button>
                 
                 {languageDropdownOpen && (
                   <div className="absolute top-full right-0 pt-2 z-50">
-                    <div className="bg-white shadow-lg rounded-lg py-2 min-w-[150px]">
-                      {languages.map(lang => (
+                    <div className="w-40 bg-white rounded-lg shadow-xl border border-gray-100 py-2">
+                      {languages.map((lang) => (
                         <button
                           key={lang.code}
-                          className={`w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center gap-2 ${language === lang.code ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
                           onClick={() => setLanguage(lang.code)}
+                          className={`w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors flex items-center gap-2 ${
+                            language === lang.code ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                          }`}
                         >
                           <span>{lang.flag}</span>
                           <span>{lang.name}</span>
@@ -252,109 +248,126 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-700"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="md:hidden py-4 border-t">
+            <div className="lg:hidden py-4 border-t border-gray-100">
               <div className="flex flex-col gap-4">
-                <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+                <Link 
+                  to="/" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {t('header.home')}
                 </Link>
                 
-                {/* Mobile Turlar */}
                 <div>
                   <button 
                     onClick={() => setToursDropdownOpen(!toursDropdownOpen)}
-                    className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors w-full"
+                    className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
                   >
-                    {t('header.tours')}
+                    <span>{t('header.tours')}</span>
                     <ChevronDown className={`w-4 h-4 transition-transform ${toursDropdownOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {toursDropdownOpen && (
-                    <div className="mt-2 ml-4 space-y-3">
+                    <div className="mt-2 ml-4 space-y-2">
                       {navItems.map((category, idx) => (
-                        <div key={idx}>
-                          <div className="text-blue-600 mb-2 text-sm">{category.title}</div>
-                          <ul className="space-y-1 ml-2">
-                            {category.items.map((item, itemIdx) => (
-                              <li key={itemIdx}>
-                                <Link 
-                                  to={item.path} 
-                                  className="text-gray-600 hover:text-blue-600 transition-colors text-xs flex justify-between"
-                                >
-                                  <span>{item.name}</span>
-                                  <span className="text-gray-400">({item.count})</span>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
+                        <div key={idx} className="space-y-2">
+                          <p className="font-semibold text-gray-900 text-sm">{category.title}</p>
+                          {category.items.map((item, itemIdx) => (
+                            <Link
+                              key={itemIdx}
+                              to={item.path}
+                              className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {item.name} ({item.count})
+                            </Link>
+                          ))}
                         </div>
+                      ))}
+                      <Link
+                        to="/tours/all"
+                        className="block text-blue-600 hover:text-blue-700 font-medium text-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {t('home.viewAllTours')} →
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <button 
+                    onClick={() => setVisaDropdownOpen(!visaDropdownOpen)}
+                    className="flex items-center justify-between w-full text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    <span>{t('header.visa')}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${visaDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {visaDropdownOpen && (
+                    <div className="mt-2 ml-4 space-y-2">
+                      {visaItems.map((item, idx) => (
+                        <Link
+                          key={idx}
+                          to={item.path}
+                          className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
                       ))}
                     </div>
                   )}
                 </div>
 
-                {/* Mobile Vize Desteği */}
-                <div>
-                  <button 
-                    onClick={() => setVisaDropdownOpen(!visaDropdownOpen)}
-                    className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors w-full"
-                  >
-                    {t('header.visa')}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${visaDropdownOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {visaDropdownOpen && (
-                    <div className="mt-2 ml-4 space-y-1">
-                      <Link 
-                        to="/visa" 
-                        className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
-                      >
-                        Vize Desteği
-                      </Link>
-                      <Link 
-                        to="/dubai-visa" 
-                        className="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
-                      >
-                        Dubai Vize
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
-                <Link to="/blog" className="text-gray-700 hover:text-blue-600 transition-colors">
-                  {t('header.blog')}
-                </Link>
-                <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
+                <Link 
+                  to="/about" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {t('header.about')}
                 </Link>
-                <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">
+                <Link 
+                  to="/blog" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {t('header.blog')}
+                </Link>
+                <Link 
+                  to="/contact" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {t('header.contact')}
                 </Link>
-                
-                {/* Mobile Language Selector */}
-                <div className="border-t pt-4">
+
+                {/* Language Selector Mobile */}
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-gray-500 text-sm mb-2">Dil / Language</p>
                   <div className="flex gap-2">
-                    {languages.map(lang => (
+                    {languages.map((lang) => (
                       <button
                         key={lang.code}
-                        className={`px-3 py-1 rounded transition-colors ${language === lang.code ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                         onClick={() => setLanguage(lang.code)}
+                        className={`px-3 py-2 rounded-lg transition-colors ${
+                          language === lang.code 
+                            ? 'bg-blue-600 text-white' 
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
                       >
                         {lang.flag} {lang.code.toUpperCase()}
                       </button>
                     ))}
                   </div>
                 </div>
-
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors">
-                  {t('header.bookNow')}
-                </button>
               </div>
             </div>
           )}

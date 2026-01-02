@@ -90,7 +90,6 @@ ${formData.message}
             <h3 className="text-gray-900 mb-2">{t('contact.phone')}</h3>
             <div className="text-gray-600 space-y-1">
               <p>+90 543 220 05 43</p>
-              <p>+90 242 753 2827</p>
             </div>
           </div>
 

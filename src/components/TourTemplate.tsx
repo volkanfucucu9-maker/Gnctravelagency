@@ -65,12 +65,12 @@ export function TourTemplate({
           <h2 className="text-3xl text-center mb-12">Tur Paketleri</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {packages.map((pkg) => (
-              <div key={pkg.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div key={pkg.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
                 <div 
                   className="h-64 bg-cover bg-center"
                   style={{ backgroundImage: `url(${pkg.image})` }}
                 />
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -101,21 +101,23 @@ export function TourTemplate({
                       {pkg.priceNote && <div className="text-xs text-gray-500">{pkg.priceNote}</div>}
                     </div>
                   </div>
-                  {pkg.detailUrl ? (
-                    <Link 
-                      to={pkg.detailUrl}
-                      className="block w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center"
-                    >
-                      Detayları İncele
-                    </Link>
-                  ) : (
-                    <Link 
-                      to="/contact"
-                      className="block w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center"
-                    >
-                      Bilgi Al
-                    </Link>
-                  )}
+                  <div className="mt-auto pt-4">
+                    {pkg.detailUrl ? (
+                      <Link 
+                        to={pkg.detailUrl}
+                        className="block w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center"
+                      >
+                        Detayları İncele
+                      </Link>
+                    ) : (
+                      <Link 
+                        to="/contact"
+                        className="block w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors text-center"
+                      >
+                        Bilgi Al
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

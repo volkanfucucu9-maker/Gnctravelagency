@@ -402,12 +402,12 @@ export function AllTours() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {filteredTours.map((tour) => (
-                  <div key={tour.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  <div key={tour.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col h-full">
                     <div 
                       className="h-48 bg-cover bg-center"
                       style={{ backgroundImage: `url(${tour.image})` }}
                     />
-                    <div className="p-5">
+                    <div className="p-5 flex flex-col flex-grow">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
                           {tour.category}
@@ -439,18 +439,20 @@ export function AllTours() {
                         </div>
                         <div className="text-xl text-blue-600">{tour.priceText}</div>
                       </div>
-                      {tour.detailUrl ? (
-                        <Link 
-                          to={tour.detailUrl}
-                          className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors block text-center"
-                        >
-                          Detayları Gör
-                        </Link>
-                      ) : (
-                        <button className="w-full mt-4 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                          Detayları Gör
-                        </button>
-                      )}
+                      <div className="mt-auto pt-4">
+                        {tour.detailUrl ? (
+                          <Link 
+                            to={tour.detailUrl}
+                            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors block text-center"
+                          >
+                            Detayları Gör
+                          </Link>
+                        ) : (
+                          <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                            Bilgi Al
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
