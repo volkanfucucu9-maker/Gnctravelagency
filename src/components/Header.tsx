@@ -130,7 +130,7 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/logognctravel.png" alt="GNC Travel Agency" className="h-20" />
+              <img src="/assets/logognctravel.png" alt="GNC Travel Agency" className="h-16 md:h-20" />
             </Link>
 
             {/* Desktop Navigation */}

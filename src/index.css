@@ -2391,6 +2391,12 @@
   }
 
   @media (width >= 48rem) {
+    .md\:h-20 {
+      height: calc(var(--spacing) * 20);
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:h-80 {
       height: calc(var(--spacing) * 80);
     }
