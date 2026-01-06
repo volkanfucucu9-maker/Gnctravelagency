@@ -78,14 +78,17 @@ export function DubaiVisa() {
 
     try {
       const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-dubai-visa`,
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${publicAnonKey}`,
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            formType: 'dubai-visa',
+            formData: formData
+          }),
         }
       );
 
@@ -120,7 +123,8 @@ export function DubaiVisa() {
           setSuccessMessage(false);
         }, 10000);
       } else {
-        console.error('Form submission failed:', await response.text());
+        const errorData = await response.json();
+        console.error('Form submission failed:', errorData);
         alert('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
       }
     } catch (error) {

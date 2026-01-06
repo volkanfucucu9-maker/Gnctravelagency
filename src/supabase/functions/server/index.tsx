@@ -90,7 +90,7 @@ app.post("/make-server-d52997fc/send-email", async (c) => {
       },
       body: JSON.stringify({
         from: 'GNC Travel <onboarding@resend.dev>', // Resend'in varsayılan gönderici adresi
-        to: ['gncaslan07@gmail.com'], // Resend free tier sadece doğrulanmış email adresine gönderebilir
+        to: ['gncaslan07@gmail.com'], // Resend'de doğrulanmış email adresi
         subject: subject,
         html: htmlContent
       })
