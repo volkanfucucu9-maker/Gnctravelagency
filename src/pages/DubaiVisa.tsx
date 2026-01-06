@@ -32,6 +32,7 @@ export function DubaiVisa() {
     notes: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,7 +75,13 @@ export function DubaiVisa() {
         passengers: formData.passengers
       });
       
-      alert('Başvurunuz alındı! En kısa sürede size dönüş yapacağız.');
+      // Başarı mesajını göster
+      setSuccessMessage(true);
+      
+      // 5 saniye sonra mesajı gizle
+      setTimeout(() => {
+        setSuccessMessage(false);
+      }, 5000);
       
       // Formu temizle
       setFormData({
@@ -634,6 +641,28 @@ export function DubaiVisa() {
           </div>
           
           <form onSubmit={handleSubmit} className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 md:p-12 rounded-3xl shadow-2xl border-2 border-blue-200">
+            {/* Başarı Mesajı */}
+            {successMessage && (
+              <div className="mb-8 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-500 rounded-2xl p-6 animate-in fade-in slide-in-from-top-4 duration-500">
+                <div className="flex items-start gap-4">
+                  <div className="bg-green-500 text-white rounded-full p-2 flex-shrink-0">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl text-green-900 mb-2">
+                      <strong>✅ Başvurunuz Alındı!</strong>
+                    </h3>
+                    <p className="text-green-800 text-lg mb-2">
+                      Dubai vize başvurunuz başarıyla gönderildi.
+                    </p>
+                    <p className="text-green-700">
+                      Uzman ekibimiz <strong>en kısa sürede</strong> sizinle iletişime geçecektir.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block mb-2">

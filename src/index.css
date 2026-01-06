@@ -87,7 +87,9 @@
     --color-green-500: oklch(.723 .219 149.579);
     --color-green-600: oklch(.627 .194 149.214);
     --color-green-700: oklch(.527 .154 150.069);
+    --color-green-800: oklch(.448 .119 151.328);
     --color-green-900: oklch(.393 .095 152.535);
+    --color-emerald-50: oklch(.979 .021 166.113);
     --color-cyan-50: oklch(.984 .019 200.873);
     --color-cyan-100: oklch(.956 .045 203.388);
     --color-cyan-400: oklch(.789 .154 211.53);
@@ -988,6 +990,10 @@
     transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
   }
 
+  .animate-in {
+    animation: enter var(--tw-duration, .15s) var(--tw-ease, ease);
+  }
+
   .animate-pulse {
     animation: var(--animate-pulse);
   }
@@ -1221,6 +1227,10 @@
 
   .border-green-200 {
     border-color: var(--color-green-200);
+  }
+
+  .border-green-500 {
+    border-color: var(--color-green-500);
   }
 
   .border-white {
@@ -1553,6 +1563,11 @@
 
   .to-cyan-600 {
     --tw-gradient-to: var(--color-cyan-600);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+
+  .to-emerald-50 {
+    --tw-gradient-to: var(--color-emerald-50);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
 
@@ -1908,6 +1923,14 @@
     color: var(--color-green-600);
   }
 
+  .text-green-700 {
+    color: var(--color-green-700);
+  }
+
+  .text-green-800 {
+    color: var(--color-green-800);
+  }
+
   .text-green-900 {
     color: var(--color-green-900);
   }
@@ -2079,6 +2102,14 @@
   .outline-none {
     --tw-outline-style: none;
     outline-style: none;
+  }
+
+  .fade-in {
+    --tw-enter-opacity: 0;
+  }
+
+  .slide-in-from-top-4 {
+    --tw-enter-translate-y: calc(4 * var(--spacing) * -1);
   }
 
   @media (hover: hover) {
@@ -3076,5 +3107,12 @@ html {
 @keyframes pulse {
   50% {
     opacity: .5;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));
   }
 }
