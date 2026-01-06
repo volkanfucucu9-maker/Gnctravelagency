@@ -61,6 +61,7 @@ declare global {
 export const trackFacebookEvent = (eventName: string, data?: any) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, data);
+    console.log('[FB Pixel] Event:', eventName, data); // Debug için
   }
 };
 
@@ -68,5 +69,65 @@ export const trackFacebookEvent = (eventName: string, data?: any) => {
 export const trackCustomEvent = (eventName: string, data?: any) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('trackCustom', eventName, data);
+    console.log('[FB Pixel] Custom:', eventName, data); // Debug için
   }
+};
+
+// Scroll depth tracking
+export const trackScrollDepth = (depth: number) => {
+  trackCustomEvent('ScrollDepth', { depth_percentage: depth });
+};
+
+// Time on page tracking
+export const trackTimeOnPage = (seconds: number, pageName: string) => {
+  trackCustomEvent('TimeOnPage', { 
+    seconds: seconds,
+    page: pageName,
+    minutes: Math.round(seconds / 60 * 10) / 10
+  });
+};
+
+// Button click tracking
+export const trackButtonClick = (buttonName: string, location: string) => {
+  trackCustomEvent('ButtonClick', {
+    button_name: buttonName,
+    button_location: location
+  });
+};
+
+// Tour view tracking
+export const trackTourView = (tourName: string, tourPrice: string, tourId: string) => {
+  trackFacebookEvent('ViewContent', {
+    content_name: tourName,
+    content_ids: [tourId],
+    content_type: 'product',
+    value: parseFloat(tourPrice.replace(/[^0-9.]/g, '')),
+    currency: 'EUR'
+  });
+};
+
+// Form interaction tracking
+export const trackFormStart = (formName: string) => {
+  trackFacebookEvent('InitiateCheckout', {
+    content_name: formName,
+    content_category: 'visa_form'
+  });
+};
+
+// Visa type selection tracking
+export const trackVisaSelection = (visaType: string, price: number) => {
+  trackFacebookEvent('AddToCart', {
+    content_name: `Dubai Visa - ${visaType}`,
+    content_type: 'product',
+    value: price,
+    currency: 'USD'
+  });
+};
+
+// Contact tracking (phone/whatsapp)
+export const trackContactClick = (contactType: 'phone' | 'whatsapp', number: string) => {
+  trackFacebookEvent('Contact', {
+    contact_type: contactType,
+    phone_number: number
+  });
 };

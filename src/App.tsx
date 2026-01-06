@@ -1,4 +1,5 @@
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -81,68 +82,70 @@ function WhatsAppButton() {
 
 export default function App() {
   return (
-    <Router>
-      <LanguageProvider>
-        <FacebookPixel />
-        <ScrollToTop />
-        <div className="min-h-screen bg-gray-50">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/packages" element={<Packages />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/visa" element={<Visa />} />
-            <Route path="/dubai-visa" element={<DubaiVisa />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<Blog />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/tours/all" element={<AllTours />} />
-            
-            {/* Yurt Dışı Turları */}
-            <Route path="/tours/visa-free" element={<VisaFree />} />
-            <Route path="/tours/montenegro" element={<Montenegro />} />
-            <Route path="/tours/balkans" element={<Balkans />} />
-            <Route path="/tours/italy" element={<Italy />} />
-            <Route path="/tours/dubai" element={<Dubai />} />
-            <Route path="/tours/japan" element={<Japan />} />
-            <Route path="/tours/egypt" element={<Egypt />} />
-            <Route path="/tours/sharm-el-sheikh" element={<SharmElSheikh />} />
-            <Route path="/tours/greece" element={<Greece />} />
-            <Route path="/tours/thailand" element={<Thailand />} />
-            <Route path="/tours/bali" element={<Bali />} />
-            
-            {/* Kültür Turları */}
-            <Route path="/tours/europe-culture" element={<EuropeCulture />} />
-            <Route path="/tours/asia-culture" element={<AsiaCulture />} />
-            <Route path="/tours/middle-east" element={<MiddleEast />} />
-            <Route path="/tours/holy-lands" element={<HolyLands />} />
-            <Route path="/tours/far-east" element={<FarEast />} />
-            
-            {/* Türkiye Turları */}
-            <Route path="/tours/antalya" element={<Antalya />} />
-            <Route path="/tours/cappadocia" element={<Cappadocia />} />
-            <Route path="/tours/aegean-turkey" element={<AegeanTurkey />} />
-            <Route path="/tours/mediterranean-turkey" element={<MediterraneanTurkey />} />
-            
-            {/* Tur Detayları */}
-            <Route path="/tour-details/bali-paradise" element={<BaliParadise />} />
-            <Route path="/tour-details/dubai-ajet" element={<DubaiAjet />} />
-            <Route path="/tour-details/dubai-masali" element={<DubaiMasali />} />
-            <Route path="/tour-details/dubai-emirates" element={<DubaiEmirates />} />
-            <Route path="/tour-details/bangkok-pattaya" element={<BangkokPattaya />} />
-            <Route path="/tour-details/kesfet-tayland" element={<KesfetTayland />} />
-            <Route path="/tour-details/bangkok-pattaya-extended" element={<BangkokPattayaExtended />} />
-            <Route path="/tour-details/bali-ubud-wonderland" element={<BaliUbudWonderland />} />
-            <Route path="/tour-details/egypt-cairo-nile" element={<EgyptCairoNile />} />
-            <Route path="/tour-details/egypt-classic" element={<EgyptClassic />} />
-            <Route path="/tour-details/egypt-jordan-combo" element={<EgyptJordanCombo />} />
-            <Route path="/tour-details/egypt-culture" element={<EgyptCulture />} />
-            <Route path="/tour-details/egypt-budget" element={<EgyptBudget />} />
-          </Routes>
-          <Footer />
-          <WhatsAppButton />
-        </div>
-      </LanguageProvider>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <LanguageProvider>
+          <FacebookPixel />
+          <ScrollToTop />
+          <div className="min-h-screen bg-gray-50">
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/packages" element={<Packages />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/visa" element={<Visa />} />
+              <Route path="/dubai-visa" element={<DubaiVisa />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<Blog />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/tours/all" element={<AllTours />} />
+              
+              {/* Yurt Dışı Turları */}
+              <Route path="/tours/visa-free" element={<VisaFree />} />
+              <Route path="/tours/montenegro" element={<Montenegro />} />
+              <Route path="/tours/balkans" element={<Balkans />} />
+              <Route path="/tours/italy" element={<Italy />} />
+              <Route path="/tours/dubai" element={<Dubai />} />
+              <Route path="/tours/japan" element={<Japan />} />
+              <Route path="/tours/egypt" element={<Egypt />} />
+              <Route path="/tours/sharm-el-sheikh" element={<SharmElSheikh />} />
+              <Route path="/tours/greece" element={<Greece />} />
+              <Route path="/tours/thailand" element={<Thailand />} />
+              <Route path="/tours/bali" element={<Bali />} />
+              
+              {/* Kültür Turları */}
+              <Route path="/tours/europe-culture" element={<EuropeCulture />} />
+              <Route path="/tours/asia-culture" element={<AsiaCulture />} />
+              <Route path="/tours/middle-east" element={<MiddleEast />} />
+              <Route path="/tours/holy-lands" element={<HolyLands />} />
+              <Route path="/tours/far-east" element={<FarEast />} />
+              
+              {/* Türkiye Turları */}
+              <Route path="/tours/antalya" element={<Antalya />} />
+              <Route path="/tours/cappadocia" element={<Cappadocia />} />
+              <Route path="/tours/aegean-turkey" element={<AegeanTurkey />} />
+              <Route path="/tours/mediterranean-turkey" element={<MediterraneanTurkey />} />
+              
+              {/* Tur Detayları */}
+              <Route path="/tour-details/bali-paradise" element={<BaliParadise />} />
+              <Route path="/tour-details/dubai-ajet" element={<DubaiAjet />} />
+              <Route path="/tour-details/dubai-masali" element={<DubaiMasali />} />
+              <Route path="/tour-details/dubai-emirates" element={<DubaiEmirates />} />
+              <Route path="/tour-details/bangkok-pattaya" element={<BangkokPattaya />} />
+              <Route path="/tour-details/kesfet-tayland" element={<KesfetTayland />} />
+              <Route path="/tour-details/bangkok-pattaya-extended" element={<BangkokPattayaExtended />} />
+              <Route path="/tour-details/bali-ubud-wonderland" element={<BaliUbudWonderland />} />
+              <Route path="/tour-details/egypt-cairo-nile" element={<EgyptCairoNile />} />
+              <Route path="/tour-details/egypt-classic" element={<EgyptClassic />} />
+              <Route path="/tour-details/egypt-jordan-combo" element={<EgyptJordanCombo />} />
+              <Route path="/tour-details/egypt-culture" element={<EgyptCulture />} />
+              <Route path="/tour-details/egypt-budget" element={<EgyptBudget />} />
+            </Routes>
+            <Footer />
+            <WhatsAppButton />
+          </div>
+        </LanguageProvider>
+      </Router>
+    </HelmetProvider>
   );
 }

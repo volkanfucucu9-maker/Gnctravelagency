@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { 
   FileText, 
   Clock, 
@@ -18,10 +19,19 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
-import { trackFacebookEvent } from '../components/FacebookPixel';
+import { 
+  trackFacebookEvent, 
+  trackScrollDepth, 
+  trackTimeOnPage, 
+  trackButtonClick,
+  trackFormStart,
+  trackVisaSelection,
+  trackContactClick
+} from '../components/FacebookPixel';
 
 export function DubaiVisa() {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
+  const [successMessage, setSuccessMessage] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,75 +39,22 @@ export function DubaiVisa() {
     visaType: '',
     entryDate: '',
     passengers: '1',
-    notes: '',
+    notes: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Scroll to form function
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      // Backend'e form verilerini gönder
-      const response = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            formType: 'dubai-visa',
-            formData: formData,
-          }),
-        }
-      );
+    const formElement = document.getElementById('application-form');
+    if (formElement) {
+      const headerOffset = 100; // Header height + padding
+      const elementPosition = formElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        console.error('Email gönderme hatası:', result);
-        alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
-        setIsSubmitting(false);
-        return;
-      }
-
-      console.log('Email başarıyla gönderildi:', result);
-      
-      // Facebook Pixel - SubmitApplication event'i track et
-      trackFacebookEvent('SubmitApplication', {
-        content_name: 'Dubai Visa Application',
-        content_category: 'Visa',
-        value: formData.visaType,
-        visa_type: formData.visaType,
-        passengers: formData.passengers
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       });
-      
-      // Başarı mesajını göster
-      setSuccessMessage(true);
-      
-      // 5 saniye sonra mesajı gizle
-      setTimeout(() => {
-        setSuccessMessage(false);
-      }, 5000);
-      
-      // Formu temizle
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        visaType: '',
-        entryDate: '',
-        passengers: '1',
-        notes: '',
-      });
-    } catch (error) {
-      console.error('Email gönderme hatası:', error);
-      alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -106,6 +63,70 @@ export function DubaiVisa() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Track Facebook event
+    trackFacebookEvent('SubmitApplication', {
+      content_name: 'Dubai Visa Application',
+      content_category: 'visa',
+      currency: 'USD',
+      value: 147
+    });
+
+    try {
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-dubai-visa`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${publicAnonKey}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        setSuccessMessage(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          visaType: '',
+          entryDate: '',
+          passengers: '1',
+          notes: ''
+        });
+        
+        // Scroll to success message
+        setTimeout(() => {
+          const formElement = document.getElementById('application-form');
+          if (formElement) {
+            const headerOffset = 100;
+            const elementPosition = formElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 100);
+
+        // Hide success message after 10 seconds
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 10000);
+      } else {
+        console.error('Form submission failed:', await response.text());
+        alert('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Başvuru gönderilirken bir hata oluştu. Lütfen tekrar deneyin.');
+    }
   };
 
   const pricingPlans = [
@@ -195,16 +216,115 @@ export function DubaiVisa() {
     }
   ];
 
+  // Track scroll depth & form visibility
+  useEffect(() => {
+    const scrollDepths = { 25: false, 50: false, 75: false, 100: false };
+    
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      
+      Object.keys(scrollDepths).forEach((depth) => {
+        const depthNum = parseInt(depth);
+        if (scrollPercent >= depthNum && !scrollDepths[depthNum]) {
+          scrollDepths[depthNum] = true;
+          trackScrollDepth(depthNum);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Track time on page
+  useEffect(() => {
+    const startTime = Date.now();
+    
+    // Track every 30 seconds
+    const interval = setInterval(() => {
+      const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+      trackTimeOnPage(timeSpent, 'Dubai Visa Page');
+    }, 30000);
+    
+    return () => {
+      clearInterval(interval);
+      const totalTime = Math.floor((Date.now() - startTime) / 1000);
+      trackTimeOnPage(totalTime, 'Dubai Visa Page');
+    };
+  }, []);
+
+  // Track visa selection
+  const handleVisaTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    handleChange(e);
+    
+    if (value) {
+      const priceMap: { [key: string]: number } = {
+        '30-day-single': 147,
+        '30-day-multiple': 393,
+        '90-day-single': 467,
+        '90-day-multiple': 716
+      };
+      trackVisaSelection(value, priceMap[value] || 147);
+    }
+  };
+
+  // Track form start
+  const handleFormInputFocus = () => {
+    trackFormStart('Dubai Visa Application Form');
+  };
+
+  // Track contact click
+  const handlePhoneClick = () => {
+    trackContactClick('phone', '+905432200543');
+    trackButtonClick('Phone Call CTA', 'Hero Section');
+  };
+
+  const handlePhoneClick2 = () => {
+    trackContactClick('phone', '+905432200543');
+    trackButtonClick('Phone Call CTA', 'Bottom Section');
+  };
+
+  const formRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className="min-h-screen">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru - GNC Travel</title>
+        <meta name="description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok. Uzman vize danışmanlığı ile güvenli hizmet." />
+        <meta name="keywords" content="dubai vizesi, dubai vize başvurusu, online dubai vizesi, hızlı dubai vizesi, dubai turistik vize, dubai vize fiyatları, dubai vize şartları, dubai vize danışmanlığı" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
+        <meta property="og:description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok." />
+        <meta property="og:image" content="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
+        <meta name="twitter:description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru." />
+        <meta name="twitter:image" content="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://gnctravel.com/#/dubai-visa" />
+        
+        {/* Additional SEO */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="Turkish" />
+        <meta name="author" content="GNC Travel Agency" />
+      </Helmet>
+
       {/* Sticky Mobile CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t-2 border-blue-500 shadow-2xl p-4 md:hidden">
-        <Link
-          to="/contact"
+        <a
+          href="#application-form"
+          onClick={scrollToForm}
           className="block w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-center py-4 rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg text-lg"
         >
           <strong>Hemen Başvur – $147'dan</strong>
-        </Link>
+        </a>
       </div>
 
       {/* HERO SECTION - Above the Fold */}
@@ -266,8 +386,9 @@ export function DubaiVisa() {
 
             {/* Ana CTA */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                to="/contact"
+              <a
+                href="#application-form"
+                onClick={scrollToForm}
                 className="group bg-white text-blue-900 px-10 py-5 rounded-xl hover:bg-blue-50 transition-all shadow-2xl inline-flex items-center gap-3 text-xl hover:scale-105"
               >
                 <FileText className="w-6 h-6" />
@@ -276,11 +397,12 @@ export function DubaiVisa() {
                   <span className="block text-sm text-blue-700">$147'dan Başlayan Fiyatlarla</span>
                 </span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
               
               <a
                 href="tel:+905432200543"
                 className="bg-blue-800/50 backdrop-blur-sm text-white px-8 py-5 rounded-xl hover:bg-blue-700/50 transition-all inline-flex items-center gap-2 border-2 border-white/30"
+                onClick={handlePhoneClick}
               >
                 <Phone className="w-5 h-5" />
                 <span>+90 543 220 05 43</span>
@@ -346,8 +468,9 @@ export function DubaiVisa() {
                     ))}
                   </ul>
 
-                  <Link
-                    to="/contact"
+                  <a
+                    href="#application-form"
+                    onClick={scrollToForm}
                     className={`block w-full text-center py-4 rounded-xl transition-all ${
                       plan.popular
                         ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white hover:from-blue-700 hover:to-cyan-700 shadow-lg'
@@ -355,7 +478,7 @@ export function DubaiVisa() {
                     }`}
                   >
                     <strong>Hemen Başvur</strong>
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}
@@ -413,13 +536,14 @@ export function DubaiVisa() {
           </div>
 
           <div className="text-center mt-10">
-            <Link
-              to="/contact"
+            <a
+              href="#application-form"
+              onClick={scrollToForm}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-4 rounded-xl hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg text-lg"
             >
               <strong>Şimdi Başla</strong>
               <ArrowRight className="w-5 h-5" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -628,7 +752,7 @@ export function DubaiVisa() {
       </section>
 
       {/* BAŞVURU FORMU */}
-      <section id="application-form" className="py-20 bg-white">
+      <section id="application-form" className="py-20 bg-white" ref={formRef}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="inline-block bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2 rounded-full mb-4">
@@ -718,7 +842,7 @@ export function DubaiVisa() {
                 <select
                   name="visaType"
                   value={formData.visaType}
-                  onChange={handleChange}
+                  onChange={handleVisaTypeChange}
                   required
                   className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
@@ -805,8 +929,9 @@ export function DubaiVisa() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              to="/contact"
+            <a
+              href="#application-form"
+              onClick={scrollToForm}
               className="group bg-white text-blue-900 px-10 py-5 rounded-xl hover:bg-blue-50 transition-all shadow-2xl inline-flex items-center gap-3 text-xl hover:scale-105"
             >
               <FileText className="w-6 h-6" />
@@ -815,11 +940,12 @@ export function DubaiVisa() {
                 <span className="block text-sm text-blue-700">$147'dan</span>
               </span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             
             <a
               href="tel:+905432200543"
               className="bg-blue-800/50 backdrop-blur-sm text-white px-8 py-5 rounded-xl hover:bg-blue-700/50 transition-all inline-flex items-center gap-2 border-2 border-white/30"
+              onClick={handlePhoneClick2}
             >
               <Phone className="w-5 h-5" />
               <span>+90 543 220 05 43</span>

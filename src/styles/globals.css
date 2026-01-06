@@ -231,6 +231,7 @@
 
 html {
   font-size: var(--font-size);
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar but keep functionality */
