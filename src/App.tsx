@@ -3,6 +3,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { FacebookPixel } from './components/FacebookPixel';
 import { MessageCircle } from 'lucide-react';
 import { Home } from './pages/Home';
 import { Packages } from './pages/Packages';
@@ -82,6 +83,7 @@ export default function App() {
   return (
     <Router>
       <LanguageProvider>
+        <FacebookPixel />
         <ScrollToTop />
         <div className="min-h-screen bg-gray-50">
           <Header />

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import exampleImage from 'figma:asset/3c41d0a7b0e544fca7dcadf3133a19df82439f0e.png';
+import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function Visa() {
   const { t } = useLanguage();
@@ -12,36 +14,69 @@ export function Visa() {
     phone: '',
     country: '',
     passportStatus: '',
-    message: '',
+    travelDate: '',
+    notes: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // E-posta gövdesini oluştur
-    const emailBody = `
-Vize Başvuru Formu - Yeni Başvuru
+    try {
+      // Backend'e form verilerini gönder
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'visa',
+            formData: formData,
+          }),
+        }
+      );
 
-Ad Soyad: ${formData.name}
-E-posta: ${formData.email}
-Telefon: ${formData.phone}
-Gitmek İstediği Ülke: ${formData.country}
-Pasaport Durumu: ${formData.passportStatus}
+      const result = await response.json();
 
-Mesaj:
-${formData.message}
-    `.trim();
+      if (!response.ok) {
+        console.error('Email gönderme hatası:', result);
+        alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+        setIsSubmitting(false);
+        return;
+      }
 
-    // Mailto linki oluştur
-    const mailtoLink = `mailto:gonca@gnctravel.com?subject=Vize Başvurusu - ${formData.name}&body=${encodeURIComponent(emailBody)}`;
-    
-    // E-posta istemcisini aç
-    window.location.href = mailtoLink;
-    
-    // Kullanıcıya bilgi ver
-    setTimeout(() => {
+      console.log('Email başarıyla gönderildi:', result);
+      
+      // Facebook Pixel - Lead event'i track et
+      trackFacebookEvent('Lead', {
+        content_name: 'Visa Application',
+        content_category: 'Visa',
+        country: formData.country,
+        passport_status: formData.passportStatus
+      });
+      
       alert(t('visa.submitSuccess') || 'Başvurunuz alındı! En kısa sürede size dönüş yapacağız.');
-    }, 500);
+      
+      // Formu temizle
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        country: '',
+        passportStatus: '',
+        travelDate: '',
+        notes: '',
+      });
+    } catch (error) {
+      console.error('Email gönderme hatası:', error);
+      alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -354,15 +389,29 @@ ${formData.message}
               </select>
             </div>
 
+            <div className="mb-6">
+              <label htmlFor="travelDate" className="block text-gray-700 mb-2">
+                Seyahat Tarihi
+              </label>
+              <input
+                type="date"
+                id="travelDate"
+                name="travelDate"
+                value={formData.travelDate}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              />
+            </div>
+
             <div className="mb-8">
-              <label htmlFor="message" className="block text-gray-700 mb-2">
-                Mesajınız
+              <label htmlFor="notes" className="block text-gray-700 mb-2">
+                Ek Notlar
               </label>
               <textarea
-                id="message"
-                name="message"
+                id="notes"
+                name="notes"
                 rows={5}
-                value={formData.message}
+                value={formData.notes}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
                 placeholder="Vize başvurunuz hakkında bilgi vermek isterseniz..."
@@ -372,8 +421,9 @@ ${formData.message}
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
             >
-              Başvuruyu Gönder
+              {isSubmitting ? 'Gönderiliyor...' : 'Başvuruyu Gönder'}
               <ArrowRight className="w-5 h-5" />
             </button>
           </form>

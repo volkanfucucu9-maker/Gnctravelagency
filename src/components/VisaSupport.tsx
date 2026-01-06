@@ -1,6 +1,7 @@
 import { FileCheck, Clock, CheckCircle, Globe, MessageSquare, Send } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { projectId, publicAnonKey } from '../utils/supabase/info';
 
 export function VisaSupport() {
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -8,6 +9,9 @@ export function VisaSupport() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [travelDate, setTravelDate] = useState('');
+  const [notes, setNotes] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const visaProcess = [
     {
@@ -87,36 +91,60 @@ export function VisaSupport() {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // E-posta gövdesini oluştur
-    const emailBody = `
-Vize Destek Formu - Yeni Başvuru
+    try {
+      // Backend'e form verilerini gönder
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'visa',
+            formData: {
+              name,
+              email,
+              phone,
+              country: selectedCountry,
+              travelDate,
+              notes,
+            },
+          }),
+        }
+      );
 
-Ad Soyad: ${name}
-E-posta: ${email}
-Telefon: ${phone}
-Ülke: ${selectedCountry}
-Vize Tipi: ${visaType}
-    `.trim();
+      const result = await response.json();
 
-    // Mailto linki oluştur
-    const mailtoLink = `mailto:gonca@gnctravel.com?subject=Vize Destek Talebi - ${selectedCountry}&body=${encodeURIComponent(emailBody)}`;
-    
-    // E-posta istemcisini aç
-    window.location.href = mailtoLink;
-    
-    // Kullanıcıya bilgi ver
-    setTimeout(() => {
+      if (!response.ok) {
+        console.error('Email gönderme hatası:', result);
+        alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Email başarıyla gönderildi:', result);
       alert('Teşekkürler! Vize destek ekibimiz 24 saat içinde sizinle iletişime geçecektir.');
-    }, 500);
-    
-    setName('');
-    setEmail('');
-    setPhone('');
-    setSelectedCountry('');
-    setVisaType('');
+      
+      // Formu temizle
+      setName('');
+      setEmail('');
+      setPhone('');
+      setSelectedCountry('');
+      setVisaType('');
+      setTravelDate('');
+      setNotes('');
+    } catch (error) {
+      console.error('Email gönderme hatası:', error);
+      alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -326,6 +354,27 @@ Vize Tipi: ${visaType}
                     <option value="work">Çalışma Vizesi</option>
                     <option value="other">Diğer</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Yolculuk Tarihi</label>
+                  <input
+                    type="date"
+                    value={travelDate}
+                    onChange={(e) => setTravelDate(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 mb-2">Diğer Notlar</label>
+                  <textarea
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    rows={4}
+                    placeholder="Diğer notlarınızı buraya yazın"
+                  />
                 </div>
 
                 <button

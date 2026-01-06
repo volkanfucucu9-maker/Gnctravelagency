@@ -17,6 +17,8 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function DubaiVisa() {
   const { t, language } = useLanguage();
@@ -25,32 +27,71 @@ export function DubaiVisa() {
     email: '',
     phone: '',
     visaType: '',
-    travelDate: '',
-    message: '',
+    entryDate: '',
+    passengers: '1',
+    notes: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    const emailBody = `
-Dubai Vize Başvuru Formu - Yeni Başvuru
+    try {
+      // Backend'e form verilerini gönder
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'dubai-visa',
+            formData: formData,
+          }),
+        }
+      );
 
-Ad Soyad: ${formData.name}
-E-posta: ${formData.email}
-Telefon: ${formData.phone}
-Vize Türü: ${formData.visaType}
-Seyahat Tarihi: ${formData.travelDate}
+      const result = await response.json();
 
-Mesaj:
-${formData.message}
-    `.trim();
+      if (!response.ok) {
+        console.error('Email gönderme hatası:', result);
+        alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+        setIsSubmitting(false);
+        return;
+      }
 
-    const mailtoLink = `mailto:gonca@gnctravel.com?subject=Dubai Vize Başvurusu - ${formData.name}&body=${encodeURIComponent(emailBody)}`;
-    window.location.href = mailtoLink;
-    
-    setTimeout(() => {
+      console.log('Email başarıyla gönderildi:', result);
+      
+      // Facebook Pixel - SubmitApplication event'i track et
+      trackFacebookEvent('SubmitApplication', {
+        content_name: 'Dubai Visa Application',
+        content_category: 'Visa',
+        value: formData.visaType,
+        visa_type: formData.visaType,
+        passengers: formData.passengers
+      });
+      
       alert('Başvurunuz alındı! En kısa sürede size dönüş yapacağız.');
-    }, 500);
+      
+      // Formu temizle
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        visaType: '',
+        entryDate: '',
+        passengers: '1',
+        notes: '',
+      });
+    } catch (error) {
+      console.error('Email gönderme hatası:', error);
+      alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -663,12 +704,12 @@ ${formData.message}
             
             <div className="mb-6">
               <label className="block mb-2">
-                <strong>Tahmini Seyahat Tarihi</strong>
+                <strong>Tahmini Giriş Tarihi</strong>
               </label>
               <input
                 type="date"
-                name="travelDate"
-                value={formData.travelDate}
+                name="entryDate"
+                value={formData.entryDate}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
@@ -676,11 +717,29 @@ ${formData.message}
             
             <div className="mb-6">
               <label className="block mb-2">
+                <strong>Yolcu Sayısı</strong>
+              </label>
+              <select
+                name="passengers"
+                value={formData.passengers}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="1">1 Yolcu</option>
+                <option value="2">2 Yolcu</option>
+                <option value="3">3 Yolcu</option>
+                <option value="4">4 Yolcu</option>
+                <option value="5">5 Yolcu</option>
+              </select>
+            </div>
+            
+            <div className="mb-6">
+              <label className="block mb-2">
                 <strong>Ek Bilgiler</strong>
               </label>
               <textarea
-                name="message"
-                value={formData.message}
+                name="notes"
+                value={formData.notes}
                 onChange={handleChange}
                 rows={4}
                 className="w-full px-4 py-3 rounded-xl border-2 border-blue-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"

@@ -1,6 +1,8 @@
 import { MapPin, Mail, Clock, Send, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function Contact() {
   const { t } = useLanguage();
@@ -11,41 +13,63 @@ export function Contact() {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // E-posta gövdesini oluştur
-    const emailBody = `
-İletişim Formu - Yeni Mesaj
+    try {
+      // Backend'e form verilerini gönder
+      const response = await fetch(
+        `https://${projectId}.supabase.co/functions/v1/make-server-d52997fc/send-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${publicAnonKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'contact',
+            formData: formData,
+          }),
+        }
+      );
 
-Ad Soyad: ${formData.name}
-E-posta: ${formData.email}
-Telefon: ${formData.phone}
-Konu: ${formData.subject}
+      const result = await response.json();
 
-Mesaj:
-${formData.message}
-    `.trim();
+      if (!response.ok) {
+        console.error('Email gönderme hatası:', result);
+        alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+        setIsSubmitting(false);
+        return;
+      }
 
-    // Mailto linki oluştur
-    const mailtoLink = `mailto:gonca@gnctravel.com?subject=İletişim Formu - ${formData.subject}&body=${encodeURIComponent(emailBody)}`;
-    
-    // E-posta istemcisini aç
-    window.location.href = mailtoLink;
-    
-    // Kullanıcıya bilgi ver
-    setTimeout(() => {
+      console.log('Email başarıyla gönderildi:', result);
+      
+      // Facebook Pixel - Lead event'i track et
+      trackFacebookEvent('Lead', {
+        content_name: 'Contact Form',
+        content_category: 'Contact',
+        value: formData.subject
+      });
+      
       alert(t('contact.successMessage'));
-    }, 500);
-    
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
+      
+      // Formu temizle
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Email gönderme hatası:', error);
+      alert('Email gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan gonca@gnctravel.com adresine email gönderin.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -198,9 +222,10 @@ ${formData.message}
               <button
                 type="submit"
                 className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                disabled={isSubmitting}
               >
                 <Send className="w-5 h-5" />
-                {t('contact.send')}
+                {isSubmitting ? t('contact.sending') : t('contact.send')}
               </button>
             </form>
           </div>
