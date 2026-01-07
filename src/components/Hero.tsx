@@ -51,7 +51,7 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative h-[500px] md:h-[600px] flex items-center justify-center">
+    <section id="home" className="relative min-h-[500px] md:min-h-[600px] flex items-center justify-center pt-32 md:pt-36 pb-8">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -62,13 +62,13 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* USP Badge - Above Title */}
-        <div className="inline-flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm text-white px-6 py-3 rounded-full mb-6 shadow-lg">
-          <Award className="w-5 h-5" />
-          <span className="font-bold text-sm md:text-base">10 Yıl Tecrübe | 1,000+ Mutlu Müşteri | %98 Memnuniyet</span>
+        {/* USP Badge - Above Title - Mobilde gizli */}
+        <div className="hidden md:inline-flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm text-white px-4 md:px-6 py-2 md:py-3 rounded-full mb-4 md:mb-6 shadow-lg">
+          <Award className="w-4 h-4 md:w-5 md:h-5" />
+          <span className="font-bold text-xs md:text-base">10 Yıl Tecrübe | 1,000+ Mutlu Müşteri | %98 Memnuniyet</span>
         </div>
 
-        <h1 className="text-white mb-4 md:mb-6 font-bold">
+        <h1 className="text-white mb-4 md:mb-6 font-bold text-3xl md:text-5xl">
           {t('hero.title')}
         </h1>
         <p className="text-white/90 mb-8 md:mb-12 max-w-2xl mx-auto text-sm md:text-base">
@@ -76,12 +76,12 @@ export function Hero() {
         </p>
 
         {/* Search Card */}
-        <form onSubmit={handleSearch} className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="relative">
+        <form onSubmit={handleSearch} className="bg-white rounded-2xl shadow-2xl p-4 md:p-6 max-w-4xl mx-auto overflow-visible relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-visible">
+            <div className="relative overflow-visible">
               <label className="block text-gray-700 mb-2 text-left">{t('hero.destination')}</label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <div className="relative overflow-visible">
+                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                 <input
                   type="text"
                   placeholder={t('hero.destinationPlaceholder')}
@@ -97,7 +97,7 @@ export function Hero() {
                 
                 {/* Öneri listesi */}
                 {showSuggestions && filteredTours.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-y-auto z-[100]">
                     {filteredTours.map((tour, idx) => (
                       <button
                         key={idx}
@@ -158,34 +158,34 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Trust Badges - Below Search */}
+          {/* Trust Badges - Below Search - Mobilde yuvarlak iconlar kaldırıldı */}
           <div className="mt-6 pt-6 border-t border-gray-200">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="bg-green-100 p-3 rounded-lg flex-shrink-0">
+                <div className="hidden md:block bg-green-100 p-3 rounded-lg flex-shrink-0">
                   <CheckCircle className="w-6 h-6 text-green-600" />
                 </div>
-                <div className="text-left">
+                <div className="text-center md:text-left">
                   <p className="text-sm font-bold text-gray-900">%100 Güvenli Ödeme</p>
                   <p className="text-xs text-gray-600">SSL Sertifikalı</p>
                 </div>
               </div>
               
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+                <div className="hidden md:block bg-blue-100 p-3 rounded-lg flex-shrink-0">
                   <Shield className="w-6 h-6 text-blue-600" />
                 </div>
-                <div className="text-left">
+                <div className="text-center md:text-left">
                   <p className="text-sm font-bold text-gray-900">TÜRSAB Üyesi</p>
                   <p className="text-xs text-gray-600">Yetkili Acente</p>
                 </div>
               </div>
               
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                <div className="hidden md:block bg-orange-100 p-3 rounded-lg flex-shrink-0">
                   <UsersIcon className="w-6 h-6 text-orange-600" />
                 </div>
-                <div className="text-left">
+                <div className="text-center md:text-left">
                   <p className="text-sm font-bold text-gray-900">7/24 Destek</p>
                   <p className="text-xs text-gray-600">Anında Yanıt</p>
                 </div>

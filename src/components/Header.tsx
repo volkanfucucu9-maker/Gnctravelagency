@@ -96,40 +96,24 @@ export function Header() {
 
   return (
     <>
-      {/* Announcement Banner */}
-      <div className="bg-blue-600 text-white py-3 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-4 flex-wrap justify-center md:justify-start">
-            <span className="font-medium">{t('header.announcement')}</span>
-            <div className="flex items-center gap-2">
-              <div className="bg-white text-blue-600 rounded px-2 py-1 min-w-[40px] text-center">
-                <span>{String(timeLeft.hours).padStart(2, '0')}</span>
-              </div>
-              <span>:</span>
-              <div className="bg-white text-blue-600 rounded px-2 py-1 min-w-[40px] text-center">
-                <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
-              </div>
-              <span>:</span>
-              <div className="bg-white text-blue-600 rounded px-2 py-1 min-w-[40px] text-center">
-                <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
-              </div>
-            </div>
-            <div className="hidden md:flex gap-2 text-xs">
-              <span>{t('header.hours')}</span>
-              <span className="ml-6">{t('header.minutes')}</span>
-              <span className="ml-4">{t('header.seconds')}</span>
-            </div>
-          </div>
-          <Link 
-            to="/packages"
-            className="bg-white text-blue-600 px-6 py-2 rounded-full hover:bg-blue-50 transition-colors whitespace-nowrap"
-          >
-            {t('header.checkOffers')}
-          </Link>
-        </div>
-      </div>
-
       <header className="bg-white shadow-sm sticky top-0 z-50">
+        {/* Countdown Banner */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2 px-2 text-center text-xs md:text-sm font-semibold">
+          <div className="flex items-center justify-center gap-1 md:gap-2 flex-wrap">
+            <span className="whitespace-nowrap">{t('header.lastMinuteDeals')}</span>
+            <div className="flex gap-1 md:gap-2">
+              <span className="bg-white/20 px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm">{String(timeLeft.hours).padStart(2, '0')}</span>
+              <span className="text-xs md:text-sm">:</span>
+              <span className="bg-white/20 px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm">{String(timeLeft.minutes).padStart(2, '0')}</span>
+              <span className="text-xs md:text-sm">:</span>
+              <span className="bg-white/20 px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm">{String(timeLeft.seconds).padStart(2, '0')}</span>
+            </div>
+            <Link to="/packages" className="ml-2 md:ml-4 text-white underline hover:text-blue-100 transition-colors whitespace-nowrap text-xs md:text-sm">
+              {t('header.viewDeals')}
+            </Link>
+          </div>
+        </div>
+
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <Link to="/" className="flex items-center gap-2">
