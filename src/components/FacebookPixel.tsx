@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Facebook Pixel ID'nizi buraya ekleyin
-const FACEBOOK_PIXEL_ID = '871595629012972';
+const FACEBOOK_PIXEL_ID = '1937731077140815';
+
+// Test mode için test_event_code (Facebook Events Manager'dan alınan kod)
+const TEST_EVENT_CODE = 'TEST86570';
 
 export function FacebookPixel() {
   const location = useLocation();
@@ -33,8 +36,8 @@ export function FacebookPixel() {
         'https://connect.facebook.net/en_US/fbevents.js'
       );
 
-      // Initialize Pixel
-      window.fbq('init', FACEBOOK_PIXEL_ID);
+      // Initialize Pixel with test_event_code
+      window.fbq('init', FACEBOOK_PIXEL_ID, {}, { test_event_code: TEST_EVENT_CODE });
       window.fbq('track', 'PageView');
     }
   }, []);
