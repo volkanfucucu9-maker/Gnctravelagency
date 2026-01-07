@@ -1,5 +1,5 @@
 import { FileText, Clock, CheckCircle2, Globe, Shield, Users, ArrowRight, BookOpen } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import exampleImage from 'figma:asset/3c41d0a7b0e544fca7dcadf3133a19df82439f0e.png';
@@ -18,6 +18,16 @@ export function Visa() {
     notes: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: 'Visa Services Page',
+      content_category: 'visa_services',
+      content_type: 'service'
+    });
+    console.log('[Visa Page] ViewContent event tracked');
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

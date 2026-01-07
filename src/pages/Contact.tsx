@@ -1,5 +1,5 @@
 import { MapPin, Mail, Clock, Send, MessageCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { trackFacebookEvent } from '../components/FacebookPixel';
@@ -14,6 +14,16 @@ export function Contact() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: 'Contact Page',
+      content_category: 'contact',
+      content_type: 'page'
+    });
+    console.log('[Contact Page] ViewContent event tracked');
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

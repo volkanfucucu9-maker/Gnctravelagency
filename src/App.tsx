@@ -5,6 +5,8 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { FacebookPixel } from './components/FacebookPixel';
+import { FacebookPixelTest } from './pages/FacebookPixelTest';
+import { MobileFloatingActions } from './components/MobileFloatingActions';
 import { MessageCircle } from 'lucide-react';
 import { Home } from './pages/Home';
 import { Packages } from './pages/Packages';
@@ -100,6 +102,9 @@ export default function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/tours/all" element={<AllTours />} />
               
+              {/* Facebook Pixel Test Page */}
+              <Route path="/fb-pixel-test" element={<FacebookPixelTest />} />
+              
               {/* Yurt Dışı Turları */}
               <Route path="/tours/visa-free" element={<VisaFree />} />
               <Route path="/tours/montenegro" element={<Montenegro />} />
@@ -143,6 +148,7 @@ export default function App() {
             </Routes>
             <Footer />
             <WhatsAppButton />
+            <MobileFloatingActions />
           </div>
         </LanguageProvider>
       </Router>

@@ -1,7 +1,8 @@
-import { Plane, Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Plane, Menu, X, ChevronDown, Globe, Search } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
+import { trackSearch } from './FacebookPixel';
 import logo from '../assets/logognctravel.png';
 
 export function Header() {
@@ -9,7 +10,10 @@ export function Header() {
   const [toursDropdownOpen, setToursDropdownOpen] = useState(false);
   const [visaDropdownOpen, setVisaDropdownOpen] = useState(false);
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
   const { language, setLanguage, t } = useLanguage();
   
   // Countdown timer state
@@ -76,6 +80,19 @@ export function Header() {
   ];
 
   const currentLanguage = languages.find(lang => lang.code === language);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Track Facebook Pixel Search event
+      trackSearch(searchQuery, 'header_search');
+      
+      // Navigate to tours page with search query
+      navigate(`/tours/all?search=${encodeURIComponent(searchQuery)}`);
+      setSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <>
@@ -244,15 +261,33 @@ export function Header() {
                   </div>
                 )}
               </div>
+
+              {/* Search Button */}
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="p-2 text-gray-700 hover:text-blue-600 transition-colors"
+                aria-label="Search"
+              >
+                <Search className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Mobile Menu & Search Buttons */}
+            <div className="lg:hidden flex items-center gap-2">
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="p-2 text-gray-700 hover:text-blue-600 transition-colors"
+                aria-label="Search"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
@@ -373,6 +408,38 @@ export function Header() {
           )}
         </nav>
       </header>
+
+      {/* Search Modal */}
+      {searchOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold">{t('header.search')}</h3>
+              <button
+                onClick={() => setSearchOpen(false)}
+                className="p-2 text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <form onSubmit={handleSearch} className="mt-4">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={t('header.searchPlaceholder')}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              />
+              <button
+                type="submit"
+                className="mt-4 w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                {t('header.search')}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }

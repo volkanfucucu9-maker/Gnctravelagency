@@ -1,5 +1,7 @@
 import { MapPin, Calendar, Users, Star, CheckCircle, X, Plane, Hotel, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { trackFacebookEvent } from '../../components/FacebookPixel';
 
 export function DubaiMasali() {
   const tourDetails = {
@@ -13,6 +15,19 @@ export function DubaiMasali() {
     groupSize: '10-20 kişi',
     departure: 'Her Hafta Cuma'
   };
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: tourDetails.title,
+      content_category: 'tour',
+      content_type: 'product',
+      content_ids: ['dubai-masali'],
+      currency: 'EUR',
+      value: 499
+    });
+    console.log(`[Tour Details] ViewContent event tracked: ${tourDetails.title}`);
+  }, []);
 
   const included = [
     'İstanbul (SAW)- Sharjah- İstanbul (SAW) Ajet Hava Yolları Ekonomi Sınıfı Uçak bileti',

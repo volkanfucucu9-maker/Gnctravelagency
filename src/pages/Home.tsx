@@ -2,12 +2,25 @@ import { Hero } from '../components/Hero';
 import { DestinationCard } from '../components/DestinationCard';
 import { TourPackage } from '../components/TourPackage';
 import { VisaSupport } from '../components/VisaSupport';
+import { SocialProof } from '../components/SocialProof';
 import { Globe, Shield, Headphones, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useEffect } from 'react';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function Home() {
   const { t } = useLanguage();
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: 'Home Page',
+      content_category: 'page_view',
+      content_type: 'website'
+    });
+    console.log('[Home Page] ViewContent event tracked');
+  }, []);
 
   const destinations = [
     {
@@ -258,6 +271,9 @@ export function Home() {
 
       {/* Visa Support Section */}
       <VisaSupport />
+
+      {/* Social Proof Section */}
+      <SocialProof />
 
       {/* CTA Section */}
       <section className="py-20 bg-blue-600">

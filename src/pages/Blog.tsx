@@ -1,5 +1,7 @@
-import { Calendar, User, ArrowLeft, CheckCircle2 } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { Calendar, User, Clock, Tag, ArrowLeft, Share2, BookOpen } from 'lucide-react';
+import { useEffect } from 'react';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 const blogPosts = [
   {
@@ -312,6 +314,31 @@ const blogPosts = [
 
 export function Blog() {
   const { id } = useParams();
+  
+  // Track ViewContent event on page load
+  useEffect(() => {
+    if (id) {
+      // Track specific blog post
+      const post = blogPosts.find(p => p.id === id);
+      if (post) {
+        trackFacebookEvent('ViewContent', {
+          content_name: post.title,
+          content_category: 'blog_post',
+          content_type: 'article',
+          content_ids: [id]
+        });
+        console.log(`[Blog Post] ViewContent event tracked: ${post.title}`);
+      }
+    } else {
+      // Track blog list page
+      trackFacebookEvent('ViewContent', {
+        content_name: 'Blog List',
+        content_category: 'blog',
+        content_type: 'page'
+      });
+      console.log('[Blog Page] ViewContent event tracked');
+    }
+  }, [id]);
   
   if (id) {
     const post = blogPosts.find(p => p.id === id);

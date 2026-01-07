@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle, Star, Calendar, Filter, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function AllTours() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPrice, setSelectedPrice] = useState<string>('all');
   const [selectedDuration, setSelectedDuration] = useState<string>('all');
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: 'All Tours Page',
+      content_category: 'tour_catalog',
+      content_type: 'product_group'
+    });
+    console.log('[All Tours Page] ViewContent event tracked');
+  }, []);
 
   // Tüm turlar - Websitedeki güncel turlar
   const allTours = [

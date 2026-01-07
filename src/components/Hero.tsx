@@ -1,4 +1,4 @@
-import { Search, MapPin, Calendar, Users } from 'lucide-react';
+import { Search, MapPin, Calendar, Users, CheckCircle, Shield, Award, Users as UsersIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -62,6 +62,12 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* USP Badge - Above Title */}
+        <div className="inline-flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm text-white px-6 py-3 rounded-full mb-6 shadow-lg">
+          <Award className="w-5 h-5" />
+          <span className="font-bold text-sm md:text-base">10 Yıl Tecrübe | 1,000+ Mutlu Müşteri | %98 Memnuniyet</span>
+        </div>
+
         <h1 className="text-white mb-4 md:mb-6 font-bold">
           {t('hero.title')}
         </h1>
@@ -149,6 +155,41 @@ export function Hero() {
                 <Search className="w-5 h-5" />
                 {t('hero.search')}
               </button>
+            </div>
+          </div>
+
+          {/* Trust Badges - Below Search */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="bg-green-100 p-3 rounded-lg flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-gray-900">%100 Güvenli Ödeme</p>
+                  <p className="text-xs text-gray-600">SSL Sertifikalı</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="bg-blue-100 p-3 rounded-lg flex-shrink-0">
+                  <Shield className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-gray-900">TÜRSAB Üyesi</p>
+                  <p className="text-xs text-gray-600">Yetkili Acente</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                  <UsersIcon className="w-6 h-6 text-orange-600" />
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-bold text-gray-900">7/24 Destek</p>
+                  <p className="text-xs text-gray-600">Anında Yanıt</p>
+                </div>
+              </div>
             </div>
           </div>
         </form>

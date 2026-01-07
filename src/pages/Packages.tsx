@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TourPackage } from '../components/TourPackage';
 import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackFacebookEvent } from '../components/FacebookPixel';
 
 export function Packages() {
   const [selectedCategory, setSelectedCategory] = useState('Tümü');
   const [selectedDuration, setSelectedDuration] = useState('Tümü');
   const [priceRange, setPriceRange] = useState('Tümü');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: 'Tour Packages Page',
+      content_category: 'tour_listings',
+      content_type: 'product_group'
+    });
+    console.log('[Packages Page] ViewContent event tracked');
+  }, []);
 
   const categories = ['Tümü', 'Vizesiz Turlar', 'Dubai Turları', 'Mısır Turları', 'Tayland Turları', 'Bali Turları'];
   const durations = ['Tümü', '1-3 Gün', '4-7 Gün', '8-14 Gün'];

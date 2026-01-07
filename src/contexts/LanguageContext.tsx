@@ -58,7 +58,9 @@ const translations: Record<Language, any> = {
       checkOffers: 'Fırsatları İncele →',
       hours: 'Saat',
       minutes: 'Dakika',
-      seconds: 'Saniye'
+      seconds: 'Saniye',
+      search: 'Ara',
+      searchPlaceholder: 'Dubai, Bali, Tayland...'
     },
     hero: {
       title: 'Bir Sonraki Maceranızı Keşfedin',
@@ -342,7 +344,9 @@ const translations: Record<Language, any> = {
       checkOffers: 'Check Offers →',
       hours: 'Hours',
       minutes: 'Minutes',
-      seconds: 'Seconds'
+      seconds: 'Seconds',
+      search: 'Search',
+      searchPlaceholder: 'Dubai, Bali, Thailand...'
     },
     hero: {
       title: 'Discover Your Next Adventure',
@@ -722,7 +726,9 @@ const translations: Record<Language, any> = {
       checkOffers: 'Angebote Prüfen →',
       hours: 'Stunden',
       minutes: 'Minuten',
-      seconds: 'Sekunden'
+      seconds: 'Sekunden',
+      search: 'Suchen',
+      searchPlaceholder: 'Dubai, Bali, Thailand...'
     },
     hero: {
       title: 'Entdecken Sie Ihren nächsten Abenteuer',

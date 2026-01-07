@@ -64,7 +64,15 @@ declare global {
 export const trackFacebookEvent = (eventName: string, data?: any) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, data);
-    console.log('[FB Pixel] Event:', eventName, data); // Debug için
+    
+    // Debug için detaylı log
+    console.log(`%c[Facebook Pixel] Event: ${eventName}`, 'background: #1877F2; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+    if (data) {
+      console.log('%cEvent Data:', 'color: #1877F2; font-weight: bold;', data);
+    }
+    console.log('%c✅ Event successfully sent to Facebook', 'color: green;');
+  } else {
+    console.warn('[Facebook Pixel] fbq is not loaded yet');
   }
 };
 
@@ -132,5 +140,13 @@ export const trackContactClick = (contactType: 'phone' | 'whatsapp', number: str
   trackFacebookEvent('Contact', {
     contact_type: contactType,
     phone_number: number
+  });
+};
+
+// Search tracking
+export const trackSearch = (searchString: string, searchLocation?: string) => {
+  trackFacebookEvent('Search', {
+    search_string: searchString,
+    content_category: searchLocation || 'general_search'
   });
 };

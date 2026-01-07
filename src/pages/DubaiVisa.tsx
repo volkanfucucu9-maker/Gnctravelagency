@@ -42,6 +42,21 @@ export function DubaiVisa() {
     notes: ''
   });
 
+  // Track ViewContent event on page load for Facebook Ads
+  useEffect(() => {
+    // Track page view with content details
+    trackFacebookEvent('ViewContent', {
+      content_name: 'Dubai Visa Service',
+      content_category: 'visa_services',
+      content_type: 'product',
+      content_ids: ['dubai-visa-landing'],
+      currency: 'USD',
+      value: 147 // Base price
+    });
+
+    console.log('[Dubai Visa Page] ViewContent event tracked for Facebook Ads');
+  }, []);
+
   // Scroll to form function
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -68,8 +83,16 @@ export function DubaiVisa() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Track Facebook event
+    // Track Facebook events
     trackFacebookEvent('SubmitApplication', {
+      content_name: 'Dubai Visa Application',
+      content_category: 'visa',
+      currency: 'USD',
+      value: 147
+    });
+
+    // Track Lead event for Facebook Ads optimization
+    trackFacebookEvent('Lead', {
       content_name: 'Dubai Visa Application',
       content_category: 'visa',
       currency: 'USD',

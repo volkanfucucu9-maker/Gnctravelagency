@@ -1,5 +1,7 @@
 import { MapPin, Calendar, Users, Star, CheckCircle, X, Plane, Hotel, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { trackFacebookEvent } from '../../components/FacebookPixel';
 
 export function DubaiEmirates() {
   const tourDetails = {
@@ -14,8 +16,21 @@ export function DubaiEmirates() {
     departure: 'Her Hafta'
   };
 
+  // Track ViewContent event on page load
+  useEffect(() => {
+    trackFacebookEvent('ViewContent', {
+      content_name: tourDetails.title,
+      content_category: 'tour',
+      content_type: 'product',
+      content_ids: ['dubai-emirates'],
+      currency: 'EUR',
+      value: 1099
+    });
+    console.log(`[Tour Details] ViewContent event tracked: ${tourDetails.title}`);
+  }, []);
+
   const included = [
-    'İstanbul (IST)- Dubai- İstanbul (IST) Emirates Hava Yolları Ekonomi Sınıfı Uçak bileti',
+    'İstanbul (IST)- Dubai- İstanbul (IST) Emirates Hava Yolları Ekonomi Sınıfı U��ak bileti',
     'Seçilecek Oteller kategorilerinde 3 gece oda kahvaltı konaklama',
     'Havaalanı – Otel – Havaalanı Transferleri',
     'Dubai Şehir Turu ve Abra geçişi turu',
