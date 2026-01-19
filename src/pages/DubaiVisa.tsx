@@ -318,20 +318,20 @@ export function DubaiVisa() {
     <div className="min-h-screen">
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru - GNC Travel</title>
-        <meta name="description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok. Uzman vize danışmanlığı ile güvenli hizmet." />
-        <meta name="keywords" content="dubai vizesi, dubai vize başvurusu, online dubai vizesi, hızlı dubai vizesi, dubai turistik vize, dubai vize fiyatları, dubai vize şartları, dubai vize danışmanlığı" />
+        <title>Birleşik Arap Emirlikleri Vizesi | 3-5 İş Gününde Hızlı Online Başvuru - GNC Travel</title>
+        <meta name="description" content="BAE vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok. Uzman vize danışmanlığı ile güvenli hizmet." />
+        <meta name="keywords" content="bae vizesi, dubai vizesi, bae vize başvurusu, online bae vizesi, hızlı dubai vizesi, bae turistik vize, bae vize fiyatları, bae vize şartları, bae vize danışmanlığı" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
-        <meta property="og:description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok." />
+        <meta property="og:title" content="Birleşik Arap Emirlikleri Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
+        <meta property="og:description" content="BAE vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru. Konsolosluk randevusu yok, evrak karmaşası yok." />
         <meta property="og:image" content="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Dubai Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
-        <meta name="twitter:description" content="Dubai vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru." />
+        <meta name="twitter:title" content="Birleşik Arap Emirlikleri Vizesi | 3-5 İş Gününde Hızlı Online Başvuru" />
+        <meta name="twitter:description" content="BAE vizesi 3-5 iş gününde! $147'dan başlayan fiyatlarla online başvuru." />
         <meta name="twitter:image" content="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" />
         
         {/* Canonical URL */}

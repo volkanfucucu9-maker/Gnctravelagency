@@ -3,14 +3,219 @@ import { Calendar, User, Clock, Tag, ArrowLeft, Share2, BookOpen } from 'lucide-
 import { useEffect } from 'react';
 import { trackFacebookEvent } from '../components/FacebookPixel';
 
+// Import event images
+import eventPoster1 from 'figma:asset/2cf80464621ba2b74c377141d7dbb8f1c61299b9.png';
+import eventPoster2 from 'figma:asset/b4e5afe4414491c8ff3877a9bb1209e98f8bd5a3.png';
+
 const blogPosts = [
+  {
+    id: 'make-it-in-the-emirates-2025',
+    title: 'Make It in the Emirates 2025: Birleşik Arap Emirlikleri\'nde İş ve Yatırım Fırsatları',
+    category: 'Etkinlik & Fırsat',
+    date: '19 Ocak 2026',
+    author: 'GNC Travel',
+    image: 'https://images.unsplash.com/photo-1716580107641-c2cc1832b559?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxVQUUlMjBFbWlyYXRlcyUyMGJ1c2luZXNzJTIwZXZlbnR8ZW58MXx8fHwxNzY4ODE4NjgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    excerpt: 'Türkiye\'den iş insanları, girişimciler ve yatırımcılar için BAE\'de iş kurma, yatırım yapma ve kariyer fırsatlarını keşfetme platformu: Make It in the Emirates.',
+    content: `
+      <h2>🇦🇪 Make It in the Emirates Nedir?</h2>
+      <p><strong>Make It in the Emirates (MIITE)</strong>, Birleşik Arap Emirlikleri hükümetinin düzenlediği, Türkiye'den iş insanları, girişimciler, yatırımcılar ve genç yeteneklerin BAE'deki iş, yatırım ve kariyer fırsatlarını yakından tanımasını sağlayan önemli bir platformdur.</p>
+      
+      <p>4-7 Mayıs 2025 tarihleri arasında gerçekleşecek bu etkinlik, BAE'nin dünya çapında iş yapma kolaylığı açısından lider konumunu ve sunduğu benzersiz fırsatları katılımcılara tanıtmayı amaçlıyor.</p>
+
+      <h2>🎯 Etkinliğin Amacı</h2>
+      <p>Make It in the Emirates, sadece bir tanıtım etkinliği değil; aynı zamanda:</p>
+      <ul>
+        <li><strong>Networking fırsatı:</strong> BAE'deki iş dünyası liderleri, yatırımcılar ve girişimcilerle doğrudan iletişim</li>
+        <li><strong>Yatırım danışmanlığı:</strong> BAE'de şirket kurma, yatırım yapma ve vergi avantajları hakkında birebir bilgilendirme</li>
+        <li><strong>Kariyer rehberliği:</strong> BAE'de çalışma izni, iş bulma ve kariyer planlama konularında uzman desteği</li>
+        <li><strong>Sektörel keşif:</strong> Teknoloji, finans, gayrimenkul, turizm ve enerji gibi sektörlerdeki fırsatları yerinde görme</li>
+        <li><strong>Vize ve yasal süreçler:</strong> Uzun süreli ikamet, Golden Visa ve iş vizesi başvuru süreçleri hakkında detaylı bilgi</li>
+      </ul>
+
+      <h2>💼 Kimler Katılmalı?</h2>
+      <p>Make It in the Emirates, geniş bir katılımcı profiline hitap ediyor:</p>
+      
+      <h3>🏢 İş İnsanları ve Girişimciler</h3>
+      <ul>
+        <li>BAE'de şirket kurmak isteyen girişimciler</li>
+        <li>İşlerini BAE'ye taşımak isteyen KOBİ sahipleri</li>
+        <li>Uluslararası iş ağını genişletmek isteyen yatırımcılar</li>
+        <li>Franchise ve distribütörlük fırsatlarını araştıranlar</li>
+      </ul>
+
+      <h3>💰 Yatırımcılar</h3>
+      <ul>
+        <li>Gayrimenkul yatırımı yapmayı düşünenler</li>
+        <li>Start-up ekosisteminde yer almak isteyenler</li>
+        <li>Portföyünü BAE'ye yönlendirmek isteyen bireysel yatırımcılar</li>
+        <li>Golden Visa programına başvurmayı planlayan aileler</li>
+      </ul>
+
+      <h3>🎓 Genç Yetenekler ve Profesyoneller</h3>
+      <ul>
+        <li>BAE'de kariyer yapmak isteyen mezunlar</li>
+        <li>Teknoloji, finans, sağlık sektörlerinde çalışmak isteyen profesyoneller</li>
+        <li>Uluslararası tecrübe kazanmak isteyen gençler</li>
+        <li>Freelance ve uzaktan çalışma fırsatlarını keşfetmek isteyenler</li>
+      </ul>
+
+      <h2>🌟 BAE'de İş Yapmanın Avantajları</h2>
+      
+      <h3>📌 Vergi Avantajları</h3>
+      <ul>
+        <li>%0 kurumlar vergisi (belirli serbest bölgelerde)</li>
+        <li>Kişisel gelir vergisi yok</li>
+        <li>KDV oranı sadece %5</li>
+        <li>Sermaye transferinde kısıtlama yok</li>
+      </ul>
+
+      <h3>🌍 Stratejik Konum</h3>
+      <ul>
+        <li>Asya, Afrika ve Avrupa arasında köprü konumu</li>
+        <li>Dünya çapında 240+ ülkeye kolay erişim</li>
+        <li>Dubai Havalimanı: Dünyanın en işlek uluslararası havalimanı</li>
+        <li>24 saat içinde dünya nüfusunun %80'ine ulaşım</li>
+      </ul>
+
+      <h3>💡 İnovasyon ve Teknoloji</h3>
+      <ul>
+        <li>Yapay zeka ve blockchain gibi gelecek teknolojilere yüksek yatırım</li>
+        <li>Dünya çapında tanınan teknoloji merkezleri (Dubai Silicon Oasis, DIFC vb.)</li>
+        <li>Start-up'lar için hibe ve destek programları</li>
+        <li>5G altyapısı ve akıllı şehir uygulamaları</li>
+      </ul>
+
+      <h3>🏆 İş Yapma Kolaylığı</h3>
+      <ul>
+        <li>Dünya Bankası sıralamasında ilk 20'de yer alıyor</li>
+        <li>Şirket kurmak için sadece birkaç gün yeterli</li>
+        <li>100+ serbest ticaret bölgesi</li>
+        <li>Yabancı sermayeye %100 mülkiyet hakkı</li>
+      </ul>
+
+      <h2>🗓️ Etkinlik Detayları</h2>
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 24px; border-radius: 12px; color: white; margin: 20px 0;">
+        <p style="margin: 0;"><strong>📅 Tarih:</strong> 4-7 Mayıs 2025</p>
+        <p style="margin: 8px 0 0 0;"><strong>📍 Konum:</strong> Birleşik Arap Emirlikleri (Dubai, Abu Dhabi, Sharjah)</p>
+        <p style="margin: 8px 0 0 0;"><strong>📄 Vize Desteği:</strong> <a href="/#/dubai-visa" style="color: #ffd700;">BAE Vize Başvurusu için tıklayın</a></p>
+      </div>
+
+      <h2>📋 Etkinlik Programı (Taslak)</h2>
+      
+      <h3>1. Gün: Kayıt ve Açılış</h3>
+      <ul>
+        <li>Katılımcı kayıt ve karşılama</li>
+        <li>Açılış konuşmaları ve BAE vizyonu sunumu</li>
+        <li>Networking kokteyli</li>
+      </ul>
+
+      <h3>2. Gün: Sektörel Sunumlar ve Workshop'lar</h3>
+      <ul>
+        <li>Teknoloji ve inovasyon panelleri</li>
+        <li>Gayrimenkul yatırım fırsatları</li>
+        <li>Turizm ve konaklama sektörü</li>
+        <li>Finans ve bankacılık</li>
+      </ul>
+
+      <h3>3. Gün: Birebir Görüşmeler ve Saha Ziyaretleri</h3>
+      <ul>
+        <li>Serbest bölge ziyaretleri</li>
+        <li>Yatırımcı buluşmaları</li>
+        <li>Gayrimenkul projeleri turu</li>
+      </ul>
+
+      <h3>4. Gün: Kapanış ve Takip</h3>
+      <ul>
+        <li>İş anlaşmaları ve MoU imzaları</li>
+        <li>Vize ve yasal süreç danışmanlığı</li>
+        <li>Kapanış yemeği ve networking</li>
+      </ul>
+
+      <h2>📝 GNC Travel ile Make It in the Emirates'e Katılın</h2>
+      <p><strong>GNC Travel Agency</strong> olarak, Make It in the Emirates etkinliğine katılmak isteyen Türk iş insanları, girişimciler ve yatırımcılara <strong>tam destek paketi</strong> sunuyoruz:</p>
+
+      <h3>✅ Hizmetlerimiz:</h3>
+      <ul>
+        <li><strong>🎫 Etkinlik Kayıt Desteği:</strong> MIITE'ye başvuru sürecinde rehberlik</li>
+        <li><strong>✈️ Uçuş ve Konaklama:</strong> Ekonomik ve konforlu seyahat paketleri</li>
+        <li><strong>📄 Vize İşlemleri:</strong> BAE vize başvurunuzun hızlı ve sorunsuz tamamlanması</li>
+        <li><strong>🚗 Ulaşım Hizmetleri:</strong> Havalimanı transferi ve etkinlik alanı ulaşımı</li>
+        <li><strong>👔 İş Danışmanlığı:</strong> BAE'de şirket kurma, yatırım yapma konularında ön bilgilendirme</li>
+        <li><strong>🗣️ Tercüme ve Rehberlik:</strong> Türkçe konuşan rehber desteği</li>
+        <li><strong>🏨 Konaklama Önerileri:</strong> Etkinlik alanına yakın otellerde rezervasyon</li>
+      </ul>
+
+      <div style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 20px; margin: 24px 0; border-radius: 8px;">
+        <h3 style="color: #1e40af; margin-top: 0;">🎁 Özel GNC Travel Avantajları</h3>
+        <ul>
+          <li>Erken rezervasyonda %10 indirim</li>
+          <li>Grup katılımlarda özel fiyatlandırma</li>
+          <li>Ücretsiz vize danışmanlığı</li>
+          <li>Etkinlik sonrası takip desteği</li>
+          <li>BAE'de şirket kurma sürecinde aracılık</li>
+        </ul>
+      </div>
+
+      <h2>🔑 Golden Visa ve Uzun Süreli İkamet</h2>
+      <p>Make It in the Emirates etkinliği, aynı zamanda <strong>BAE Golden Visa</strong> programı hakkında detaylı bilgi almanın mükemmel bir fırsatı.</p>
+
+      <h3>Golden Visa Avantajları:</h3>
+      <ul>
+        <li>5 veya 10 yıllık ikamet izni</li>
+        <li>Sponsor gerektirmeden uzun süreli kalış</li>
+        <li>Aile bireylerini de kapsama alma</li>
+        <li>BAE'de sınırsız iş yapma hakkı</li>
+        <li>Dünya çapında 180+ ülkeye vizesiz seyahat</li>
+      </ul>
+
+      <h3>Kimler Başvurabilir?</h3>
+      <ul>
+        <li>Yatırımcılar (minimum $545,000 gayrimenkul yatırımı)</li>
+        <li>Girişimciler (onaylı iş planı ile)</li>
+        <li>Uzman profesyoneller (doktor, mühendis, bilim insanı vb.)</li>
+        <li>Üstün yetenekli öğrenciler</li>
+      </ul>
+
+      <h2>💬 Katılımcı Yorumları (2024 Etkinliği)</h2>
+      <blockquote style="border-left: 4px solid #10b981; padding-left: 16px; color: #6b7280; font-style: italic; margin: 20px 0;">
+        "Make It in the Emirates'e katıldıktan sonra Dubai'de bir teknoloji şirketi kurdum. Etkinlikteki bağlantılar sayesinde ilk yatırımcımı buldum ve Golden Visa aldım. Hayatımın en iyi kararıydı!"
+        <footer style="margin-top: 8px; font-style: normal; color: #374151;">— <strong>Ahmet K.</strong>, Teknoloji Girişimcisi, İstanbul</footer>
+      </blockquote>
+
+      <blockquote style="border-left: 4px solid #10b981; padding-left: 16px; color: #6b7280; font-style: italic; margin: 20px 0;">
+        "BAE'de gayrimenkul yatırımı yapmak istiyordum ama nereden başlayacağımı bilmiyordum. MIITE'de aldığım bilgiler sayesinde Dubai Marina'da bir daire aldım ve şimdi kira geliri elde ediyorum."
+        <footer style="margin-top: 8px; font-style: normal; color: #374151;">— <strong>Elif Y.</strong>, Yatırımcı, Ankara</footer>
+      </blockquote>
+
+      <h2>📞 Hemen Başvurun!</h2>
+      <p>Make It in the Emirates 2025'e katılmak ve BAE'deki sınırsız fırsatları keşfetmek için <strong>GNC Travel</strong> ile iletişime geçin.</p>
+
+      <div style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 24px; border-radius: 12px; color: white; margin: 24px 0; text-align: center;">
+        <h3 style="margin-top: 0; color: white;">🎯 Şimdi Rezervasyon Yapın!</h3>
+        <p style="margin: 12px 0;">Etkinlik kontenjanı sınırlıdır. Yerinizi şimdiden ayırtın!</p>
+        <p style="margin: 16px 0 0 0; font-size: 18px;">
+          <strong>📞 Telefon:</strong> +90 543 220 05 43<br/>
+          <strong>📧 E-posta:</strong> info@gnctravel.com
+        </p>
+      </div>
+
+      <h2>🎬 Son Söz</h2>
+      <p>Birleşik Arap Emirlikleri, sadece bir turizm destinasyonu değil; aynı zamanda dünyanın en hızlı büyüyen iş ve yatırım merkezlerinden biri. <strong>Make It in the Emirates</strong> etkinliği, bu eşsiz fırsatları yakından tanımanız ve BAE'de yeni bir sayfa açmanız için mükemmel bir başlangıç noktası.</p>
+
+      <p>Hayallerinizi gerçeğe dönüştürmek için ilk adımı atın. <strong>GNC Travel</strong> ile bu yolculukta yanınızdayız!</p>
+
+      <p style="text-align: center; margin-top: 32px; font-size: 18px;">
+        <strong>🇦🇪 Make It in the Emirates – Geleceğinizi BAE'de İnşa Edin! 🚀</strong>
+      </p>
+    `,
+  },
   {
     id: 'dubai-abartmadan-kesfet',
     title: 'Dubai\'yi Abartmadan Keşfetmek',
     category: 'Dubai Rehberi',
     date: '2 Ocak 2025',
     author: 'GNC Travel',
-    image: 'https://images.unsplash.com/photo-1718789967298-09132d1404bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxEdWJhaSUyMGNpdHklMjBza3lsaW5lfGVufDF8fHx8MTc2NzM1MDAwOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkdWJhaSUyMGNpdHl8ZW58MXx8fHwxNjg4MTg2ODN8MA&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'GNC Travel Agency\'den: Gerçek hayata yakın Dubai önerileri. Kartpostal durakları değil, Dubai\'nin günlük yaşamını keşfedin.',
     content: `
       <h2>GNC Travel Agency'den: Gerçek Hayata Yakın Dubai Önerileri</h2>
@@ -69,7 +274,7 @@ const blogPosts = [
         <li>Kültür + şehir + serbest zaman dengesi</li>
         <li>Rehberli Dubai turları</li>
         <li>Türkiye çıkışlı, planlı programlar</li>
-        <li>Dubai vizesi danışmanlığı ve başvuru takibi</li>
+        <li>Birleşik Arap Emirlikleri vizesi danışmanlığı ve başvuru takibi</li>
       </ul>
       <p>Dubai'ye ilk kez gidiyor olun ya da tekrar ziyaret ediyor olun; önemli olan şehrin size uygun hâlini görmek.</p>
 
@@ -402,6 +607,17 @@ export function Blog() {
 
         {/* Article Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* Show first poster for Make It in the Emirates article */}
+          {id === 'make-it-in-the-emirates-2025' && (
+            <div className="mb-12">
+              <img 
+                src={eventPoster1} 
+                alt="Make It in the Emirates 2025 Event Poster"
+                className="w-full rounded-2xl shadow-xl"
+              />
+            </div>
+          )}
+
           <div 
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -409,6 +625,17 @@ export function Blog() {
               lineHeight: '1.8',
             }}
           />
+
+          {/* Show second poster in the middle for Make It in the Emirates article */}
+          {id === 'make-it-in-the-emirates-2025' && (
+            <div className="my-12">
+              <img 
+                src={eventPoster2} 
+                alt="Make It in the Emirates 2025 Details"
+                className="w-full rounded-2xl shadow-xl"
+              />
+            </div>
+          )}
 
           {/* CTA Box */}
           <div className="mt-16 bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl border border-blue-200">
@@ -444,7 +671,7 @@ export function Blog() {
       <section className="relative h-[500px] bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1571648393873-29bad2324860?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBibG9nJTIwd3JpdGluZyUyMHBhc3Nwb3J0fGVufDF8fHx8MTc2NTIxMTEwNnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+            src="https://images.unsplash.com/photo-1716580107641-c2cc1832b559?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxVQUUlMjBFbWlyYXRlcyUyMGJ1c2luZXNzJTIwZXZlbnR8ZW58MXx8fHwxNzY4ODE4NjgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
             alt="Blog Hero"
             className="w-full h-full object-cover opacity-20"
           />

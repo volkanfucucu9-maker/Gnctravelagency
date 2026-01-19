@@ -65,9 +65,9 @@ app.post("/make-server-d52997fc/send-email", async (c) => {
         <p>${formData.notes ? formData.notes.replace(/\n/g, '<br>') : 'Yok'}</p>
       `;
     } else if (formType === 'dubai-visa') {
-      subject = `Dubai Vize Başvurusu - ${formData.name}`;
+      subject = `BAE Vize Başvurusu - ${formData.name}`;
       htmlContent = `
-        <h2>Dubai Vize Başvurusu</h2>
+        <h2>Birleşik Arap Emirlikleri Vize Başvurusu</h2>
         <p><strong>Ad Soyad:</strong> ${formData.name}</p>
         <p><strong>E-posta:</strong> ${formData.email}</p>
         <p><strong>Telefon:</strong> ${formData.phone}</p>

@@ -186,7 +186,7 @@ export function Visa() {
             </p>
           </div>
 
-          {/* Dubai Vize Özel Kartı */}
+          {/* Birleşik Arap Emirlikleri Vize Özel Kartı */}
           <div className="mb-16">
             <Link 
               to="/dubai-visa"
@@ -198,7 +198,7 @@ export function Visa() {
                     <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">Özel Hizmet</span>
                   </div>
                   <h3 className="text-3xl md:text-4xl mb-4 text-blue-900">
-                    🇦🇪 Dubai Vize Hizmetleri
+                    🇦🇪 Birleşik Arap Emirlikleri Vize Hizmetleri
                   </h3>
                   <p className="text-lg text-gray-700 mb-6">
                     Birleşik Arap Emirlikleri'ne seyahatiniz için profesyonel vize danışmanlığı. 

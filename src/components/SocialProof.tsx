@@ -44,7 +44,7 @@ export function SocialProof() {
     {
       name: 'Zeynep Arslan',
       location: 'Bursa',
-      tour: 'Dubai Vize Hizmeti',
+      tour: 'Birleşik Arap Emirlikleri Vize Hizmeti',
       rating: 5,
       text: 'Vize işlemlerimde GNC Travel çok yardımcı oldu. Hızlı, güvenilir ve profesyoneldi. Belgelerimi hazırladılar ve vizem 4 günde çıktı!',
       date: 'Aralık 2024',

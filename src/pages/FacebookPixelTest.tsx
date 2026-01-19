@@ -35,9 +35,9 @@ export function FacebookPixelTest() {
     },
     {
       name: 'ViewContent',
-      description: 'İçerik görüntüleme (Dubai Vize)',
+      description: 'İçerik görüntüleme (BAE Vize)',
       data: {
-        content_name: 'Dubai Visa Service',
+        content_name: 'UAE Visa Service',
         content_category: 'visa_services',
         content_type: 'product',
         content_ids: ['dubai-visa-landing'],
