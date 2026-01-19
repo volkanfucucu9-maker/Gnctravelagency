@@ -3,11 +3,6 @@ import { Calendar, User, Clock, Tag, ArrowLeft, Share2, BookOpen } from 'lucide-
 import { useEffect } from 'react';
 import { trackFacebookEvent } from '../components/FacebookPixel';
 
-// Import event images
-import eventPoster1 from 'figma:asset/2cf80464621ba2b74c377141d7dbb8f1c61299b9.png';
-import eventPoster2 from 'figma:asset/b4e5afe4414491c8ff3877a9bb1209e98f8bd5a3.png';
-import dubaiAbartmadanImage from 'figma:asset/24fd35e5a84cfe7a39eaf8830a726bb2302fbfb3.png';
-
 const blogPosts = [
   {
     id: 'make-it-in-the-emirates-2025',
@@ -59,6 +54,22 @@ const blogPosts = [
         <li>Uluslararası tecrübe kazanmak isteyen gençler</li>
         <li>Freelance ve uzaktan çalışma fırsatlarını keşfetmek isteyenler</li>
       </ul>
+
+      <div style="background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: 20px; padding: 32px; margin: 40px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; box-shadow: 0 10px 40px rgba(59, 130, 246, 0.15);">
+        <div style="flex: 1; min-width: 280px;">
+          <span style="display: inline-block; background: #3b82f6; color: white; padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Özel Hizmet</span>
+          <h3 style="color: #1e40af; margin-bottom: 16px; font-size: 24px;">🇦🇪 Birleşik Arap Emirlikleri Vize Hizmetleri</h3>
+          <p style="color: #475569; margin-bottom: 20px; line-height: 1.6;">Birleşik Arap Emirlikleri'ne seyahatiniz için profesyonel vize danışmanlığı. Hızlı işlem, yüksek onay oranı ve özel Dubai turlarımızla sizlere hizmet veriyoruz.</p>
+          <a href="/#/dubai-visa" style="display: inline-flex; align-items: center; gap: 8px; background: #3b82f6; color: white; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s;">
+            Detaylı Bilgi Al
+            <span style="font-size: 18px;">→</span>
+          </a>
+          <p style="color: #64748b; margin-top: 12px; font-size: 13px;">Turist Vizesi • Transit Vize • Çok Girişli Vize</p>
+        </div>
+        <div style="flex: 1; min-width: 300px; max-width: 450px;">
+          <img src="https://images.unsplash.com/photo-1651063820152-d3e7a27b4d2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxEdWJhaSUyMEJ1cmolMjBLaGFsaWZhJTIwc2t5bGluZSUyMHN1bnNldHxlbnwxfHx8fDE3Njg4MjEyOTZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Dubai Skyline" style="width: 100%; height: 240px; object-fit: cover; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);" />
+        </div>
+      </div>
 
       <h2>🌟 BAE'de İş Yapmanın Avantajları</h2>
       
@@ -142,7 +153,6 @@ const blogPosts = [
         <li><strong>📄 Vize İşlemleri:</strong> BAE vize başvurunuzun hızlı ve sorunsuz tamamlanması</li>
         <li><strong>🚗 Ulaşım Hizmetleri:</strong> Havalimanı transferi ve etkinlik alanı ulaşımı</li>
         <li><strong>👔 İş Danışmanlığı:</strong> BAE'de şirket kurma, yatırım yapma konularında ön bilgilendirme</li>
-        <li><strong>🗣️ Tercüme ve Rehberlik:</strong> Türkçe konuşan rehber desteği</li>
         <li><strong>🏨 Konaklama Önerileri:</strong> Etkinlik alanına yakın otellerde rezervasyon</li>
       </ul>
 
@@ -216,7 +226,7 @@ const blogPosts = [
     category: 'Dubai Rehberi',
     date: '2 Ocak 2025',
     author: 'GNC Travel',
-    image: dubaiAbartmadanImage,
+    image: 'https://images.unsplash.com/photo-1768069794857-9306ac167c6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxEdWJhaSUyMHNreWxpbmUlMjBzdW5zZXQlMjBjaXR5c2NhcGV8ZW58MXx8fHwxNzY4ODIxNDIyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     excerpt: 'GNC Travel Agency\'den: Gerçek hayata yakın Dubai önerileri. Kartpostal durakları değil, Dubai\'nin günlük yaşamını keşfedin.',
     content: `
       <h2>GNC Travel Agency'den: Gerçek Hayata Yakın Dubai Önerileri</h2>
@@ -328,7 +338,7 @@ const blogPosts = [
       <p>Formu dikkatli ve eksiksiz doldurmak çok önemli. Yapılan basit bir hata bile süreci uzatabilir. <strong>GNC Travel danışmanları</strong> burada en sık yapılan hataları engellemenize yardımcı olabilir.</p>
 
       <h3>2. Randevu al</h3>
-      <p>Konsolosluk randevuları bazı dönemlerde çok hızlı dolar. Özellikle yaz aylarında ve akademik dönemlerde yoğunluk yaşanır. Erken planlama her zaman avantajdır.</p>
+      <p>Konsolosluk randevuları baz�� dönemlerde çok hızlı dolar. Özellikle yaz aylarında ve akademik dönemlerde yoğunluk yaşanır. Erken planlama her zaman avantajdır.</p>
 
       <h3>3. Evraklarını hazırla ve kontrol ettir</h3>
       <p>Belgeler hazırlandıktan sonra mutlaka bir kez daha kontrol edilmelidir. Danışmanlık hizmeti alan birçok kişi bu aşamada <strong>GNC Travel'dan</strong> destek almayı tercih ediyor.</p>
@@ -608,17 +618,6 @@ export function Blog() {
 
         {/* Article Content */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          {/* Show first poster for Make It in the Emirates article */}
-          {id === 'make-it-in-the-emirates-2025' && (
-            <div className="mb-12">
-              <img 
-                src={eventPoster1} 
-                alt="Make It in the Emirates 2025 Event Poster"
-                className="w-full rounded-2xl shadow-xl"
-              />
-            </div>
-          )}
-
           <div 
             className="prose prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -626,17 +625,6 @@ export function Blog() {
               lineHeight: '1.8',
             }}
           />
-
-          {/* Show second poster in the middle for Make It in the Emirates article */}
-          {id === 'make-it-in-the-emirates-2025' && (
-            <div className="my-12">
-              <img 
-                src={eventPoster2} 
-                alt="Make It in the Emirates 2025 Details"
-                className="w-full rounded-2xl shadow-xl"
-              />
-            </div>
-          )}
 
           {/* CTA Box */}
           <div className="mt-16 bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl border border-blue-200">
