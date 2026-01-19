@@ -6,6 +6,7 @@ import { trackFacebookEvent } from '../components/FacebookPixel';
 // Import event images
 import eventPoster1 from 'figma:asset/2cf80464621ba2b74c377141d7dbb8f1c61299b9.png';
 import eventPoster2 from 'figma:asset/b4e5afe4414491c8ff3877a9bb1209e98f8bd5a3.png';
+import dubaiAbartmadanImage from 'figma:asset/24fd35e5a84cfe7a39eaf8830a726bb2302fbfb3.png';
 
 const blogPosts = [
   {
@@ -215,7 +216,7 @@ const blogPosts = [
     category: 'Dubai Rehberi',
     date: '2 Ocak 2025',
     author: 'GNC Travel',
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkdWJhaSUyMGNpdHl8ZW58MXx8fHwxNjg4MTg2ODN8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: dubaiAbartmadanImage,
     excerpt: 'GNC Travel Agency\'den: Gerçek hayata yakın Dubai önerileri. Kartpostal durakları değil, Dubai\'nin günlük yaşamını keşfedin.',
     content: `
       <h2>GNC Travel Agency'den: Gerçek Hayata Yakın Dubai Önerileri</h2>
@@ -646,7 +647,7 @@ export function Blog() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link 
-                to="/visa#form" 
+                to="/dubai-visa" 
                 className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
               >
                 Hemen Başvur
